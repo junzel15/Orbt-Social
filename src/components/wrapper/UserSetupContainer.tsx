@@ -2,13 +2,15 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React, {memo, ReactNode} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Octicons from 'react-native-vector-icons/Octicons';
+import {useDispatch} from 'react-redux';
 import {colors} from '../../constants/colors';
+import commonStyles from '../../constants/commonStyles';
 import {fonts} from '../../constants/fonts';
 import {windowWidth} from '../../constants/globalConstants';
 import {getScaledFontSize} from '../../constants/globalFunctions';
 import {globalStyleDefinitions} from '../../constants/globalStyleDefinitions';
+import {setAccessToken} from '../../redux/slices/authState';
 import CommonButton from '../atoms/button/CommonButton';
-import commonStyles from '../../constants/commonStyles';
 
 type WrapperContainerProps = {
   children: ReactNode;
@@ -18,12 +20,15 @@ type WrapperContainerProps = {
 
 const UserSetupContainer = (props: WrapperContainerProps) => {
   const navigation = useNavigation<NavigationProp<any>>();
+  const dispatch = useDispatch();
 
   const onBackPress = () => {
     navigation.goBack();
   };
 
-  const onSkip = () => {};
+  const onSkip = () => {
+    dispatch(setAccessToken('accessToken'));
+  };
 
   return (
     <View style={commonStyles.flexFull}>

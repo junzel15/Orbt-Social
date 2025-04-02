@@ -9,4 +9,6 @@ export const colors = {
   placeholderColor: '#747688',
   disable: '#A2A8BF',
   purple:'#A87AFE',
+  darkPurple:'#3A1F70',
+  lightPurple:'#999BFF'
 };

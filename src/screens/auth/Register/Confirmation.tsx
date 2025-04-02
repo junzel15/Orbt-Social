@@ -1,9 +1,10 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import LinearWrapperContainer from '../../../components/wrapper/LinearWrapperContainer';
 import CommonButton from '../../../components/atoms/button/CommonButton';
 import CustomImage from '../../../components/atoms/image/CustomImage';
+import LinearWrapperContainer from '../../../components/wrapper/LinearWrapperContainer';
+import WrapperContainer from '../../../components/wrapper/WrapperContainer';
 import {colors} from '../../../constants/colors';
 import commonStyles from '../../../constants/commonStyles';
 import {fonts} from '../../../constants/fonts';
@@ -21,26 +22,28 @@ const Confirmation = () => {
   };
 
   return (
-    <LinearWrapperContainer>
-      <CustomImage
-        url={imagePath.confirm}
-        height={350}
-        width={windowWidth * 0.7}
-        imageStyle={styles.image}
-      />
-      <View style={commonStyles.fullInnerContainer}>
-        <Text style={styles.headerText}>You're all set!</Text>
-        <Text style={styles.headerSubText}>
-          Your account has been successfully verified. Let's get to know you
-          better!
-        </Text>
-      </View>
-      <CommonButton
-        title="Get Started"
-        customStyles={styles.buttonContainer}
-        onPress={onGetStarted}
-      />
-    </LinearWrapperContainer>
+    <WrapperContainer>
+      <LinearWrapperContainer>
+        <CustomImage
+          url={imagePath.confirm}
+          height={350}
+          width={windowWidth * 0.7}
+          imageStyle={styles.image}
+        />
+        <View style={commonStyles.fullInnerContainer}>
+          <Text style={styles.headerText}>You're all set!</Text>
+          <Text style={styles.headerSubText}>
+            Your account has been successfully verified. Let's get to know you
+            better!
+          </Text>
+        </View>
+        <CommonButton
+          title="Get Started"
+          customStyles={styles.buttonContainer}
+          onPress={onGetStarted}
+        />
+      </LinearWrapperContainer>
+    </WrapperContainer>
   );
 };
 

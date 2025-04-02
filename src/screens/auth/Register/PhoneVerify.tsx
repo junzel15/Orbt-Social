@@ -16,6 +16,7 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import CommonButton from '../../../components/atoms/button/CommonButton';
 import FullScreenLoader from '../../../components/atoms/loader/FullScreenLoader';
 import LinearWrapperContainer from '../../../components/wrapper/LinearWrapperContainer';
+import WrapperContainer from '../../../components/wrapper/WrapperContainer';
 import {colors} from '../../../constants/colors';
 import commonStyles from '../../../constants/commonStyles';
 import {fonts} from '../../../constants/fonts';
@@ -78,61 +79,63 @@ const PhoneVerify = () => {
   };
 
   return (
-    <LinearWrapperContainer>
-      <Octicons
-        name="arrow-left"
-        color={colors.black}
-        size={30}
-        style={styles.backIcon}
-        suppressHighlighting
-        onPress={onBackPress}
-      />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={commonStyles.fullInnerContainer}>
-        <Text style={styles.headerText}>Verification</Text>
-        <Text style={styles.headerSubText}>
-          We’ve sent you the verification code to{`\n`}
-          {phone}
-        </Text>
-        <CodeField
-          ref={ref}
-          {...props}
-          value={value}
-          onChangeText={setValue}
-          cellCount={4}
-          rootStyle={styles.codeField}
-          keyboardType="number-pad"
-          textContentType="oneTimeCode"
-          renderCell={({index, symbol, isFocused}) => (
-            <View style={styles.codeWrapper} key={index}>
-              <Text
-                style={styles.cellContainer}
-                onLayout={getCellOnLayoutHandler(index)}>
-                {symbol || (isFocused ? <Cursor /> : null)}
-              </Text>
-            </View>
-          )}
+    <WrapperContainer>
+      <LinearWrapperContainer>
+        <Octicons
+          name="arrow-left"
+          color={colors.black}
+          size={30}
+          style={styles.backIcon}
+          suppressHighlighting
+          onPress={onBackPress}
         />
-
-        <CommonButton
-          title="Verify"
-          customStyles={styles.btnWrapper}
-          onPress={onVerify}
-          disable={isDisable}
-        />
-        <Text style={styles.subText}>
-          Re-send code in{' '}
-          <Text
-            style={{color: colors.primary}}
-            suppressHighlighting
-            onPress={handleResendCode}>
-            {timer == 0 ? 'Resend' : `00:${timer < 10 ? `0${timer}` : timer}`}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={commonStyles.fullInnerContainer}>
+          <Text style={styles.headerText}>Verification</Text>
+          <Text style={styles.headerSubText}>
+            We’ve sent you the verification code to{`\n`}
+            {phone}
           </Text>
-        </Text>
-      </ScrollView>
-      {isLoading && <FullScreenLoader />}
-    </LinearWrapperContainer>
+          <CodeField
+            ref={ref}
+            {...props}
+            value={value}
+            onChangeText={setValue}
+            cellCount={4}
+            rootStyle={styles.codeField}
+            keyboardType="number-pad"
+            textContentType="oneTimeCode"
+            renderCell={({index, symbol, isFocused}) => (
+              <View style={styles.codeWrapper} key={index}>
+                <Text
+                  style={styles.cellContainer}
+                  onLayout={getCellOnLayoutHandler(index)}>
+                  {symbol || (isFocused ? <Cursor /> : null)}
+                </Text>
+              </View>
+            )}
+          />
+
+          <CommonButton
+            title="Verify"
+            customStyles={styles.btnWrapper}
+            onPress={onVerify}
+            disable={isDisable}
+          />
+          <Text style={styles.subText}>
+            Re-send code in{' '}
+            <Text
+              style={{color: colors.primary}}
+              suppressHighlighting
+              onPress={handleResendCode}>
+              {timer == 0 ? 'Resend' : `00:${timer < 10 ? `0${timer}` : timer}`}
+            </Text>
+          </Text>
+        </ScrollView>
+        {isLoading && <FullScreenLoader />}
+      </LinearWrapperContainer>
+    </WrapperContainer>
   );
 };
 

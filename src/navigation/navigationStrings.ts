@@ -9,6 +9,12 @@ type NavigationStrings = {
   BirthdaySelection:string
   AboutMe:string
   InterestSelection:string
+  BottomNavigation:string
+  Home:string
+  Calendar:string
+  Message:string
+  Profile:string
+  Dining:string
 };
 
 export const navigationStrings: NavigationStrings = {
@@ -22,4 +28,10 @@ export const navigationStrings: NavigationStrings = {
   BirthdaySelection: 'BirthdaySelection',
   AboutMe: 'AboutMe',
   InterestSelection: 'InterestSelection',
+  BottomNavigation: 'BottomNavigation',
+  Home: 'Home',
+  Calendar: 'Calendar',
+  Message: 'Message',
+  Profile: 'Profile',
+  Dining: 'Dining',
 };

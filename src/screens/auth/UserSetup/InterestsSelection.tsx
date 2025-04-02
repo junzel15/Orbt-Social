@@ -1,17 +1,18 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {FlatList, StyleSheet, Text, TextInput, View} from 'react-native';
+import {useDispatch} from 'react-redux';
 import UserSetupContainer from '../../../components/wrapper/UserSetupContainer';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
 import {colors} from '../../../constants/colors';
 import {fonts} from '../../../constants/fonts';
 import {getScaledFontSize} from '../../../constants/globalFunctions';
 import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
+import {setAccessToken} from '../../../redux/slices/authState';
 import {InterestData} from './components/data';
 import InterestCard from './components/InterestCard';
 
 const InterestSelection = () => {
-  const navigation = useNavigation<NavigationProp<any>>();
+  const dispatch = useDispatch();
 
   const [interestsList, setInterestsList] = useState<Array<string>>([]);
   const [filteredData, setFilteredData] = useState<Array<string>>(InterestData);
@@ -29,7 +30,9 @@ const InterestSelection = () => {
     }
   }, [search]);
 
-  const onNext = () => {};
+  const onNext = () => {
+    dispatch(setAccessToken('accessToken'));
+  };
 
   const renderItem = useCallback(
     ({item, index}: any) => {
@@ -51,9 +54,7 @@ const InterestSelection = () => {
 
   return (
     <WrapperContainer>
-      <UserSetupContainer
-        progress={85}
-        onNextPress={onNext}>
+      <UserSetupContainer progress={85} onNextPress={onNext}>
         <Text style={styles.titleText}>
           Let us know what you're passionate about!
         </Text>
