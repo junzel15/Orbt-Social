@@ -1,0 +1,12 @@
+export const colors = {
+  black: '#000000', 
+  white: '#FFFFFF',
+  primary: '#5300FA',
+  primaryText: '#4B4B4B',
+  secondaryText: '#545B62',
+  appBackground: '#EEF4FF',
+  borderColor: '#DFDFE4',
+  placeholderColor: '#747688',
+  disable: '#A2A8BF',
+  purple:'#A87AFE',
+};

@@ -1,0 +1,104 @@
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import React, {memo, ReactNode} from 'react';
+import {Platform, StyleSheet, Text, View} from 'react-native';
+import Octicons from 'react-native-vector-icons/Octicons';
+import {colors} from '../../constants/colors';
+import {fonts} from '../../constants/fonts';
+import {windowWidth} from '../../constants/globalConstants';
+import {getScaledFontSize} from '../../constants/globalFunctions';
+import {globalStyleDefinitions} from '../../constants/globalStyleDefinitions';
+import CommonButton from '../atoms/button/CommonButton';
+import commonStyles from '../../constants/commonStyles';
+
+type WrapperContainerProps = {
+  children: ReactNode;
+  progress: number;
+  onNextPress?: () => void;
+};
+
+const UserSetupContainer = (props: WrapperContainerProps) => {
+  const navigation = useNavigation<NavigationProp<any>>();
+
+  const onBackPress = () => {
+    navigation.goBack();
+  };
+
+  const onSkip = () => {};
+
+  return (
+    <View style={commonStyles.flexFull}>
+      <View style={styles.rowWrapper}>
+        <Octicons
+          name="arrow-left"
+          color={colors.white}
+          size={30}
+          style={styles.backIcon}
+          suppressHighlighting
+          onPress={onBackPress}
+        />
+        <View style={styles.progress}>
+          <View style={[styles.progressFill, {width: `${props.progress}%`}]} />
+        </View>
+      </View>
+      <View style={styles.mainWrapper}>{props.children}</View>
+      <View style={styles.buttonWrapper}>
+        <CommonButton title="Next" onPress={props.onNextPress} />
+        <Text style={styles.subText} suppressHighlighting onPress={onSkip}>
+          Skip for now
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  rowWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: Platform.select({ios: 80, android: 60}),
+    height: 40,
+  },
+  backIcon: {
+    position: 'absolute',
+    left: globalStyleDefinitions.screenPadding.padding,
+  },
+  progress: {
+    width: windowWidth * 0.6,
+    height: 5,
+    backgroundColor: colors.white,
+    borderRadius: 0.5 * globalStyleDefinitions.br_10.borderRadius,
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: '100%',
+    backgroundColor: colors.purple,
+    borderRadius: 0.5 * globalStyleDefinitions.br_10.borderRadius,
+  },
+  mainWrapper: {
+    flex: 1,
+    margin: globalStyleDefinitions.screenPadding.padding,
+    borderWidth: 1,
+    borderColor: colors.primary,
+    backgroundColor: colors.primary + '20',
+    borderRadius: 1.5 * globalStyleDefinitions.br_10.borderRadius,
+    padding: 2 * globalStyleDefinitions.cardInnerPadding.padding,
+  },
+  subText: {
+    fontSize: getScaledFontSize(16),
+    color: colors.white,
+    fontFamily: fonts.fontRegular,
+    marginBottom: Platform.select({
+      ios: globalStyleDefinitions.screenPadding.padding,
+    }),
+    marginTop: globalStyleDefinitions.mt_15.marginTop,
+    padding: globalStyleDefinitions.cardInnerPadding.padding,
+    alignSelf: 'center',
+  },
+  buttonWrapper: {
+    padding: globalStyleDefinitions.screenPadding.padding,
+    marginTop: globalStyleDefinitions.mt_15.marginTop,
+  },
+});
+
+export default memo(UserSetupContainer);

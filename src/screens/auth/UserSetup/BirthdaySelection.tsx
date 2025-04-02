@@ -1,0 +1,59 @@
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import moment from 'moment';
+import React, {useState} from 'react';
+import {StyleSheet, Text} from 'react-native';
+import CustomInput from '../../../components/atoms/input/CustomInput';
+import UserSetupContainer from '../../../components/wrapper/UserSetupContainer';
+import WrapperContainer from '../../../components/wrapper/WrapperContainer';
+import {colors} from '../../../constants/colors';
+import {fonts} from '../../../constants/fonts';
+import {getScaledFontSize} from '../../../constants/globalFunctions';
+import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
+import {iconPath} from '../../../constants/iconPath';
+import {navigationStrings} from '../../../navigation/navigationStrings';
+import CalendarCard from './components/CalendarCard';
+
+const BirthdaySelection = () => {
+  const navigation = useNavigation<NavigationProp<any>>();
+
+  const [date, setDate] = useState<Date>(new Date());
+
+  const onNext = () => {
+    navigation.navigate(navigationStrings.AboutMe);
+  };
+
+  return (
+    <WrapperContainer>
+      <UserSetupContainer progress={35} onNextPress={onNext}>
+        <Text style={styles.titleText}>When is your birthday?</Text>
+
+        <CustomInput
+          value={moment(date).format('DD/MM/YYYY')}
+          icon={iconPath.calendar}
+          iconColor={colors.white}
+          editable={false}
+          customStyle={styles.inputContainer}
+          customTextStyles={styles.input}
+        />
+        <CalendarCard date={date} setDate={setDate} />
+      </UserSetupContainer>
+    </WrapperContainer>
+  );
+};
+
+const styles = StyleSheet.create({
+  titleText: {
+    fontSize: getScaledFontSize(20),
+    color: colors.white,
+    fontFamily: fonts.soraSemiBold,
+    textAlign: 'center',
+    marginBottom: globalStyleDefinitions.mt_15.marginTop,
+  },
+  inputContainer: {
+    borderColor: colors.white,
+    backgroundColor: 'transparent',
+  },
+  input: {color: colors.white, fontSize: getScaledFontSize(16)},
+});
+
+export default BirthdaySelection;
