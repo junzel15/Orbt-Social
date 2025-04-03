@@ -49,7 +49,6 @@ const Dining = () => {
               <CustomImage url={iconPath.close} height={44} width={44} />
             </TouchableOpacity>
           </View>
-
           <View style={styles.listWrapper}>
             {DiningData.map((item, index) => (
               <TouchableOpacity
