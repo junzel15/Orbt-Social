@@ -1,4 +1,3 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import CustomImage from '../components/atoms/image/CustomImage';
@@ -11,6 +10,7 @@ import Home from '../screens/mainScreens/Home';
 import Message from '../screens/mainScreens/Message';
 import Profile from '../screens/mainScreens/Profile';
 import {navigationStrings} from './navigationStrings';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const TabIcons = ({isFocused, routeName}: any) => {
   return routeName == navigationStrings.Home ? (

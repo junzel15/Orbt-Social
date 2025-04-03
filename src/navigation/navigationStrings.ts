@@ -15,6 +15,7 @@ type NavigationStrings = {
   Message:string
   Profile:string
   Dining:string
+  MatchingCrew:string
 };
 
 export const navigationStrings: NavigationStrings = {
@@ -34,4 +35,5 @@ export const navigationStrings: NavigationStrings = {
   Message: 'Message',
   Profile: 'Profile',
   Dining: 'Dining',
+  MatchingCrew:'MatchingCrew'
 };

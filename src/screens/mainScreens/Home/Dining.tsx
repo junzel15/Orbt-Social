@@ -22,6 +22,7 @@ import {imagePath} from '../../../constants/imagePath';
 import {DiningData} from './components/data';
 import DateSelectionList from './components/DateSelectionList';
 import ExpandableCard from './components/ExpandableCard';
+import { navigationStrings } from '../../../navigation/navigationStrings';
 
 const Dining = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -32,6 +33,10 @@ const Dining = () => {
   const onBackPress = () => {
     navigation.goBack();
   };
+
+  const searchCrew =() =>{
+      navigation.navigate(navigationStrings.MatchingCrew);
+  }
 
   return (
     <WrapperContainer>
@@ -46,7 +51,6 @@ const Dining = () => {
               <CustomImage url={iconPath.close} height={44} width={44} />
             </TouchableOpacity>
           </View>
-
           <View style={styles.listWrapper}>
             {DiningData.map((item, index) => (
               <TouchableOpacity
@@ -115,7 +119,8 @@ const Dining = () => {
         <CommonButton
           title="Book Now"
           customStyles={styles.buttonContainer}
-          disable={!selectedDate?.trim()}
+          // disable={!selectedDate?.trim()}
+          onPress={searchCrew}
         />
       </ImageBackground>
     </WrapperContainer>
