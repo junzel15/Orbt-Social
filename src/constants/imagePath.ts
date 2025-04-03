@@ -13,5 +13,8 @@ export const imagePath = {
   onboarding2: require('../assets/images/onboarding2.png'),
   onboarding3: require('../assets/images/onboarding3.png'),
   searchIcon: require('../assets/images/searchIcon.png'),
-  sucessfully:require('../assets/images/sucessfully.png')
+  sucessfully: require('../assets/images/sucessfully.png'),
+  userSetupBackground: require('../assets/images/userSetupBackground.png'),
+  userSetupBackground2: require('../assets/images/userSetupBackground2.png'),
+  userSetupBackground3: require('../assets/images/userSetupBackground3.png'),
 };

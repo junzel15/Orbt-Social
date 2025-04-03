@@ -20,7 +20,6 @@ import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions'
 import {iconPath} from '../../../constants/iconPath';
 import {imagePath} from '../../../constants/imagePath';
 import {navigationStrings} from '../../../navigation/navigationStrings';
-import { setAccessToken } from '../../../redux/slices/authState';
 
 const Register = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -63,9 +62,7 @@ const Register = () => {
     });
   };
 
-  const handleLogin = async () => {
-    dispatch(setAccessToken("accessToken"))
-  };
+  const handleLogin = async () => {};
 
   const onCountryCodePress = () => {
     setShowCountryPicker(true);

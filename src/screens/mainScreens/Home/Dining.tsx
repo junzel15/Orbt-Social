@@ -19,10 +19,10 @@ import {getScaledFontSize} from '../../../constants/globalFunctions';
 import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
 import {iconPath} from '../../../constants/iconPath';
 import {imagePath} from '../../../constants/imagePath';
+import {navigationStrings} from '../../../navigation/navigationStrings';
 import {DiningData} from './components/data';
 import DateSelectionList from './components/DateSelectionList';
 import ExpandableCard from './components/ExpandableCard';
-import { navigationStrings } from '../../../navigation/navigationStrings';
 
 const Dining = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -34,16 +34,24 @@ const Dining = () => {
     navigation.goBack();
   };
 
-  const searchCrew =() =>{
-      navigation.navigate(navigationStrings.MatchingCrew);
-  }
+  const searchCrew = () => {
+    navigation.navigate(navigationStrings.MatchingCrew);
+  };
+
+  const onChangeTab = (item: string) => {
+    setSelected(item);
+    setSelectedDate('');
+  };
 
   return (
     <WrapperContainer>
       <ImageBackground
         source={imagePath.linearBackground}
         style={commonStyles.fullInnerContainer}>
-        <ScrollView style={commonStyles.flexFull} showsVerticalScrollIndicator={false} nestedScrollEnabled>
+        <ScrollView
+          style={commonStyles.flexFull}
+          showsVerticalScrollIndicator={false}
+          nestedScrollEnabled>
           <View style={styles.rowWrapper}>
             <CustomImage url={imagePath.dining} height={44} width={44} />
             <Text style={styles.headerTitle}>Dining</Text>
@@ -55,7 +63,7 @@ const Dining = () => {
             {DiningData.map((item, index) => (
               <TouchableOpacity
                 key={index}
-                onPress={() => setSelected(item.label)}
+                onPress={() => onChangeTab(item?.label)}
                 activeOpacity={0.9}
                 style={[
                   styles.listContainer,
@@ -118,9 +126,9 @@ const Dining = () => {
         </ScrollView>
         <CommonButton
           title="Book Now"
-          customStyles={styles.buttonContainer}
-          // disable={!selectedDate?.trim()}
+          disable={!selectedDate?.trim()}
           onPress={searchCrew}
+          customStyles={styles.buttonContainer}
         />
       </ImageBackground>
     </WrapperContainer>
@@ -169,28 +177,6 @@ const styles = StyleSheet.create({
   selectedText: {
     color: colors.black,
   },
-  dropdownWrapper: {
-    height: 50,
-    borderColor: colors.white,
-    borderWidth: 1,
-    borderRadius: globalStyleDefinitions.br_10.borderRadius,
-    paddingHorizontal: globalStyleDefinitions.cardInnerPadding.padding,
-  },
-  dropdownPlaceholder: {
-    color: colors.white,
-    fontFamily: fonts.fontRegular,
-    fontSize: getScaledFontSize(14),
-  },
-  dropdownText: {
-    color: colors.white,
-    fontFamily: fonts.fontSemiBold,
-    fontSize: getScaledFontSize(14),
-  },
-  dropdownContainer: {
-    backgroundColor: colors.primary,
-    borderRadius: globalStyleDefinitions.br_10.borderRadius,
-  },
-
   buttonContainer: {
     marginBottom: globalStyleDefinitions.mt_15.marginTop,
   },
