@@ -19,8 +19,11 @@ interface iProps {
 
 const CommonButton = ({icon, label, colors, onPress, customStyle}: iProps) => {
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={1}>
-      <LinearGradient colors={colors} style={[styles.button, customStyle]}>
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={1}
+      style={[styles.button, customStyle]}>
+      <LinearGradient colors={colors} style={[styles.button]} start={{x:0,y:1}}>
         <TouchableOpacity
           style={styles.innerWrapper}
           onPress={onPress}
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 3 * globalStyleDefinitions.br_10.borderRadius,
     justifyContent: 'center',
     zIndex: 1,
-    overflow: 'hidden',
+    overflow: 'hidden',backgroundColor:'yellow'
   },
   innerWrapper: {
     paddingHorizontal: globalStyleDefinitions.screenPadding.padding,

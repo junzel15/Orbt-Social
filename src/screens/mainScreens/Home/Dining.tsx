@@ -107,7 +107,6 @@ const Dining = () => {
         </View>
         <CommonButton
           title="Book Now"
-          disable
           customStyles={styles.buttonContainer}
         />
       </ImageBackground>
