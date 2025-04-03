@@ -81,20 +81,20 @@ const Home = () => {
         <View style={styles.bottomWrapper}>
           <CommonButton
             label={'Dining'}
-            colors={['#1A004E', colors.black]}
+            colors={[colors.darkPrimary, colors.black]}
             icon={imagePath.dining}
             customStyle={{bottom: 0}}
             onPress={onDiningPress}
           />
           <CommonButton
             label={'Bars'}
-            colors={['#330099', '#130038']}
+            colors={[colors.darkPurple, colors.darkPrimary]}
             icon={imagePath.bar}
             customStyle={{bottom: 30}}
           />
           <CommonButton
             label={'Experiences'}
-            colors={[colors.black, colors.primary]}
+            colors={[colors.primary, colors.darkPurple]}
             icon={imagePath.experience}
             customStyle={{bottom: 60}}
           />

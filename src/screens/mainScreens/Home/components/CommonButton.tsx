@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 3 * globalStyleDefinitions.br_10.borderRadius,
     justifyContent: 'center',
     zIndex: 1,
-    overflow: 'hidden',backgroundColor:'yellow'
+    overflow: 'hidden',
   },
   innerWrapper: {
     paddingHorizontal: globalStyleDefinitions.screenPadding.padding,

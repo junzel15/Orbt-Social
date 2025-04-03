@@ -3,13 +3,12 @@ import React, {useState} from 'react';
 import {
   ImageBackground,
   Platform,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Dropdown} from 'react-native-element-dropdown';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import CommonButton from '../../../components/atoms/button/CommonButton';
 import CustomImage from '../../../components/atoms/image/CustomImage';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
@@ -21,19 +20,17 @@ import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions'
 import {iconPath} from '../../../constants/iconPath';
 import {imagePath} from '../../../constants/imagePath';
 import {DiningData} from './components/data';
+import DateSelectionList from './components/DateSelectionList';
+import ExpandableCard from './components/ExpandableCard';
 
 const Dining = () => {
   const navigation = useNavigation<NavigationProp<any>>();
 
   const [selected, setSelected] = useState<string>('Coffee');
-  const [selectedOption, setSelectedOption] = useState<string>('');
+  const [selectedDate, setSelectedDate] = useState<string>('');
 
   const onBackPress = () => {
     navigation.goBack();
-  };
-
-  const onDateSelect = (item: any) => {
-    setSelectedOption(item?.value);
   };
 
   return (
@@ -41,7 +38,7 @@ const Dining = () => {
       <ImageBackground
         source={imagePath.linearBackground}
         style={commonStyles.fullInnerContainer}>
-        <View style={commonStyles.flexFull}>
+        <ScrollView style={commonStyles.flexFull} showsVerticalScrollIndicator={false} nestedScrollEnabled>
           <View style={styles.rowWrapper}>
             <CustomImage url={imagePath.dining} height={44} width={44} />
             <Text style={styles.headerTitle}>Dining</Text>
@@ -71,43 +68,54 @@ const Dining = () => {
             ))}
           </View>
 
-          <Dropdown
-            style={styles.dropdownWrapper}
-            data={DiningData}
-            labelField="label"
-            valueField="value"
-            placeholder="Select a date"
-            placeholderStyle={styles.dropdownPlaceholder}
-            selectedTextStyle={styles.dropdownText}
-            itemTextStyle={styles.dropdownText}
-            containerStyle={styles.dropdownContainer}
-            value={selectedOption}
-            onChange={onDateSelect}
-            activeColor="transparent"
+          <DateSelectionList
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
           />
 
-          <View style={styles.infoWrapper}>
-            <Text style={styles.titleText}>BEFORE YOU BOOK</Text>
-            <AntDesign name={'plus'} size={20} color={'white'} />
-          </View>
-          <View style={styles.infoWrapper}>
-            <Text style={styles.titleText}>WHAT TO EXPECT</Text>
-            <AntDesign name={'plus'} size={20} color={'white'} />
-          </View>
+          <ExpandableCard
+            header="BEFORE YOU BOOK"
+            content={[
+              {
+                heading: 'Free to Reserve',
+                subtext: 'You only pay for what you order at the table.',
+              },
+              {
+                heading: 'Be Ready',
+                subtext:
+                  'Your group is counting on you,  so only book if you’re sure to join!',
+              },
+            ]}
+          />
+          <ExpandableCard
+            header="WHAT TO EXPECT"
+            content={[
+              {
+                heading: 'Meet Your Crew',
+                subtext: '5 strangers with shared vibes and fun personalities.',
+              },
+              {
+                heading: 'Relax & Connect',
+                subtext:
+                  'Great food, better conversations, and easy icebreakers.',
+              },
+            ]}
+          />
           <ImageBackground
             source={imagePath.linearBackground}
             style={styles.eventWrapper}>
             <CustomImage url={imagePath.event} height={80} width={80} />
             <Text style={styles.subText}>
               Event details—like the restaurant, table, and hints about your
-              group—will be revealed{' '}
+              group—will be revealed{'  '}
               <Text style={styles.highlightText}>1 day</Text> before.
             </Text>
           </ImageBackground>
-        </View>
+        </ScrollView>
         <CommonButton
           title="Book Now"
           customStyles={styles.buttonContainer}
+          disable={!selectedDate?.trim()}
         />
       </ImageBackground>
     </WrapperContainer>
@@ -162,7 +170,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: globalStyleDefinitions.br_10.borderRadius,
     paddingHorizontal: globalStyleDefinitions.cardInnerPadding.padding,
-    marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
   },
   dropdownPlaceholder: {
     color: colors.white,
@@ -178,18 +185,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     borderRadius: globalStyleDefinitions.br_10.borderRadius,
   },
-  infoWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
-  },
-  titleText: {
-    color: colors.lightPurple,
-    fontFamily: fonts.fontMedium,
-    fontSize: getScaledFontSize(12),
-    flex: 1,
-    letterSpacing: 2,
-  },
+
   buttonContainer: {
     marginBottom: globalStyleDefinitions.mt_15.marginTop,
   },
