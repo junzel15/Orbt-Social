@@ -22,6 +22,7 @@ import {imagePath} from '../../../constants/imagePath';
 import {DiningData} from './components/data';
 import DateSelectionList from './components/DateSelectionList';
 import ExpandableCard from './components/ExpandableCard';
+import { navigationStrings } from '../../../navigation/navigationStrings';
 
 const Dining = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -115,7 +116,8 @@ const Dining = () => {
         <CommonButton
           title="Book Now"
           customStyles={styles.buttonContainer}
-          disable={!selectedDate?.trim()}
+          // disable={selectedDate?.trim()}
+          onPress={()=> navigation.navigate(navigationStrings.DiningDetails)}
         />
       </ImageBackground>
     </WrapperContainer>

@@ -13,6 +13,12 @@ export const globalStyleDefinitions = StyleSheet.create({
   mt_15: {
     marginTop: 15,
   },
+  mt_10: {
+    marginTop: 10,
+  },
+  mb_10: {
+    marginBottom: 10,
+  },
   gap:{
     gap:10
   }

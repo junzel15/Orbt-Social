@@ -12,4 +12,8 @@ export const imagePath = {
   onboarding1: require('../assets/images/onboarding1.png'),
   onboarding2: require('../assets/images/onboarding2.png'),
   onboarding3: require('../assets/images/onboarding3.png'),
+  coffeeImage:  require('../assets/images/coffeimage.png'),
+  barImage:  require('../assets/images/barsImage.png'),
+  experienceImage:  require('../assets/images/experienceImage.png'),
+  reviewImage:  require('../assets/images/review.png'),
 };

@@ -15,6 +15,13 @@ type NavigationStrings = {
   Message:string
   Profile:string
   Dining:string
+  DiningDetails:string
+  BarDetails:string
+  ExperienceDetails:string
+  GiveFeedback:string
+  SuccessfulFeedback:string
+  CancelBooking:string
+  CancelEvent:string
 };
 
 export const navigationStrings: NavigationStrings = {
@@ -34,4 +41,11 @@ export const navigationStrings: NavigationStrings = {
   Message: 'Message',
   Profile: 'Profile',
   Dining: 'Dining',
+  DiningDetails: 'DiningDetails',
+  ExperienceDetails:"ExperienceDetails",
+  BarDetails:"BarDetails",
+  GiveFeedback:"GiveFeedback",
+  SuccessfulFeedback:"SuccessfulFeedback",
+  CancelBooking:'CancelBooking',
+  CancelEvent:'CancelEvent'
 };
