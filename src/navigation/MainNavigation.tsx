@@ -4,6 +4,8 @@ import BottomNavigation from './BottomNavigation';
 import {navigationStrings} from './navigationStrings';
 import Dining from '../screens/mainScreens/Home/Dining';
 import MatchingCrew from '../screens/mainScreens/Home/MatchingCrew';
+import Bars from '../screens/mainScreens/Home/Bars';
+import Experiences from '../screens/mainScreens/Home/Experiences';
 
 const MainStack = createNativeStackNavigator();
 
@@ -29,6 +31,16 @@ const MainNavigation = () => {
       <MainStack.Screen
         name={navigationStrings.Dining}
         component={Dining}
+        options={options}
+      />
+       <MainStack.Screen
+        name={navigationStrings.Bars}
+        component={Bars}
+        options={options}
+      />
+       <MainStack.Screen
+        name={navigationStrings.Experiences}
+        component={Experiences}
         options={options}
       />
        <MainStack.Screen

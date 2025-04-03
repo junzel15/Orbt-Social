@@ -24,7 +24,7 @@ import DateSelectionList from './components/DateSelectionList';
 import ExpandableCard from './components/ExpandableCard';
 import { navigationStrings } from '../../../navigation/navigationStrings';
 
-const Dining = () => {
+const Bars = () => {
   const navigation = useNavigation<NavigationProp<any>>();
 
   const [selected, setSelected] = useState<string>('Coffee');
@@ -46,7 +46,7 @@ const Dining = () => {
         <ScrollView style={commonStyles.flexFull} showsVerticalScrollIndicator={false} nestedScrollEnabled>
           <View style={styles.rowWrapper}>
             <CustomImage url={imagePath.dining} height={44} width={44} />
-            <Text style={styles.headerTitle}>Dining</Text>
+            <Text style={styles.headerTitle}>Bars</Text>
             <TouchableOpacity activeOpacity={0.9} onPress={onBackPress}>
               <CustomImage url={iconPath.close} height={44} width={44} />
             </TouchableOpacity>
@@ -71,12 +71,10 @@ const Dining = () => {
               </TouchableOpacity>
             ))}
           </View>
-
           <DateSelectionList
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
-
           <ExpandableCard
             header="BEFORE YOU BOOK"
             content={[
@@ -218,4 +216,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Dining;
+export default Bars;

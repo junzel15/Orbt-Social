@@ -27,6 +27,12 @@ const Home = () => {
   const onDiningPress = () => {
     navigation.navigate(navigationStrings.Dining);
   };
+  const onBarsPress = () => {
+    navigation.navigate(navigationStrings.Bars);
+  };
+  const onExperiences = () => {
+    navigation.navigate(navigationStrings.Experiences);
+  };
 
   return (
     <WrapperContainer>
@@ -91,12 +97,14 @@ const Home = () => {
             colors={[colors.darkPurple, colors.darkPrimary]}
             icon={imagePath.bar}
             customStyle={{bottom: 30}}
+            onPress={onBarsPress}
           />
           <CommonButton
             label={'Experiences'}
             colors={[colors.primary, colors.darkPurple]}
             icon={imagePath.experience}
             customStyle={{bottom: 60}}
+            onPress={onExperiences}
           />
         </View>
       </LinearWrapperContainer>
