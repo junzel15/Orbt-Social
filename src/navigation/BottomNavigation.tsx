@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import CustomImage from '../components/atoms/image/CustomImage';
 import {colors} from '../constants/colors';
-import commonStyles from '../constants/commonStyles';
 import {windowWidth} from '../constants/globalConstants';
 import {globalStyleDefinitions} from '../constants/globalStyleDefinitions';
 import {BottomIcon} from '../constants/iconPath';
@@ -89,34 +88,27 @@ const BottomNavigation = () => {
   };
 
   return (
-    <View style={commonStyles.wrapperContainer}>
-      <BottomTab.Navigator
-        screenOptions={({route}) => ({
-          ...navigationOptions,
-        })}
-        initialRouteName={navigationStrings.Home}
-        tabBar={BottomTabBar}>
-        <BottomTab.Screen name={navigationStrings.Home} component={Home} />
-        <BottomTab.Screen
-          name={navigationStrings.Calendar}
-          component={Calendar}
-        />
-        <BottomTab.Screen
-          name={navigationStrings.Message}
-          component={Message}
-        />
-        <BottomTab.Screen
-          name={navigationStrings.Profile}
-          component={Profile}
-        />
-      </BottomTab.Navigator>
-    </View>
+    <BottomTab.Navigator
+      screenOptions={({route}) => ({
+        ...navigationOptions,
+      })}
+      initialRouteName={navigationStrings.Home}
+      tabBar={BottomTabBar}>
+      <BottomTab.Screen name={navigationStrings.Home} component={Home} />
+      <BottomTab.Screen
+        name={navigationStrings.Calendar}
+        component={Calendar}
+      />
+      <BottomTab.Screen name={navigationStrings.Message} component={Message} />
+      <BottomTab.Screen name={navigationStrings.Profile} component={Profile} />
+    </BottomTab.Navigator>
   );
 };
 
 const BottomTabBar = ({state, descriptors, navigation}: any) => {
   return (
-    <View style={styles.fullContainer}>
+    <View style={styles.outerContainer}>
+      <View style={styles.fullContainer}>
       {state.routes.map((route: any, index: any) => {
         const {options} = descriptors[route.key];
 
@@ -149,12 +141,19 @@ const BottomTabBar = ({state, descriptors, navigation}: any) => {
         );
       })}
     </View>
+    </View>
   );
 };
 
 export default BottomNavigation;
 
 const styles = StyleSheet.create({
+  outerContainer: {
+    position: 'absolute',
+    bottom: 0,
+    width: windowWidth,
+    backgroundColor: 'transparent',
+  },
   fullContainer: {
     flexDirection: 'row',
     width: windowWidth,

@@ -19,8 +19,11 @@ interface iProps {
 
 const CommonButton = ({icon, label, colors, onPress, customStyle}: iProps) => {
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={1}>
-      <LinearGradient colors={colors} style={[styles.button, customStyle]}>
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={1}
+      style={[styles.button, customStyle]}>
+      <LinearGradient colors={colors} style={[styles.button]} start={{x:0,y:1}}>
         <TouchableOpacity
           style={styles.innerWrapper}
           onPress={onPress}

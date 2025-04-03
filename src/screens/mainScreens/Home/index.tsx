@@ -1,6 +1,13 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Platform, StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import CustomImage from '../../../components/atoms/image/CustomImage';
 import LinearWrapperContainer from '../../../components/wrapper/LinearWrapperContainer';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
@@ -24,70 +31,72 @@ const Home = () => {
   return (
     <WrapperContainer>
       <LinearWrapperContainer>
-        <View style={styles.mainContainer}>
-          <View style={styles.rowWrapper}>
-            <CustomImage url={iconPath.location} height={34} width={34} />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Add your location"
-              placeholderTextColor={colors.placeholderColor}
-            />
-            <CustomImage url={iconPath.notification} height={24} width={24} />
+        <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
+          <View style={styles.mainContainer}>
+            <View style={styles.rowWrapper}>
+              <CustomImage url={iconPath.location} height={34} width={34} />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Add your location"
+                placeholderTextColor={colors.placeholderColor}
+              />
+              <CustomImage url={iconPath.notification} height={24} width={24} />
+            </View>
+
+            <View style={styles.innerContainer}>
+              <CustomImage
+                url={iconPath.sparkle}
+                height={28}
+                width={28}
+                imageStyle={styles.rightSparkle}
+              />
+              <CustomImage
+                url={iconPath.sparkle}
+                height={20}
+                width={20}
+                imageStyle={styles.leftSparkle}
+              />
+              <Text style={styles.titleText}>
+                Hello, <Text style={styles.highlightText}>John!</Text>
+              </Text>
+
+              <Text style={styles.mainText}>
+                {`Find your crowd,\n`}
+                <Text style={{color: colors.darkPurple}}>Share the moment</Text>
+              </Text>
+
+              <Text style={styles.subText}>
+                {`Book now, meet 5 strangers,\nand let the fun find you.`}
+              </Text>
+            </View>
           </View>
-
-          <View style={styles.innerContainer}>
-            <CustomImage
-              url={iconPath.sparkle}
-              height={28}
-              width={28}
-              imageStyle={styles.rightSparkle}
-            />
-            <CustomImage
-              url={iconPath.sparkle}
-              height={20}
-              width={20}
-              imageStyle={styles.leftSparkle}
-            />
-            <Text style={styles.titleText}>
-              Hello, <Text style={styles.highlightText}>John!</Text>
-            </Text>
-
-            <Text style={styles.mainText}>
-              {`Find your crowd,\n`}
-              <Text style={{color: colors.darkPurple}}>Share the moment</Text>
-            </Text>
-
-            <Text style={styles.subText}>
-              {`Book now, meet 5 strangers,\nand let the fun find you.`}
-            </Text>
-          </View>
-        </View>
-        <CustomImage
-          url={imagePath.homeBanner}
-          width={windowWidth}
-          height={150}
-          resizeMode="stretch"
-        />
+          <CustomImage
+            url={imagePath.homeBanner}
+            width={windowWidth}
+            height={150}
+            resizeMode="stretch"
+          />
+        </ScrollView>
 
         <View style={styles.bottomWrapper}>
           <CommonButton
             label={'Dining'}
-            colors={[colors.primary, colors.black]}
+            colors={[colors.darkPrimary, colors.black]}
             icon={imagePath.dining}
-            customStyle={{bottom: -90}}
+            customStyle={{bottom: 0}}
             onPress={onDiningPress}
           />
           <CommonButton
             label={'Bars'}
-            colors={[colors.primary, colors.primary]}
+            colors={[colors.darkPurple, colors.darkPrimary]}
             icon={imagePath.bar}
-            customStyle={{bottom: -60}}
+            customStyle={{bottom: 30}}
           />
           <CommonButton
             label={'Experiences'}
-            colors={[colors.black, colors.primary]}
+            colors={[colors.primary, colors.darkPurple]}
             icon={imagePath.experience}
-            customStyle={{bottom: -30}}
+            customStyle={{bottom: 60}}
           />
         </View>
       </LinearWrapperContainer>
@@ -160,5 +169,6 @@ const styles = StyleSheet.create({
   bottomWrapper: {
     flex: 1,
     justifyContent: 'flex-end',
+    backgroundColor: colors.primary,
   },
 });
