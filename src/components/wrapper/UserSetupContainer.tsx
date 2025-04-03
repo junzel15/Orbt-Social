@@ -11,6 +11,7 @@ import {getScaledFontSize} from '../../constants/globalFunctions';
 import {globalStyleDefinitions} from '../../constants/globalStyleDefinitions';
 import {setAccessToken} from '../../redux/slices/authState';
 import CommonButton from '../atoms/button/CommonButton';
+import { BlurView } from '@react-native-community/blur';
 
 type WrapperContainerProps = {
   children: ReactNode;
@@ -45,7 +46,12 @@ const UserSetupContainer = (props: WrapperContainerProps) => {
           <View style={[styles.progressFill, {width: `${props.progress}%`}]} />
         </View>
       </View>
-      <View style={styles.mainWrapper}>{props.children}</View>
+      <View style={commonStyles.flexFull}>
+        {/* <View style={styles.innerWrapper} /> */}
+        {/* <BlurView style={styles.innerWrapper} blurType=''/> */}
+        {/* <View style={styles.subInnerWrapper} /> */}
+        <View style={styles.mainWrapper}>{props.children}</View>
+      </View>
       <View style={styles.buttonWrapper}>
         <CommonButton title="Next" onPress={props.onNextPress} />
         <Text style={styles.subText} suppressHighlighting onPress={onSkip}>
@@ -82,12 +88,38 @@ const styles = StyleSheet.create({
   },
   mainWrapper: {
     flex: 1,
-    margin: globalStyleDefinitions.screenPadding.padding,
+    width: windowWidth - 2 * globalStyleDefinitions.screenPadding.padding,
+    marginVertical: globalStyleDefinitions.screenPadding.padding,
     borderWidth: 1,
     borderColor: colors.primary,
     backgroundColor: colors.primary + '20',
     borderRadius: 1.5 * globalStyleDefinitions.br_10.borderRadius,
     padding: 2 * globalStyleDefinitions.cardInnerPadding.padding,
+    alignSelf: 'center',zIndex:3
+  },
+  innerWrapper: {
+    height: '95%',
+    width: windowWidth - 4 * globalStyleDefinitions.screenPadding.padding,
+    alignSelf: 'center',
+    backgroundColor: colors.primary + '25',
+    marginVertical: globalStyleDefinitions.screenPadding.padding,
+    top:  globalStyleDefinitions.screenPadding.padding,
+    position: 'absolute',
+    borderWidth: 1,
+    borderColor: colors.primary,
+    borderRadius: 1.5 * globalStyleDefinitions.br_10.borderRadius,zIndex:2
+  },
+  subInnerWrapper: {
+    height: '95%',
+    width: windowWidth - 6 * globalStyleDefinitions.screenPadding.padding,
+    alignSelf: 'center',
+    backgroundColor: colors.primary + '10',
+    marginVertical: globalStyleDefinitions.screenPadding.padding,
+    top: 2 * globalStyleDefinitions.screenPadding.padding,
+    position: 'absolute',
+    borderWidth: 1,
+    borderColor: colors.primary,
+    borderRadius: 1.5 * globalStyleDefinitions.br_10.borderRadius,zIndex: 1, 
   },
   subText: {
     fontSize: getScaledFontSize(16),
