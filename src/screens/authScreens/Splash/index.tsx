@@ -1,13 +1,13 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import CustomImage from '../../components/atoms/image/CustomImage';
-import WrapperContainer from '../../components/wrapper/WrapperContainer';
-import {getAccessToken} from '../../constants/asyncStoreManager';
-import {windowHeight, windowWidth} from '../../constants/globalConstants';
-import {imagePath} from '../../constants/imagePath';
-import {navigationStrings} from '../../navigation/navigationStrings';
-import {setAccessToken} from '../../redux/slices/authState';
+import CustomImage from '../../../components/atoms/image/CustomImage';
+import WrapperContainer from '../../../components/wrapper/WrapperContainer';
+import {getAccessToken} from '../../../constants/asyncStoreManager';
+import {windowHeight, windowWidth} from '../../../constants/globalConstants';
+import {imagePath} from '../../../constants/imagePath';
+import {navigationStrings} from '../../../navigation/navigationStrings';
+import {setAccessToken} from '../../../redux/slices/authState';
 import {ImageBackground, StyleSheet} from 'react-native';
 
 const Splash = () => {
