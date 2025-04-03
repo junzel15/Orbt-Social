@@ -1,16 +1,16 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
+import OnBoarding from '../screens/authScreens/OnBoarding';
+import Register from '../screens/authScreens/Register';
+import Confirmation from '../screens/authScreens/Register/Confirmation';
+import PhoneVerify from '../screens/authScreens/Register/PhoneVerify';
+import Splash from '../screens/authScreens/Splash';
+import UserSetup from '../screens/authScreens/UserSetup';
+import AboutMe from '../screens/authScreens/UserSetup/AboutMe';
+import BirthdaySelection from '../screens/authScreens/UserSetup/BirthdaySelection';
+import GenderSelection from '../screens/authScreens/UserSetup/GenderSelection';
+import InterestSelection from '../screens/authScreens/UserSetup/InterestsSelection';
 import {navigationStrings} from './navigationStrings';
-import Splash from '../screens/Splash';
-import OnBoarding from '../screens/OnBoarding';
-import Register from '../screens/auth/Register';
-import PhoneVerify from '../screens/auth/Register/PhoneVerify';
-import Confirmation from '../screens/auth/Register/Confirmation';
-import UserSetup from '../screens/auth/UserSetup';
-import GenderSelection from '../screens/auth/UserSetup/GenderSelection';
-import BirthdaySelection from '../screens/auth/UserSetup/BirthdaySelection';
-import AboutMe from '../screens/auth/UserSetup/AboutMe';
-import InterestSelection from '../screens/auth/UserSetup/InterestsSelection';
 
 const AuthStack = createNativeStackNavigator();
 

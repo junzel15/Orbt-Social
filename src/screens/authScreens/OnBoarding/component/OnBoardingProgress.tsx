@@ -2,15 +2,15 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React, {memo} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import CommonButton from '../../../components/atoms/button/CommonButton';
-import CustomImage from '../../../components/atoms/image/CustomImage';
-import {colors} from '../../../constants/colors';
-import {fonts} from '../../../constants/fonts';
-import {windowHeight, windowWidth} from '../../../constants/globalConstants';
-import {getScaledFontSize} from '../../../constants/globalFunctions';
-import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
-import {imagePath} from '../../../constants/imagePath';
-import {navigationStrings} from '../../../navigation/navigationStrings';
+import CommonButton from '../../../../components/atoms/button/CommonButton';
+import CustomImage from '../../../../components/atoms/image/CustomImage';
+import {colors} from '../../../../constants/colors';
+import {fonts} from '../../../../constants/fonts';
+import {windowHeight, windowWidth} from '../../../../constants/globalConstants';
+import {getScaledFontSize} from '../../../../constants/globalFunctions';
+import {globalStyleDefinitions} from '../../../../constants/globalStyleDefinitions';
+import {imagePath} from '../../../../constants/imagePath';
+import {navigationStrings} from '../../../../navigation/navigationStrings';
 import {slides} from './data';
 
 interface iProps {

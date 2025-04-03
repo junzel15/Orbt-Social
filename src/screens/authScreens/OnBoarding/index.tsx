@@ -1,8 +1,8 @@
 import React, {useCallback, useState} from 'react';
 import {FlatList} from 'react-native';
-import WrapperContainer from '../../components/wrapper/WrapperContainer';
 import {slides} from './component/data';
 import OnBoardingProgress from './component/OnBoardingProgress';
+import WrapperContainer from '../../../components/wrapper/WrapperContainer';
 
 const OnBoarding = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
