@@ -47,9 +47,9 @@ const UserSetupContainer = (props: WrapperContainerProps) => {
         </View>
       </View>
       <View style={commonStyles.flexFull}>
-        {/* <View style={styles.innerWrapper} /> */}
-        {/* <BlurView style={styles.innerWrapper} blurType=''/> */}
-        {/* <View style={styles.subInnerWrapper} /> */}
+        {/* <View style={styles.innerWrapper} />
+        <BlurView style={styles.innerWrapper} blurType='light'/>
+        <View style={styles.subInnerWrapper} /> */}
         <View style={styles.mainWrapper}>{props.children}</View>
       </View>
       <View style={styles.buttonWrapper}>

@@ -1,4 +1,4 @@
-import {imagePath} from '../../../constants/imagePath';
+import {imagePath} from '../../../../constants/imagePath';
 
 export const slides = [
   {
