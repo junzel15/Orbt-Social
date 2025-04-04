@@ -1,5 +1,5 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
 import {
   ImageBackground,
   Platform,
@@ -12,15 +12,15 @@ import {
 import CommonButton from '../../../components/atoms/button/CommonButton';
 import CustomImage from '../../../components/atoms/image/CustomImage';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
-import {colors} from '../../../constants/colors';
+import { colors } from '../../../constants/colors';
 import commonStyles from '../../../constants/commonStyles';
-import {fonts} from '../../../constants/fonts';
-import {getScaledFontSize} from '../../../constants/globalFunctions';
-import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
-import {iconPath} from '../../../constants/iconPath';
-import {imagePath} from '../../../constants/imagePath';
-import {navigationStrings} from '../../../navigation/navigationStrings';
-import {DiningData} from './components/data';
+import { fonts } from '../../../constants/fonts';
+import { getScaledFontSize } from '../../../constants/globalFunctions';
+import { globalStyleDefinitions } from '../../../constants/globalStyleDefinitions';
+import { iconPath } from '../../../constants/iconPath';
+import { imagePath } from '../../../constants/imagePath';
+import { navigationStrings } from '../../../navigation/navigationStrings';
+import { DiningData } from './components/data';
 import DateSelectionList from './components/DateSelectionList';
 import ExpandableCard from './components/ExpandableCard';
 
@@ -79,12 +79,10 @@ const Dining = () => {
               </TouchableOpacity>
             ))}
           </View>
-
           <DateSelectionList
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
-
           <ExpandableCard
             header="BEFORE YOU BOOK"
             content={[
