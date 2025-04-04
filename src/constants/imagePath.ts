@@ -23,5 +23,10 @@ export const imagePath = {
   notificationImage:require('../assets/images/notificationImage.png'),
   invalidIcon:require('../assets/images/invalidIcon.png'),
   smsIcon:require('../assets/images/smsIcon.png'),
-  passwordChangeIcon:require('../assets/images/passwordChangeIcon.png')
+  passwordChangeIcon:require('../assets/images/passwordChangeIcon.png'),
+  coffeeImage:  require('../assets/images/coffeimage.png'),
+  barImage:  require('../assets/images/barsImage.png'),
+  experienceImage:  require('../assets/images/experienceImage.png'),
+  reviewImage:  require('../assets/images/review.png'),
+  cancelImage:  require('../assets/images/cancelImage.png'),
 };

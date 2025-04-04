@@ -25,6 +25,13 @@ type NavigationStrings = {
   VerifyScreen:string
   NewPassword:string
   SuccessfulPassword:string
+  DiningDetails:string
+  BarDetails:string
+  ExperienceDetails:string
+  GiveFeedback:string
+  SuccessfulFeedback:string
+  CancelBooking:string
+  CancelEvent:string
 };
 
 export const navigationStrings: NavigationStrings = {
@@ -53,5 +60,12 @@ export const navigationStrings: NavigationStrings = {
   ForgetPassword:'ForgetPassword',
   VerifyScreen:'VerifyScreen',
   NewPassword:"NewPassword",
-  SuccessfulPassword:'SuccessfulPassword'
+  SuccessfulPassword:'SuccessfulPassword',
+  DiningDetails: 'DiningDetails',
+  ExperienceDetails:"ExperienceDetails",
+  BarDetails:"BarDetails",
+  GiveFeedback:"GiveFeedback",
+  SuccessfulFeedback:"SuccessfulFeedback",
+  CancelBooking:'CancelBooking',
+  CancelEvent:'CancelEvent'
 };

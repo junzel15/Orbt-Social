@@ -8,7 +8,13 @@ import Bars from '../screens/mainScreens/Home/Bars';
 import Experiences from '../screens/mainScreens/Home/Experiences';
 import LocationAllow from '../screens/mainScreens/AccessScreen/LocationAllow';
 import NotificationAllow from '../screens/mainScreens/AccessScreen/NotificationAllow';
-import Login from '../screens/authScreens/Login';
+import BookingDiningDetails from '../screens/mainScreens/Home/bookingDetails/BookingDiningDetails';
+import BarDetails from '../screens/mainScreens/Home/bookingDetails/BarDetails';
+import ExperienceDetails from '../screens/mainScreens/Home/bookingDetails/ExperienceDetails';
+import GiveFeedback from '../screens/mainScreens/Home/reviewScreen/GiveFeedback';
+import SuccessfulFeedback from '../screens/mainScreens/Home/reviewScreen/SuccessfulFeedback';
+import CancelBooking from '../screens/mainScreens/Home/cancelEvent/CancelBooking';
+import CancelEvent from '../screens/mainScreens/Home/cancelEvent/CancelEvent';
 
 const MainStack = createNativeStackNavigator();
 
@@ -61,7 +67,41 @@ const MainNavigation = () => {
         component={NotificationAllow}
         options={options}
       />
-      
+      <MainStack.Screen
+        name={navigationStrings.DiningDetails}
+        component={BookingDiningDetails}
+        options={options}
+      />
+        <MainStack.Screen
+        name={navigationStrings.BarDetails}
+        component={BarDetails}
+        options={options}
+      />
+        <MainStack.Screen
+        name={navigationStrings.ExperienceDetails}
+        component={ExperienceDetails}
+        options={options}
+      />
+        <MainStack.Screen
+        name={navigationStrings.GiveFeedback}
+        component={GiveFeedback}
+        options={options}
+      />
+       <MainStack.Screen
+        name={navigationStrings.SuccessfulFeedback}
+        component={SuccessfulFeedback}
+        options={options}
+      />
+       <MainStack.Screen
+        name={navigationStrings.CancelBooking}
+        component={CancelBooking}
+        options={options}
+      />
+       <MainStack.Screen
+        name={navigationStrings.CancelEvent}
+        component={CancelEvent}
+        options={options}
+      />
     </MainStack.Navigator>
   );
 };
