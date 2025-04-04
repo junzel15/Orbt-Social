@@ -34,6 +34,11 @@ const Dining = () => {
     navigation.goBack();
   };
 
+
+  const onBookNowPress=()=>{
+    navigation.navigate(navigationStrings.ExperienceDetails)
+  }
+
   return (
     <WrapperContainer>
       <ImageBackground
@@ -117,7 +122,7 @@ const Dining = () => {
           title="Book Now"
           customStyles={styles.buttonContainer}
           // disable={selectedDate?.trim()}
-          onPress={()=> navigation.navigate(navigationStrings.ExperienceDetails)}
+          onPress={onBookNowPress}
         />
       </ImageBackground>
     </WrapperContainer>
