@@ -29,4 +29,6 @@ export const imagePath = {
   experienceImage:  require('../assets/images/experienceImage.png'),
   reviewImage:  require('../assets/images/review.png'),
   cancelImage:  require('../assets/images/cancelImage.png'),
+  layre: require('../assets/images/layer_1.png'),
+  s_location: require('../assets/images/s_location.png'),
 };
