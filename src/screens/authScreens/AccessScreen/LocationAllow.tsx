@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet, Platform } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { navigationStrings } from '../../../navigation/navigationStrings';
 import commonStyles from '../../../constants/commonStyles';
@@ -13,7 +12,9 @@ import { fonts } from '../../../constants/fonts';
 import { globalStyleDefinitions } from '../../../constants/globalStyleDefinitions';
 
 const LocationAllow = () => {
+
     const navigation = useNavigation<NavigationProp<any>>();
+    
     const onViewBook = () => {
         navigation.navigate(navigationStrings.NotificationAllow)
     }
@@ -32,10 +33,10 @@ const LocationAllow = () => {
                 </View>
             </View>
             <View style={styles.bottomView} >
-            <CommonButton title='Allow Location Access' onPress={onViewBook} />
-            <Text style={styles.subText} suppressHighlighting onPress={onSkip}>
-                Skip for now
-            </Text>
+                <CommonButton title='Allow Location Access' onPress={onViewBook} />
+                <Text style={styles.subText} suppressHighlighting onPress={onSkip}>
+                    Skip for now
+                </Text>
             </View>
         </View>
     )
@@ -59,14 +60,14 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         textAlign: 'center',
-        fontFamily:fonts.soraSemiBold
+        fontFamily: fonts.soraSemiBold
     },
     subtitle: {
         color: colors.black,
         fontSize: 14,
         textAlign: 'center',
         marginVertical: 10,
-        fontFamily:fonts.fontRegular
+        fontFamily: fonts.fontRegular
     },
     subText: {
         fontSize: getScaledFontSize(16),
@@ -79,9 +80,9 @@ const styles = StyleSheet.create({
         padding: globalStyleDefinitions.cardInnerPadding.padding,
         alignSelf: 'center',
     },
-    bottomView:{
-        flex:0.3,
-         justifyContent:'flex-end'
+    bottomView: {
+        flex: 0.3,
+        justifyContent: 'flex-end'
     }
 });
 

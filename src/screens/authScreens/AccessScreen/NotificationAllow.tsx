@@ -11,15 +11,20 @@ import { colors } from '../../../constants/colors';
 import { getScaledFontSize } from '../../../constants/globalFunctions';
 import { fonts } from '../../../constants/fonts';
 import { globalStyleDefinitions } from '../../../constants/globalStyleDefinitions';
+import { useDispatch } from 'react-redux';
+import { setAccessToken } from '../../../redux/slices/authState';
 
 const NotificationAllow = () => {
     const navigation = useNavigation<NavigationProp<any>>();
+
+    const dispatch = useDispatch();
+    
     const onViewBook = () => {
-        navigation.navigate(navigationStrings.NotificationAllow)
+        dispatch(setAccessToken('accessToken'));
     }
 
     const onSkip = () => {
-        //    dispatch(setAccessToken('accessToken'));
+           dispatch(setAccessToken('accessToken'));
     };
 
     return (

@@ -38,10 +38,10 @@ const Dining = () => {
     navigation.navigate(navigationStrings.MatchingCrew);
   }
 
-  const onSelect = (itemlable: any) =>{
+  const onSelect = (itemlable: any) => {
     setSelected(itemlable);
     setSelectedDate('');
- }
+  }
 
   return (
     <WrapperContainer>
@@ -59,7 +59,7 @@ const Dining = () => {
               <CustomImage url={iconPath.close} height={44} width={44} />
             </TouchableOpacity>
           </View>
-          <DiningOptions selected={selected}  onSelect={onSelect} />
+          <DiningOptions selected={selected} onSelect={onSelect} />
           <DateSelectionList
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}

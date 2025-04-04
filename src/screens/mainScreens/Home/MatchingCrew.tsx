@@ -18,8 +18,8 @@ const MatchingCrew = () => {
 
   return <WrapperContainer>
     {!isCompleted ? <SearchScreen progress={progress} /> : <SuccessfulCard />
-   }
-   </WrapperContainer>;
+    }
+  </WrapperContainer>;
 };
 
 export default MatchingCrew;

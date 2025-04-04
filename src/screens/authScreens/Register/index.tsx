@@ -62,7 +62,9 @@ const Register = () => {
     });
   };
 
-  const handleLogin = async () => {};
+  const handleLogin = async () => {
+    navigation.navigate(navigationStrings.Login)
+  };
 
   const onCountryCodePress = () => {
     setShowCountryPicker(true);

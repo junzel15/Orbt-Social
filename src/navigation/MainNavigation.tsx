@@ -6,8 +6,6 @@ import Dining from '../screens/mainScreens/Home/Dining';
 import MatchingCrew from '../screens/mainScreens/Home/MatchingCrew';
 import Bars from '../screens/mainScreens/Home/Bars';
 import Experiences from '../screens/mainScreens/Home/Experiences';
-import LocationAllow from '../screens/mainScreens/AccessScreen/LocationAllow';
-import NotificationAllow from '../screens/mainScreens/AccessScreen/NotificationAllow';
 import BookingDiningDetails from '../screens/mainScreens/Home/bookingDetails/BookingDiningDetails';
 import BarDetails from '../screens/mainScreens/Home/bookingDetails/BarDetails';
 import ExperienceDetails from '../screens/mainScreens/Home/bookingDetails/ExperienceDetails';
@@ -57,16 +55,6 @@ const MainNavigation = () => {
       <MainStack.Screen
         name={navigationStrings.MatchingCrew}
         component={MatchingCrew}
-        options={options}
-      />
-      <MainStack.Screen
-        name={navigationStrings.LocationAllow}
-        component={LocationAllow}
-        options={options}
-      />
-      <MainStack.Screen
-        name={navigationStrings.NotificationAllow}
-        component={NotificationAllow}
         options={options}
       />
       <MainStack.Screen

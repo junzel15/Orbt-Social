@@ -39,6 +39,10 @@ const Login = () => {
         navigation.navigate(navigationStrings.ForgetPassword)
     }
 
+    const handleRegister = () => {
+        navigation.navigate(navigationStrings.Register)
+    }
+
     return (
         <WrapperContainer>
             <LinearWrapperContainer>
@@ -75,6 +79,7 @@ const Login = () => {
                         <CommonButton
                             title="Login"
                             onPress={handleLogin}
+                            customStyles={{ marginTop: globalStyleDefinitions.cardInnerPadding.padding }}
                         />
                         <Text style={styles.loginTitleText}>
                             Forgot your password? {'  '}
@@ -96,12 +101,12 @@ const Login = () => {
                             <SocialButton iconPath={iconPath.facebook} />
                         </View>
                         <Text style={styles.loginTitleText}>
-                            Already have account?{'  '}
+                            Don't have an account?{'  '}
                             <Text
                                 style={styles.loginText}
                                 suppressHighlighting
-                                onPress={handleLogin}>
-                                Log in
+                                onPress={handleRegister}>
+                                Sign up
                             </Text>
                         </Text>
                     </View>
