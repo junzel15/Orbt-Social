@@ -19,29 +19,29 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ progress }) => {
     });
 
     return (
-        <LinearGradient colors={['#4C0BCE','#180028','#000000']}
-                    locations={[0.0,0.5,0.8]}
-                    start={{x:0,y:0}}
-                    end={{x:1,y:1}}
-                    style={styles.gradient}
-                 >
-        <View style={styles.container}>
-            <View style={styles.imageContainer}>
-                <Image source={imagePath.searchIcon} style={styles.image} />
-                <View style={styles.progressBarBackground}>
-                    <Animated.View style={[styles.progressBar, { width: widthInterpolate }]} />
+        <LinearGradient colors={['#4C0BCE', '#180028', '#000000']}
+            locations={[0.0, 0.5, 0.8]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.gradient}
+        >
+            <View style={styles.container}>
+                <View style={styles.imageContainer}>
+                    <Image source={imagePath.searchIcon} style={styles.image} />
+                    <View style={styles.progressBarBackground}>
+                        <Animated.View style={[styles.progressBar, { width: widthInterpolate }]} />
+                    </View>
                 </View>
+                <Text style={styles.title}>Matching You with {"\n"}  Your  Crew...</Text>
+                <Text style={styles.subtitle}>Our algorithm is curating the perfect  {"\n"}  group for your upcoming adventure. Hang  {"\n"} tight—your plans are coming together!</Text>
             </View>
-            <Text style={styles.title}>Matching You with {"\n"}  Your  Crew...</Text>
-            <Text style={styles.subtitle}>Our algorithm is curating the perfect  {"\n"}  group for your upcoming adventure. Hang  {"\n"} tight—your plans are coming together!</Text>
-        </View>
         </LinearGradient>
     );
 };
 
 const styles = StyleSheet.create({
-    gradient:{
-        flex:1
+    gradient: {
+        flex: 1
     },
     container: {
         alignItems: 'center',

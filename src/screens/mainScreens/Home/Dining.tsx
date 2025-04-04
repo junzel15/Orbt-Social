@@ -1,5 +1,5 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
 import {
   ImageBackground,
   Platform,
@@ -12,17 +12,17 @@ import {
 import CommonButton from '../../../components/atoms/button/CommonButton';
 import CustomImage from '../../../components/atoms/image/CustomImage';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
-import {colors} from '../../../constants/colors';
+import { colors } from '../../../constants/colors';
 import commonStyles from '../../../constants/commonStyles';
-import {fonts} from '../../../constants/fonts';
-import {getScaledFontSize} from '../../../constants/globalFunctions';
-import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
-import {iconPath} from '../../../constants/iconPath';
-import {imagePath} from '../../../constants/imagePath';
-import {DiningData} from './components/data';
+import { fonts } from '../../../constants/fonts';
+import { getScaledFontSize } from '../../../constants/globalFunctions';
+import { globalStyleDefinitions } from '../../../constants/globalStyleDefinitions';
+import { iconPath } from '../../../constants/iconPath';
+import { imagePath } from '../../../constants/imagePath';
 import DateSelectionList from './components/DateSelectionList';
 import ExpandableCard from './components/ExpandableCard';
 import { navigationStrings } from '../../../navigation/navigationStrings';
+import DiningOptions from './components/DiningOptions';
 
 const Dining = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -34,9 +34,14 @@ const Dining = () => {
     navigation.goBack();
   };
 
-  const searchCrew =() =>{
-      navigation.navigate(navigationStrings.MatchingCrew);
+  const searchCrew = () => {
+    navigation.navigate(navigationStrings.MatchingCrew);
   }
+
+  const onSelect = (itemlable: any) =>{
+    setSelected(itemlable);
+    setSelectedDate('');
+ }
 
   return (
     <WrapperContainer>
@@ -51,32 +56,11 @@ const Dining = () => {
               <CustomImage url={iconPath.close} height={44} width={44} />
             </TouchableOpacity>
           </View>
-          <View style={styles.listWrapper}>
-            {DiningData.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() => setSelected(item.label)}
-                activeOpacity={0.9}
-                style={[
-                  styles.listContainer,
-                  selected == item.label && styles.selectedItem,
-                ]}>
-                <Text
-                  style={[
-                    styles.listText,
-                    selected == item.label && styles.selectedText,
-                  ]}>
-                  {item.label}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-
+          <DiningOptions selected={selected}  onSelect={onSelect} />
           <DateSelectionList
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
-
           <ExpandableCard
             header="BEFORE YOU BOOK"
             content={[
@@ -157,9 +141,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 10,
     borderRadius: 2 * globalStyleDefinitions.br_10.borderRadius,
-  },
-  selectedItem: {
-    backgroundColor: colors.white,
   },
   listText: {
     color: colors.white,

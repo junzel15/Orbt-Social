@@ -19,10 +19,10 @@ import {getScaledFontSize} from '../../../constants/globalFunctions';
 import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
 import {iconPath} from '../../../constants/iconPath';
 import {imagePath} from '../../../constants/imagePath';
-import {DiningData} from './components/data';
 import DateSelectionList from './components/DateSelectionList';
 import ExpandableCard from './components/ExpandableCard';
 import { navigationStrings } from '../../../navigation/navigationStrings';
+import DiningOptions from './components/DiningOptions';
 
 const Bars = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -38,6 +38,11 @@ const Bars = () => {
       navigation.navigate(navigationStrings.MatchingCrew);
   }
 
+ const onSelect = (itemlable: any) =>{
+    setSelected(itemlable);
+    setSelectedDate('');
+ }
+
   return (
     <WrapperContainer>
       <ImageBackground
@@ -51,26 +56,7 @@ const Bars = () => {
               <CustomImage url={iconPath.close} height={44} width={44} />
             </TouchableOpacity>
           </View>
-          <View style={styles.listWrapper}>
-            {DiningData.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() => setSelected(item.label)}
-                activeOpacity={0.9}
-                style={[
-                  styles.listContainer,
-                  selected == item.label && styles.selectedItem,
-                ]}>
-                <Text
-                  style={[
-                    styles.listText,
-                    selected == item.label && styles.selectedText,
-                  ]}>
-                  {item.label}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+          <DiningOptions selected={selected}  onSelect={onSelect} />
           <DateSelectionList
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}

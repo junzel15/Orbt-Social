@@ -18,7 +18,13 @@ type NavigationStrings = {
   MatchingCrew:string
   Bars:string
   Experiences:string
-
+  LocationAllow:string
+  NotificationAllow:string
+  Login:string
+  ForgetPassword:string
+  VerifyScreen:string
+  NewPassword:string
+  SuccessfulPassword:string
 };
 
 export const navigationStrings: NavigationStrings = {
@@ -40,5 +46,12 @@ export const navigationStrings: NavigationStrings = {
   Dining: 'Dining',
   MatchingCrew:'MatchingCrew',
   Bars:'Bars',
-  Experiences:'Experiences'
+  Experiences:'Experiences',
+  LocationAllow:'LocationAllow',
+  NotificationAllow:'NotificationAllow',
+  Login:'Login',
+  ForgetPassword:'ForgetPassword',
+  VerifyScreen:'VerifyScreen',
+  NewPassword:"NewPassword",
+  SuccessfulPassword:'SuccessfulPassword'
 };

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
 import SearchScreen from './components/SearchCard';
-import LinearGradient from 'react-native-linear-gradient';
-import SuccecfullCard from './components/SussecfullCard';
+import SuccessfulCard from './components/SuccessfulCard';
 
 const MatchingCrew = () => {
   const [progress, setProgress] = useState(new Animated.Value(0));
@@ -18,7 +17,7 @@ const MatchingCrew = () => {
   }, []);
 
   return <WrapperContainer>
-    {!isCompleted ? <SearchScreen progress={progress} /> : <SuccecfullCard />
+    {!isCompleted ? <SearchScreen progress={progress} /> : <SuccessfulCard />
    }
    </WrapperContainer>;
 };

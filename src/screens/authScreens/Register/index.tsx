@@ -1,6 +1,6 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import CheckBox from '../../../components/atoms/button/CheckBox';
 import CommonButton from '../../../components/atoms/button/CommonButton';
@@ -84,6 +84,10 @@ const Register = () => {
     setIsAgree(!isAgree);
   };
 
+  const onLoginOpen = () =>{
+    navigation.navigate(navigationStrings.Login)
+  }
+
   return (
     <WrapperContainer>
       <LinearWrapperContainer>
@@ -149,12 +153,14 @@ const Register = () => {
           </View>
           <Text style={styles.loginTitleText}>
             Already have account?{'  '}
+            <TouchableOpacity onPress={onLoginOpen}  >
             <Text
               style={styles.loginText}
               suppressHighlighting
               onPress={handleLogin}>
               Log in
             </Text>
+            </TouchableOpacity>
           </Text>
         </ScrollView>
         <CountrycodeModal

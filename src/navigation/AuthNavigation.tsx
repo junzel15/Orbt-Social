@@ -11,6 +11,11 @@ import BirthdaySelection from '../screens/authScreens/UserSetup/BirthdaySelectio
 import GenderSelection from '../screens/authScreens/UserSetup/GenderSelection';
 import InterestSelection from '../screens/authScreens/UserSetup/InterestsSelection';
 import {navigationStrings} from './navigationStrings';
+import Login from '../screens/authScreens/Login';
+import ForgetPassword from '../screens/authScreens/ForgetPassword.tsx';
+import VerifyScreen from '../screens/authScreens/ForgetPassword.tsx/VerifyScreen.tsx';
+import NewPassword from '../screens/authScreens/ForgetPassword.tsx/NewPassword.tsx';
+import SuccessfulPassword from '../screens/authScreens/ForgetPassword.tsx/SuccessfulPassword.tsx';
 
 const AuthStack = createNativeStackNavigator();
 
@@ -74,6 +79,31 @@ const AuthNavigation = () => {
       <AuthStack.Screen
         name={navigationStrings.InterestSelection}
         component={InterestSelection}
+        options={options}
+      />
+       <AuthStack.Screen
+        name={navigationStrings.Login}
+        component={Login}
+        options={options}
+      />
+       <AuthStack.Screen
+        name={navigationStrings.ForgetPassword}
+        component={ForgetPassword}
+        options={options}
+      />
+         <AuthStack.Screen
+        name={navigationStrings.VerifyScreen}
+        component={VerifyScreen}
+        options={options}
+      />
+         <AuthStack.Screen
+        name={navigationStrings.NewPassword}
+        component={NewPassword}
+        options={options}
+      />
+       <AuthStack.Screen
+        name={navigationStrings.SuccessfulPassword}
+        component={SuccessfulPassword}
         options={options}
       />
     </AuthStack.Navigator>
