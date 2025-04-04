@@ -19,4 +19,8 @@ export const colors = {
   lightpink:'#f7f2ff',
   lightRed:'#E1392D',
   lighGrey:'#ADAFBB'
+  lavender:"#eee1ff",
+  mediumRed:"#CD5C5C",
+  mediumgray:"#888",
+  CharcoalGrey:"#414141",
 };

@@ -32,6 +32,9 @@ type NavigationStrings = {
   SuccessfulFeedback:string
   CancelBooking:string
   CancelEvent:string
+  Notification:string
+  Location:string
+
 };
 
 export const navigationStrings: NavigationStrings = {
@@ -67,5 +70,7 @@ export const navigationStrings: NavigationStrings = {
   GiveFeedback:"GiveFeedback",
   SuccessfulFeedback:"SuccessfulFeedback",
   CancelBooking:'CancelBooking',
-  CancelEvent:'CancelEvent'
+  CancelEvent:'CancelEvent',
+  Notification:'Notification',
+  Location:'Location'
 };
