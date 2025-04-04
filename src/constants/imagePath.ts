@@ -17,4 +17,6 @@ export const imagePath = {
   userSetupBackground: require('../assets/images/userSetupBackground.png'),
   userSetupBackground2: require('../assets/images/userSetupBackground2.png'),
   userSetupBackground3: require('../assets/images/userSetupBackground3.png'),
+  layre: require('../assets/images/layer_1.png'),
+  s_location: require('../assets/images/s_location.png'),
 };
