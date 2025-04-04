@@ -16,4 +16,5 @@ export const imagePath = {
   barImage:  require('../assets/images/barsImage.png'),
   experienceImage:  require('../assets/images/experienceImage.png'),
   reviewImage:  require('../assets/images/review.png'),
+  cancelImage:  require('../assets/images/cancelImage.png'),
 };

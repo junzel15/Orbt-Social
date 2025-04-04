@@ -3,6 +3,7 @@ import React from 'react'
 import CommonHeader from '../../../../components/header/CommonHeader'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import { getScaledFontSize } from '../../../../constants/globalFunctions'
 import { colors } from '../../../../constants/colors'
 import { fonts } from '../../../../constants/fonts'
@@ -25,8 +26,6 @@ const ExperienceDetails = () => {
             <CommonHeader showBackIcon={true} headerTitle='ORBT-BR0001' />
             <ScrollView style={styles.container}>
                 <View >
-
-
                     <View style={styles.mainCard}>
                         <View style={{}}>
                             <Text style={styles.title}>Experience</Text>
@@ -82,10 +81,17 @@ const ExperienceDetails = () => {
                     <View style={{ borderTopWidth: 0.5, borderColor: colors.white, marginTop: globalStyleDefinitions.mt_15.marginTop }} />
                     <View style={styles.langRow}>
 
-                        <View>
-                            <Text style={styles.subLabel}>Nationality:</Text>
-                            <Text style={styles.whiteText}>🇺🇸 United States of America{'\n'}🇵🇭 Philippines</Text>
-                        </View>
+                       <View>
+                                               <View  style={styles.infoRow}>
+                                                   <Feather name={"globe"} size={13} color={colors.white} />
+                                                    <Text style={[styles.subLabel,{marginLeft:10}]}>Nationality:</Text>
+                                                    </View>
+                                                   <View>
+                                                  
+                                                   <Text style={styles.whiteText}>🇺🇸 United States of America{'\n'}🇵🇭 Philippines</Text>
+                                                
+                                                   </View>
+                                               </View>
                         <View >
                             <Text style={styles.subLabel}>Language:</Text>
                             <Text style={styles.whiteText}>English, Filipino</Text>
@@ -135,25 +141,27 @@ const styles = StyleSheet.create({
         flex: 1
     },
     sectionLabel: {
-        color: '#fff',
+        color: colors.white,
         marginTop: 2 * globalStyleDefinitions.mt_10.marginTop,
-        marginBottom: 12,
-        fontWeight: '600',
-        fontSize: 16,
+        marginBottom: globalStyleDefinitions.mb_10.marginBottom,
+        fontFamily:fonts.fontMedium,
+        fontSize: getScaledFontSize(14),
     },
     zodiac: {
-        color: '#fff',
-        fontSize: 16,
-        marginTop: 8,
-        marginBottom: 20,
+        fontFamily:fonts.fontRegular,
+        color:colors.white,
+        fontSize: getScaledFontSize(12),
+        marginBottom: 2*globalStyleDefinitions.mb_10.marginBottom,
     },
     badge: {
         alignSelf: 'flex-start',
-        backgroundColor: '#5B2EFF',
+        backgroundColor: colors.primary,
+        borderColor:colors.darkPurple,
+        borderWidth:2,
         borderRadius: 2 * globalStyleDefinitions.br_10.borderRadius,
         paddingHorizontal: 12,
         paddingVertical: 4,
-        marginBottom: 8,
+        marginBottom: globalStyleDefinitions.mb_10.marginBottom,
     },
     badgeText: {
         color: colors.white,
@@ -164,52 +172,39 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontSize: getScaledFontSize(24),
         fontFamily: fonts.fontRegular,
-        marginBottom: 16,
+        marginBottom: globalStyleDefinitions.mb_10.marginBottom,
     },
     infoRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 10,
+        marginBottom: globalStyleDefinitions.mb_10.marginBottom,
     },
     infoText: {
         color: colors.white,
         marginLeft: 10,
         fontSize: getScaledFontSize(14),
-        // lineHeight: 20,
-    },
-    topRightCode: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-    },
-    code: {
-        color: colors.white,
-        fontWeight: '600',
     },
     cupImage: {
         width: 120,
         height: 155,
-        borderRadius: 16,
-        backgroundColor: '#8B4DFF',
     },
     tags: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         gap: globalStyleDefinitions.gap.gap,
-        marginTop: 10
+        marginTop: globalStyleDefinitions.mt_10.marginTop
     },
     tag: {
         paddingVertical: 5,
         paddingHorizontal: 10,
-        borderRadius: 20,
+        borderRadius: 2*globalStyleDefinitions.br_10.borderRadius,
         borderWidth: 1,
         borderColor: colors.white,
         marginRight: 4,
     },
     tagText: {
         color: colors.white,
-        fontSize: 13,
-
+        fontSize: getScaledFontSize(10),
     },
     langRow: {
         flexDirection: 'row',
@@ -222,15 +217,15 @@ const styles = StyleSheet.create({
         marginBottom: 4,
     },
     whiteText: {
-        color: '#fff',
-        fontSize: 15,
-        marginTop: globalStyleDefinitions.mt_15.marginTop
+        color:colors.white,
+        fontSize: getScaledFontSize(12),
+        // marginTop: globalStyleDefinitions.mt_15.marginTop
     },
-
     buttonRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: windowHeight * 0.1
+        marginBottom: windowHeight * 0.1,
+        marginTop:globalStyleDefinitions.mt_10.marginTop
     },
 
 

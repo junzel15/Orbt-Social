@@ -117,7 +117,7 @@ const Dining = () => {
           title="Book Now"
           customStyles={styles.buttonContainer}
           // disable={selectedDate?.trim()}
-          onPress={()=> navigation.navigate(navigationStrings.DiningDetails)}
+          onPress={()=> navigation.navigate(navigationStrings.ExperienceDetails)}
         />
       </ImageBackground>
     </WrapperContainer>

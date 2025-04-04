@@ -16,6 +16,9 @@ export const globalStyleDefinitions = StyleSheet.create({
   mt_10: {
     marginTop: 10,
   },
+  mr_10:{
+    marginRight:10
+  },
   mb_10: {
     marginBottom: 10,
   },

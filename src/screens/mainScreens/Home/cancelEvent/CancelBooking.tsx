@@ -27,7 +27,7 @@ const CancelBooking = () => {
         >
         <View style={styles.container}>
             <Image
-            source={imagePath.reviewImage}
+            source={imagePath.cancelImage}
             style={styles.imageStyle}
             
             />
@@ -35,7 +35,11 @@ const CancelBooking = () => {
             <Text style={styles.thanksText}>Your Booking Has Been Cancelled</Text>
             <Text style={styles.subText}>We’re sorry to see you go, but we hope to see you again soon! If there’s anything we can do to improve your experience, let us know.</Text>
             </View>
+            
+            </View>
+            <View style={styles.buttonView}>
             <CommonButton onPress={onPressButton} title='Back to Home'/>
+
             </View>
         </LinearGradient>
     )
@@ -57,7 +61,7 @@ innerContainer:{
     padding:globalStyleDefinitions.screenPadding.padding
 },
 imageStyle:{ 
-    width: windowWidth * 0.8, 
+    width: windowWidth * 0.9, 
     height: windowHeight * 0.4 
 },
 thanksText:{ 
@@ -72,6 +76,11 @@ subText:{
     fontSize: getScaledFontSize(14), 
     textAlign:'center', 
     marginTop:3*globalStyleDefinitions.mt_10.marginTop
-}
+},
+buttonView:{
+    flex:0.12, 
+    padding:globalStyleDefinitions.screenPadding.padding
+},
+
 
 })

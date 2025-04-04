@@ -91,15 +91,15 @@ const BarDetails = () => {
                     <TimerComponent />
                     <PricePeopleComponent />
                     <View style={styles.buttonRow}>
-                      <CommonButton
-                      title='cancel Event'
-                      customStyles={{width:windowWidth/2.5, marginRight:10, backgroundColor:colors.white}}
-                      customTextStyles={{color:colors.black}}
-                      />
                         <CommonButton
-                      title='View E-Ticket'
-                      customStyles={{width:windowWidth/2.5, }}
-                      />
+                            title='cancel Event'
+                            customStyles={{ width: windowWidth / 2.5, marginRight: 10, backgroundColor: colors.white }}
+                            customTextStyles={{ color: colors.black }}
+                        />
+                        <CommonButton
+                            title='View E-Ticket'
+                            customStyles={{ width: windowWidth / 2.5, }}
+                        />
                     </View>
 
                 </View>
@@ -123,26 +123,33 @@ const styles = StyleSheet.create({
         padding: globalStyleDefinitions.screenPadding.padding,
         flex: 1
     },
+    customStyles: {
+        width: windowWidth / 2.5,
+        marginRight: globalStyleDefinitions.mr_10.marginRight,
+        backgroundColor: colors.white
+    },
     sectionLabel: {
-        color: '#fff',
+        color: colors.white,
         marginTop: 2 * globalStyleDefinitions.mt_10.marginTop,
-        marginBottom: 12,
-        fontWeight: '600',
-        fontSize: 16,
+        marginBottom: globalStyleDefinitions.mb_10.marginBottom,
+        fontFamily: fonts.fontMedium,
+        fontSize: getScaledFontSize(14),
     },
     zodiac: {
-        color: '#fff',
-        fontSize: 16,
-        marginTop: 8,
-        marginBottom: 20,
+        fontFamily: fonts.fontRegular,
+        color: colors.white,
+        fontSize: getScaledFontSize(12),
+        marginBottom: 2 * globalStyleDefinitions.mb_10.marginBottom,
     },
     badge: {
         alignSelf: 'flex-start',
-        backgroundColor: '#5B2EFF',
+        backgroundColor: colors.primary,
+        borderColor: colors.darkPurple,
+        borderWidth: 2,
         borderRadius: 2 * globalStyleDefinitions.br_10.borderRadius,
         paddingHorizontal: 12,
         paddingVertical: 4,
-        marginBottom: 8,
+        marginBottom: globalStyleDefinitions.mb_10.marginBottom,
     },
     badgeText: {
         color: colors.white,
@@ -153,51 +160,39 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontSize: getScaledFontSize(24),
         fontFamily: fonts.fontRegular,
-        marginBottom: 16,
+        marginBottom: globalStyleDefinitions.mb_10.marginBottom,
     },
     infoRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 10,
+        marginBottom: globalStyleDefinitions.mb_10.marginBottom,
     },
     infoText: {
         color: colors.white,
         marginLeft: 10,
         fontSize: getScaledFontSize(14),
-        // lineHeight: 20,
-    },
-    topRightCode: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-    },
-    code: {
-        color: '#fff',
-        fontWeight: '600',
     },
     cupImage: {
         width: 120,
         height: 155,
-        borderRadius: 16,
-        backgroundColor: '#8B4DFF',
     },
     tags: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        gap: 10,
-        marginTop: 10
+        gap: globalStyleDefinitions.gap.gap,
+        marginTop: globalStyleDefinitions.mt_10.marginTop
     },
     tag: {
         paddingVertical: 5,
         paddingHorizontal: 10,
-        borderRadius: 20,
+        borderRadius: 2 * globalStyleDefinitions.br_10.borderRadius,
         borderWidth: 1,
         borderColor: colors.white,
         marginRight: 4,
     },
     tagText: {
-        color: '#fff',
-        fontSize: 13,
+        color: colors.white,
+        fontSize: getScaledFontSize(10),
     },
     langRow: {
         flexDirection: 'row',
@@ -205,21 +200,21 @@ const styles = StyleSheet.create({
         marginTop: 2 * globalStyleDefinitions.mt_10.marginTop,
     },
     subLabel: {
-        color: '#aaa',
-        fontSize: 14,
+        color: colors.white,
+        fontSize: getScaledFontSize(14),
         marginBottom: 4,
     },
     whiteText: {
-        color: '#fff',
-        fontSize: 15,
-        marginTop: globalStyleDefinitions.mt_15.marginTop
+        color: colors.white,
+        fontSize: getScaledFontSize(12),
+        // marginTop: globalStyleDefinitions.mt_15.marginTop
     },
 
     buttonRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom:windowHeight*0.1
-      },
-    
-     
+        marginBottom: windowHeight * 0.1
+    },
+
+
 });
