@@ -34,7 +34,6 @@ type NavigationStrings = {
   CancelEvent:string
   Notification:string
   Location:string
-
 };
 
 export const navigationStrings: NavigationStrings = {
