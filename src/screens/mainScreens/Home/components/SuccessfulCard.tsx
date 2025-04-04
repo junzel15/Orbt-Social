@@ -6,8 +6,17 @@ import { windowHeight, windowWidth } from '../../../../constants/globalConstants
 import { colors } from '../../../../constants/colors';
 import CommonButton from '../../../../components/atoms/button/CommonButton';
 import LinearGradient from 'react-native-linear-gradient';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { navigationStrings } from '../../../../navigation/navigationStrings';
 
-const SuccecfullCard = () => (
+const SuccessfulCard = () => {
+   const navigation = useNavigation<NavigationProp<any>>();
+
+   const onViewBook = () =>{
+    navigation.navigate(navigationStrings.LocationAllow)
+   }
+
+    return(
     <LinearGradient colors={['#4C0BCE', '#180028', '#000000']}
         locations={[0.0, 0.5, 0.8]}
         start={{ x: 0, y: 0 }}
@@ -22,10 +31,11 @@ const SuccecfullCard = () => (
                     <Text style={styles.subtitle}>Your reservation is confirmed! Tap the {'\n'} button below to view your ticket details.</Text>
                 </View>
             </View>
-            <CommonButton title='View Booking' />
+            <CommonButton title='View Booking' onPress={onViewBook}  />
         </View>
     </LinearGradient>
-);
+    )
+};
 
 const styles = StyleSheet.create({
     gradient: {
@@ -57,4 +67,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SuccecfullCard;
+export default SuccessfulCard;

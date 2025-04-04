@@ -13,6 +13,7 @@ const commonStyles = StyleSheet.create({
   fullInnerContainer: {
     flex: 1,
     padding: globalStyleDefinitions.screenPadding.padding,
+  
   },
 });
 export default commonStyles;

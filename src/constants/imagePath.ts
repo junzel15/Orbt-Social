@@ -1,3 +1,5 @@
+import { invalid } from "moment";
+
 export const imagePath = {
   appLogo: require('../assets/images/appLogo.png'),
   background: require('../assets/images/background.png'),
@@ -17,4 +19,9 @@ export const imagePath = {
   userSetupBackground: require('../assets/images/userSetupBackground.png'),
   userSetupBackground2: require('../assets/images/userSetupBackground2.png'),
   userSetupBackground3: require('../assets/images/userSetupBackground3.png'),
+  locationImage:require('../assets/images/locationImage.png'),
+  notificationImage:require('../assets/images/notificationImage.png'),
+  invalidIcon:require('../assets/images/invalidIcon.png'),
+  smsIcon:require('../assets/images/smsIcon.png'),
+  passwordChangeIcon:require('../assets/images/passwordChangeIcon.png')
 };
