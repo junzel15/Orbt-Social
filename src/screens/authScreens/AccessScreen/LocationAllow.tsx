@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         marginBottom: Platform.select({
             ios: globalStyleDefinitions.screenPadding.padding,
         }),
-        marginTop: globalStyleDefinitions.mt_15.marginTop,
+        marginTop: globalStyleDefinitions.commonItemMargin.margin,
         padding: globalStyleDefinitions.cardInnerPadding.padding,
         alignSelf: 'center',
     },
