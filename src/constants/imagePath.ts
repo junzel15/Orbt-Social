@@ -31,4 +31,5 @@ export const imagePath = {
   cancelImage:  require('../assets/images/cancelImage.png'),
   layre: require('../assets/images/layer_1.png'),
   s_location: require('../assets/images/s_location.png'),
+  filter:require('../assets/images/filter.png')
 };

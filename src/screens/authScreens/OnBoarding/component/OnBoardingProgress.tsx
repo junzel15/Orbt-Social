@@ -61,7 +61,9 @@ const onBoardingProgress = ({item, activeIndex, setActiveIndex}: iProps) => {
     });
   };
 
-  const onLogin = () => {};
+  const onLogin = () => {
+    navigation.navigate(navigationStrings.Login)
+  };
 
   return (
     <LinearGradient

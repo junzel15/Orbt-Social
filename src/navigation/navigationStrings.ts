@@ -11,7 +11,7 @@ type NavigationStrings = {
   InterestSelection:string
   BottomNavigation:string
   Home:string
-  Calendar:string
+  MyBookings:string
   Message:string
   Profile:string
   Dining:string
@@ -49,7 +49,7 @@ export const navigationStrings: NavigationStrings = {
   InterestSelection: 'InterestSelection',
   BottomNavigation: 'BottomNavigation',
   Home: 'Home',
-  Calendar: 'Calendar',
+  MyBookings: 'MyBookings',
   Message: 'Message',
   Profile: 'Profile',
   Dining: 'Dining',

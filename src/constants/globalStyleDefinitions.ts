@@ -29,5 +29,8 @@ export const globalStyleDefinitions = StyleSheet.create({
   },
   gap:{
     gap:10
+  },
+  commonItemMargin:{
+    margin:15
   }
 });
