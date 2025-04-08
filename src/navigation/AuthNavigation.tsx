@@ -1,4 +1,4 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import OnBoarding from '../screens/authScreens/OnBoarding';
 import Register from '../screens/authScreens/Register';
@@ -10,12 +10,14 @@ import AboutMe from '../screens/authScreens/UserSetup/AboutMe';
 import BirthdaySelection from '../screens/authScreens/UserSetup/BirthdaySelection';
 import GenderSelection from '../screens/authScreens/UserSetup/GenderSelection';
 import InterestSelection from '../screens/authScreens/UserSetup/InterestsSelection';
-import {navigationStrings} from './navigationStrings';
+import { navigationStrings } from './navigationStrings';
 import Login from '../screens/authScreens/Login';
 import ForgetPassword from '../screens/authScreens/ForgetPassword.tsx';
 import VerifyScreen from '../screens/authScreens/ForgetPassword.tsx/VerifyScreen.tsx';
 import NewPassword from '../screens/authScreens/ForgetPassword.tsx/NewPassword.tsx';
 import SuccessfulPassword from '../screens/authScreens/ForgetPassword.tsx/SuccessfulPassword.tsx';
+import LocationAllow from '../screens/authScreens/AccessScreen/LocationAllow.tsx';
+import NotificationAllow from '../screens/authScreens/AccessScreen/NotificationAllow.tsx';
 
 const AuthStack = createNativeStackNavigator();
 
@@ -81,29 +83,39 @@ const AuthNavigation = () => {
         component={InterestSelection}
         options={options}
       />
-       <AuthStack.Screen
+      <AuthStack.Screen
         name={navigationStrings.Login}
         component={Login}
         options={options}
       />
-       <AuthStack.Screen
+      <AuthStack.Screen
         name={navigationStrings.ForgetPassword}
         component={ForgetPassword}
         options={options}
       />
-         <AuthStack.Screen
+      <AuthStack.Screen
         name={navigationStrings.VerifyScreen}
         component={VerifyScreen}
         options={options}
       />
-         <AuthStack.Screen
+      <AuthStack.Screen
         name={navigationStrings.NewPassword}
         component={NewPassword}
         options={options}
       />
-       <AuthStack.Screen
+      <AuthStack.Screen
         name={navigationStrings.SuccessfulPassword}
         component={SuccessfulPassword}
+        options={options}
+      />
+      <AuthStack.Screen
+        name={navigationStrings.NotificationAllow}
+        component={NotificationAllow}
+        options={options}
+      />
+      <AuthStack.Screen
+        name={navigationStrings.LocationAllow}
+        component={LocationAllow}
         options={options}
       />
     </AuthStack.Navigator>

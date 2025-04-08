@@ -13,7 +13,7 @@ const SuccessfulCard = () => {
    const navigation = useNavigation<NavigationProp<any>>();
 
    const onViewBook = () =>{
-    navigation.navigate(navigationStrings.LocationAllow)
+    navigation.navigate(navigationStrings.DiningDetails)
    }
 
     return(

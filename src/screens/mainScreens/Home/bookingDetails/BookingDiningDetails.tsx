@@ -77,9 +77,7 @@ const BookingDiningDetails = () => {
                              <Text style={[styles.subLabel,{marginLeft:10}]}>Nationality:</Text>
                              </View>
                             <View>
-                           
                             <Text style={styles.whiteText}>🇺🇸 United States of America{'\n'}🇵🇭 Philippines</Text>
-                         
                             </View>
                         </View>
                         <View >
@@ -99,7 +97,7 @@ const BookingDiningDetails = () => {
                     <PricePeopleComponent />
                     <View style={styles.buttonRow}>
                         <CommonButton
-                            title='cancel Event'
+                            title='Cancel Event'
                             onPress={() => navigation.navigate(navigationStrings.CancelEvent)}
                             customStyles={styles.customStyles}
                             customTextStyles={{ color: colors.black }}
