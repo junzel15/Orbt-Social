@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     fontSize: getScaledFontSize(20),
     color: colors.white,
     fontFamily: fonts.soraSemiBold,
-    textAlign: 'center',marginBottom:globalStyleDefinitions.mt_15.marginTop
+    textAlign: 'center',marginBottom:globalStyleDefinitions.commonItemMargin.margin
   },
 });
 

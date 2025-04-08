@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontFamily: fonts.soraSemiBold,
     textAlign: 'center',
-    marginBottom: globalStyleDefinitions.mt_15.marginTop,
+    marginBottom:globalStyleDefinitions.commonItemMargin.margin,
   },
   input: {
     fontSize: getScaledFontSize(16),
@@ -106,13 +106,13 @@ const styles = StyleSheet.create({
     fontSize: getScaledFontSize(12),
     color: colors.white,
     fontFamily: fonts.fontRegular,
-    marginTop: globalStyleDefinitions.mt_15.marginTop,
+    marginTop: globalStyleDefinitions.commonItemMargin.margin,
   },
   listWrapper: {
     flexWrap: 'wrap',
     flex: 1,
     gap: globalStyleDefinitions.gap.gap,
-    marginTop: globalStyleDefinitions.mt_15.marginTop,
+    marginTop: globalStyleDefinitions.commonItemMargin.margin,
   },
 });
 

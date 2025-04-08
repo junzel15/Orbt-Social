@@ -34,6 +34,7 @@ type NavigationStrings = {
   CancelEvent:string
   Notification:string
   Location:string
+  Settings:string
 };
 
 export const navigationStrings: NavigationStrings = {
@@ -71,5 +72,6 @@ export const navigationStrings: NavigationStrings = {
   CancelBooking:'CancelBooking',
   CancelEvent:'CancelEvent',
   Notification:'Notification',
-  Location:'Location'
+  Location:'Location',
+  Settings:'Settings'
 };

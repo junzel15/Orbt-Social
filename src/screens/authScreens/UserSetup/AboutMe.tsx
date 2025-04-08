@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontFamily: fonts.soraSemiBold,
     textAlign: 'center',
-    marginBottom: globalStyleDefinitions.mt_15.marginTop,
+    marginBottom: globalStyleDefinitions.commonItemMargin.margin,
   },
   input: {
     borderWidth: 1,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     borderRadius: globalStyleDefinitions.br_10.borderRadius,
     height: '70%',
     textAlignVertical: 'top',
-    marginTop: globalStyleDefinitions.mt_15.marginTop,
+    marginTop: globalStyleDefinitions.commonItemMargin.margin,
     fontFamily: fonts.fontRegular,
     fontSize: getScaledFontSize(16),
     lineHeight: getScaledFontSize(23),

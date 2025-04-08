@@ -125,11 +125,11 @@ const styles = StyleSheet.create({
         fontSize: getScaledFontSize(14),
         color: colors.primaryText,
         fontFamily: fonts.fontRegular,
-        marginTop: 0.5 * globalStyleDefinitions.mt_15.marginTop,
-        marginBottom: globalStyleDefinitions.mt_15.marginTop,
+        marginTop: 0.5 * globalStyleDefinitions.commonItemMargin.margin,
+        marginBottom: globalStyleDefinitions.commonItemMargin.margin,
     },
     btnWrapper: {
-        marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
+        marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin,
     },
     validationContainer: {
         marginTop: 15,

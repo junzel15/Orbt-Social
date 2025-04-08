@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     height: windowHeight,
   },
   image: {
-    marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
+    marginTop: 2 *globalStyleDefinitions.commonItemMargin.margin,
     flex: 1,
     alignSelf: 'center',
   },
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.fontRegular,
     color: colors.white,
     textAlign: 'center',
-    marginTop: 0.5 * globalStyleDefinitions.mt_15.marginTop,
+    marginTop: 0.5 *globalStyleDefinitions.commonItemMargin.margin,
   },
   innerWrapper: {
     zIndex: 1,
@@ -170,8 +170,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: globalStyleDefinitions.mt_15.marginTop,
-    paddingBottom: 2 * globalStyleDefinitions.mt_15.marginTop,
+    marginTop: globalStyleDefinitions.commonItemMargin.margin,
+    paddingBottom: 2 * globalStyleDefinitions.commonItemMargin.margin,
     marginHorizontal: globalStyleDefinitions.screenPadding.padding,
   },
   subText: {
@@ -207,9 +207,9 @@ const styles = StyleSheet.create({
     fontSize: getScaledFontSize(14),
     fontFamily: fonts.fontRegular,
     color: colors.white,
-    marginBottom: 2 * globalStyleDefinitions.mt_15.marginTop,
+    marginBottom: 2 * globalStyleDefinitions.commonItemMargin.margin,
     textAlign: 'center',
-    marginTop: globalStyleDefinitions.mt_15.marginTop,
+    marginTop: globalStyleDefinitions.commonItemMargin.margin,
   },
   loginText: {
     fontSize: getScaledFontSize(14),
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   buttonWrapper: {
-    paddingBottom: 2 * globalStyleDefinitions.mt_15.marginTop,
-    marginTop: globalStyleDefinitions.mt_15.marginTop,
+    paddingBottom: 2 * globalStyleDefinitions.commonItemMargin.margin,
+    marginTop: globalStyleDefinitions.commonItemMargin.margin,
   },
 });
