@@ -13,9 +13,12 @@ import GiveFeedback from '../screens/mainScreens/Home/reviewScreen/GiveFeedback'
 import SuccessfulFeedback from '../screens/mainScreens/Home/reviewScreen/SuccessfulFeedback';
 import CancelBooking from '../screens/mainScreens/Home/cancelEvent/CancelBooking';
 import CancelEvent from '../screens/mainScreens/Home/cancelEvent/CancelEvent';
-import Notification from '../screens/mainScreens/notification';
+import Notification from '../screens/mainScreens/Notification';
 import Location from '../screens/mainScreens/Location';
 import Settings from '../screens/mainScreens/Profile/Settings';
+import Blocked from '../screens/mainScreens/Blocked';
+import ChangePassword from '../screens/mainScreens/ChangePassword';
+import PasswordUpdated from '../screens/mainScreens/PasswordUpdated';
 
 const MainStack = createNativeStackNavigator();
 
@@ -103,9 +106,24 @@ const MainNavigation = () => {
         component={Location}
         options={options}
       />
-        <MainStack.Screen
+      <MainStack.Screen
         name={navigationStrings.Settings}
         component={Settings}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.Blocked}
+        component={Blocked}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.ChangePassword}
+        component={ChangePassword}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.PasswordUpdated}
+        component={PasswordUpdated}
         options={options}
       />
     </MainStack.Navigator>

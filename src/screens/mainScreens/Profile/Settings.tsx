@@ -15,6 +15,12 @@ const Settings = () => {
     const onBackPress = () => {
         navigation.goBack();
     };
+    const onBlockedPress = () => {
+        navigation.navigate('Blocked'); 
+    };
+    const onChangePasswordPress = () => {
+        navigation.navigate('ChangePassword');  
+    };
     return (
         <WrapperContainer>
             <LinearWrapperContainer>
@@ -24,6 +30,14 @@ const Settings = () => {
                         <Text style={styles.headerTitle}>Settings</Text>
                     </View>
                     <View>
+                        <TouchableOpacity style={styles.buttonTouchableOpacity} onPress={onBlockedPress} >
+                            <Text style={styles.buttonText} >Blocked uses</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.buttonTouchableOpacity} onPress={onChangePasswordPress}>
+                            <Text style={styles.buttonText} >Change Password</Text>
+                        </TouchableOpacity>
+
                         <TouchableOpacity>
                             {/* <CustomImage url={} /> */}
                         </TouchableOpacity>
@@ -64,5 +78,16 @@ const styles = StyleSheet.create({
         fontFamily: fonts.fontSemiBold,
         marginLeft: globalStyleDefinitions.mr_10.marginRight
     },
+    buttonTouchableOpacity: {
+        width: "50%",
+        backgroundColor: colors.black,
+        padding: 10,
+        borderRadius: globalStyleDefinitions.br_10.borderRadius,
+        marginTop:5
+    },
+    buttonText: {
+        fontSize: 20,
+        color: colors.white
+    }
 
 });
