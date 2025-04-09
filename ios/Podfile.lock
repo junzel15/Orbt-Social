@@ -2089,7 +2089,10 @@ SPEC CHECKSUMS:
   React-logger: 592d84bed2e04db64c0b3725f9970b437473f3d3
   React-Mapbuffer: 595c88852c1dcb1c4faafad88148de8690a70aae
   React-microtasksnativemodule: b56986b155ae82e9bcb1d1c0ca8726bac52dbb6e
+<<<<<<< HEAD
   react-native-pager-view: cda3e94765176877702695c4b8c4b5ca69cb2f16
+=======
+>>>>>>> jass/changes
   react-native-safe-area-context: 0f14bce545abcdfbff79ce2e3c78c109f0be283e
   React-nativeconfig: ecf4dc92c40b97e2b3f0c619938f78bfd6507b08
   React-NativeModulesApple: f457bbfb30fb3bc41979b1a87b99d292d7340d39

@@ -12,11 +12,14 @@ import CancelBooking from '../screens/mainScreens/Home/cancelEvent/CancelBooking
 import CancelEvent from '../screens/mainScreens/Home/cancelEvent/CancelEvent';
 import GiveFeedback from '../screens/mainScreens/Home/reviewScreen/GiveFeedback';
 import SuccessfulFeedback from '../screens/mainScreens/Home/reviewScreen/SuccessfulFeedback';
+import CancelBooking from '../screens/mainScreens/Home/cancelEvent/CancelBooking';
+import CancelEvent from '../screens/mainScreens/Home/cancelEvent/CancelEvent';
+import Notification from '../screens/mainScreens/Notification';
 import Location from '../screens/mainScreens/Location';
 import Settings from '../screens/mainScreens/Profile/Settings';
-import Notification from '../screens/mainScreens/notification';
-import BottomNavigation from './BottomNavigation';
-import {navigationStrings} from './navigationStrings';
+import Blocked from '../screens/mainScreens/Blocked';
+import ChangePassword from '../screens/mainScreens/ChangePassword';
+import PasswordUpdated from '../screens/mainScreens/PasswordUpdated';
 
 const MainStack = createNativeStackNavigator();
 
@@ -110,8 +113,18 @@ const MainNavigation = () => {
         options={options}
       />
       <MainStack.Screen
-        name={navigationStrings.FollowersFollowing}
-        component={FollowersFollowing}
+        name={navigationStrings.Blocked}
+        component={Blocked}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.ChangePassword}
+        component={ChangePassword}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.PasswordUpdated}
+        component={PasswordUpdated}
         options={options}
       />
     </MainStack.Navigator>

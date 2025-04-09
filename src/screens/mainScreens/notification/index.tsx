@@ -141,7 +141,7 @@ const Notification = () => {
     const ListEmptyComponent = useCallback(() => (
         <View style={styles.emptyContainer}>
             <Image
-                source={imagePath.layre}
+                source={imagePath.noNotificationImage}
                 style={styles.emptyImage}
                 resizeMode="contain"
             />
