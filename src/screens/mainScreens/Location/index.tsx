@@ -93,7 +93,7 @@ const Location = () => {
 
     const SinglePlaceItem = useCallback(({ item }: any) => (
         <TouchableOpacity style={styles.placeItem}>
-            <Icon name="clock" size={18} color="#888" style={{ marginRight: 10 }} />
+            <Icon name="clock" size={18} color="#888" style={{ marginRight: globalStyleDefinitions.cardInnerPadding.padding }} />
             <View style={{ flex: 1 }}>
                 <Text style={styles.placeTitle}>{item.title}</Text>
                 <Text style={styles.placeAddress}>{item.address}</Text>
@@ -160,7 +160,7 @@ const Location = () => {
                             Results for “<Text style={styles.searchQuery}>{location}</Text>” — 0 results
                         </Text>
                         <Image
-                            source={imagePath.layre}
+                            source={imagePath.noLocationImage}
                             style={styles.noResultImage}
                             resizeMode="contain"
                         />
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     inputBox: {
         flexDirection: 'row',
         borderWidth: 1,
-        borderColor: colors.CharcoalGrey,
+        borderColor: colors.charcoalGrey,
         borderRadius: globalStyleDefinitions.br_10.borderRadius,
         padding: globalStyleDefinitions.screenPadding.padding / 2,
         alignItems: 'center',
