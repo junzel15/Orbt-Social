@@ -1254,6 +1254,27 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - react-native-pager-view (6.7.0):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - react-native-safe-area-context (5.3.0):
     - DoubleConversion
     - glog
@@ -1320,7 +1341,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-slider (4.5.5):
+  - react-native-slider (4.5.6):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1333,7 +1354,7 @@ PODS:
     - React-featureflags
     - React-graphics
     - React-ImageManager
-    - react-native-slider/common (= 4.5.5)
+    - react-native-slider/common (= 4.5.6)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-rendererdebug
@@ -1342,7 +1363,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-slider/common (4.5.5):
+  - react-native-slider/common (4.5.6):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1694,7 +1715,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNReanimated (3.17.3):
+  - RNReanimated (3.17.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1716,10 +1737,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated (= 3.17.3)
-    - RNReanimated/worklets (= 3.17.3)
+    - RNReanimated/reanimated (= 3.17.2)
+    - RNReanimated/worklets (= 3.17.2)
     - Yoga
-  - RNReanimated/reanimated (3.17.3):
+  - RNReanimated/reanimated (3.17.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1741,9 +1762,9 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated/apple (= 3.17.3)
+    - RNReanimated/reanimated/apple (= 3.17.2)
     - Yoga
-  - RNReanimated/reanimated/apple (3.17.3):
+  - RNReanimated/reanimated/apple (3.17.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1766,7 +1787,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNReanimated/worklets (3.17.3):
+  - RNReanimated/worklets (3.17.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1788,9 +1809,9 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNReanimated/worklets/apple (= 3.17.3)
+    - RNReanimated/worklets/apple (= 3.17.2)
     - Yoga
-  - RNReanimated/worklets/apple (3.17.3):
+  - RNReanimated/worklets/apple (3.17.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1924,6 +1945,7 @@ DEPENDENCIES:
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
+  - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
@@ -2046,6 +2068,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-date-picker"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
+  react-native-pager-view:
+    :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-slider:
@@ -2146,23 +2170,24 @@ SPEC CHECKSUMS:
   React-FabricComponents: 7c69a91400e6c1766ad9d44b7fa73871559ead30
   React-FabricImage: dc71846e7a8b0825890faacf88a2a1cf771c7108
   React-featureflags: 1d15b368330ec96edc02e68cdae0f266efad5ebe
-  React-featureflagsnativemodule: a9b32e1e68139af535e1f82ce1f92d909a5dc4f0
-  React-graphics: 826e6af1b57fb2bbcf22469ae9783bf25d219c3a
-  React-hermes: c07c778ab9cb80a943116ef4574087e8570206cf
-  React-idlecallbacksnativemodule: 8ae14cc7ca4d772edada3d948eefc8963f43abeb
-  React-ImageManager: a1575aa1651b637dbea4de1d293fb56a37d0d3d3
-  React-jserrorhandler: 8d327cb4a9831e91918baebe3849d86aac60e963
-  React-jsi: 1c901c8f6e8d4555b6a5747c5a5b7c7cf757da71
-  React-jsiexecutor: d59faf2904bb0bd1daec18bc59731623e79a74eb
-  React-jsinspector: 543fbcf74a8070c83a04ee77938b9813bf074c3b
-  React-jsitracing: e115ec1ec16836a517909bf66c63b993bc9e36dd
-  React-logger: 5320a2acb25baa566cda59b611231929dd3ed7fc
-  React-Mapbuffer: 0d55aa10e3dcbc51121df490f1ffff427d68e6f2
-  React-microtasksnativemodule: c2bc0e0f39308276c073feaca6a0dd453d4172c5
-  react-native-date-picker: d23f0a313972fe5336540d55380366367f8a2a51
-  react-native-image-picker: 0452fc9efc21101946746663bf34e0db5741f00c
-  react-native-safe-area-context: 286b3e7b5589795bb85ffc38faf4c0706c48a092
-  react-native-slider: 7885fc2db0361d294b75f0b523040160ce98d526
+  React-featureflagsnativemodule: 45f51f78d54579087e1233dc8bae31e2536c4208
+  React-graphics: 235f82ac0ca6b4533049e10baf202f521804baef
+  React-hermes: 104bc85f9903f1caa91db6b09a5f97ceda6c50af
+  React-idlecallbacksnativemodule: 47f766f119cccd4486081f88ebc30e3046130ce0
+  React-ImageManager: 0190f64acb02be89d57764f608989297409eba30
+  React-jserrorhandler: 30f3a3a2e54ac2528bf93b59f764a8ae1bcd88eb
+  React-jsi: 0a6dd1eafe243a6c19c5207103aa0fba3c45a46d
+  React-jsiexecutor: 9aba4e775cc17d9c4311caf1bf2158a570380a9a
+  React-jsinspector: 6982d464d92181217de063cebc4a992d99d85b7f
+  React-jsitracing: a6569c6c0dadecdce4821f87a420b409a19e42d3
+  React-logger: 592d84bed2e04db64c0b3725f9970b437473f3d3
+  React-Mapbuffer: 595c88852c1dcb1c4faafad88148de8690a70aae
+  React-microtasksnativemodule: b56986b155ae82e9bcb1d1c0ca8726bac52dbb6e
+  react-native-date-picker: 4b582dbbecd3183e2268eed3645dd099c65c58cd
+  react-native-image-picker: df2b20cdfa981f7288f4019774d9baa26a4772c1
+  react-native-pager-view: cda3e94765176877702695c4b8c4b5ca69cb2f16
+  react-native-safe-area-context: 0f14bce545abcdfbff79ce2e3c78c109f0be283e
+  react-native-slider: bb7eb4732940fab78217e1c096bb647d8b0d1cf3
   React-nativeconfig: ecf4dc92c40b97e2b3f0c619938f78bfd6507b08
   React-NativeModulesApple: f457bbfb30fb3bc41979b1a87b99d292d7340d39
   React-perflogger: 1111b5feb064c4cc83df88fb403efda54b387951
@@ -2188,15 +2213,15 @@ SPEC CHECKSUMS:
   React-RuntimeHermes: 825d11cbef3dac839016830bdb93d815492bbe94
   React-runtimescheduler: a3560dd66614edaf2f2fb90697474802f8bdd358
   React-timing: d9adb125887c734222f455da146e2ff1a7b2b9c1
-  React-utils: 0bc6b54f3a3ffee24b925f0e4af918fd338ad806
-  ReactAppDependencyProvider: 8955603808eb24bbfde3511d2bcc8362d1d5860e
-  ReactCodegen: 204305627867dc05cf70b877d440bc2f7ed6d50f
-  ReactCommon: 5340e44b608ed628c3fe87408297185811285c22
-  RNCAsyncStorage: 4f4de141719fef3490c87a0dd779575c64c0472c
-  RNGestureHandler: 66e593addd8952725107cfaa4f5e3378e946b541
-  RNReanimated: 9d0609691ec639d293d9e2d398f299591af92439
-  RNScreens: 0f01bbed9bd8045a8d58e4b46993c28c7f498f3c
-  RNVectorIcons: 14a0c42f16a26bcc3e79a19bc1c5718284b1d469
+  React-utils: 5642285f8379e4d024f1f158ffcc77d9c52c877c
+  ReactAppDependencyProvider: f334cebc0beed0a72490492e978007082c03d533
+  ReactCodegen: 6f764a42662ad6379fd3fbb9c09baff6e4797b20
+  ReactCommon: 7763e59534d58e15f8f22121cdfe319040e08888
+  RNCAsyncStorage: 62fdbd7e63312228d4868779026248c2677911e1
+  RNGestureHandler: dcb1b1db024f3744b03af56d132f4f72c4c27195
+  RNReanimated: a6cdcb729f02544f07b8012c2d537c2785e63cc7
+  RNScreens: 790123c4a28783d80a342ce42e8c7381bed62db1
+  RNVectorIcons: bd818296a51dc2bb8c3bd97a3ca399df1afe216d
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 31a098f74c16780569aebd614a0f37a907de0189
 

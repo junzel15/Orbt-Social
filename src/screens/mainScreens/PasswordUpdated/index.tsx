@@ -18,6 +18,7 @@ import CommonButton from "../../../components/atoms/button/CommonButton";
 import { imagePath } from "../../../constants/imagePath";
 import CustomImage from "../../../components/atoms/image/CustomImage";
 import { windowWidth } from "../../../constants/globalConstants";
+import { navigationStrings } from "../../../navigation/navigationStrings";
 
 
 const PasswordUpdated = () => {
@@ -28,7 +29,7 @@ const PasswordUpdated = () => {
     };
 
     const onCommonBackButton = () => {
-        console.log("hi i am guning");
+        navigation.goBack();
     };
 
     return (
@@ -85,11 +86,6 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 2 * globalStyleDefinitions.br_10.borderRadius,
         overflow: "hidden",
         height: 60,
-        shadowColor: colors.black,
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-        elevation: 4,
     },
     buttonWrapper: {
         // flex: 1,

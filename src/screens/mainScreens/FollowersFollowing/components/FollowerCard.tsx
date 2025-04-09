@@ -80,13 +80,13 @@ const styles = StyleSheet.create({
   secondaryButton: {
     marginTop: 0,
     backgroundColor: colors.secondaryText,
-    width: windowWidth * 0.3,
+    width: 'auto',
     paddingVertical: 10,
     borderRadius: 2 * globalStyleDefinitions.br_10.borderRadius,
   },
   primaryButton: {
     marginTop: 0,
-    width: windowWidth * 0.3,
+    width: 'auto',
     paddingVertical: 10,
     borderRadius: 2 * globalStyleDefinitions.br_10.borderRadius,
   },

@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     gap: globalStyleDefinitions.gap.gap,
     marginTop: Platform.select({
       ios: 3 * globalStyleDefinitions.screenPadding.padding,
-      android: 2 * globalStyleDefinitions.screenPadding.padding,
+      android: 2.5 * globalStyleDefinitions.screenPadding.padding,
     }),
     justifyContent: 'space-between'
   },
@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
   },
   activeTab: {
     backgroundColor: colors.white,
+    borderTopRightRadius:globalStyleDefinitions.br_10.borderRadius,borderTopLeftRadius:globalStyleDefinitions.br_10.borderRadius
   },
   activeTabText: {
     color: colors.primary,

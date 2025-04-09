@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/Feather';
+import ProfileHeader from '../../../components/header/ProfileHeader';
 import LinearWrapperContainer from '../../../components/wrapper/LinearWrapperContainer';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
 import {colors} from '../../../constants/colors';
@@ -19,9 +19,13 @@ import {getScaledFontSize} from '../../../constants/globalFunctions';
 import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
 import {SettingsIcon} from '../../../constants/iconPath';
 import {navigationStrings} from '../../../navigation/navigationStrings';
+import { useDispatch } from 'react-redux';
+import { setAccessToken } from '../../../redux/slices/authState';
 
 const Settings = () => {
   const navigation = useNavigation<NavigationProp<any>>();
+  const dispatch=useDispatch()
+
   const [isEnabled, setIsEnabled] = useState(true);
 
   const toggleSwitch = () => {
@@ -41,22 +45,16 @@ const Settings = () => {
   const onChangePasswordPress = () => {
     navigation.navigate('ChangePassword');
   };
+
+  const onLogout=()=>{
+    dispatch(setAccessToken(""))
+  }
   return (
     <WrapperContainer>
       <LinearWrapperContainer>
-        <View style={commonStyles.fullInnerContainer}>
-          <View style={styles.rowWrapper}>
-            <View style={{flexDirection: 'row', width: '90%'}}>
-              <AntDesign
-                name="arrowleft"
-                size={28}
-                color={colors.black}
-                onPress={onBackPress}
-              />
-              <Text style={styles.headerTitle}>Settings</Text>
-            </View>
-          </View>
-          <View style={{flex: 1}}>
+        <View style={commonStyles.flexFull}>
+          <ProfileHeader title="Settings" />
+          <View style={commonStyles.fullInnerContainer}>
             <TouchableOpacity style={styles.row} onPress={onGoEditProfile}>
               <Image source={SettingsIcon.profileIcon} style={styles.icon} />
               <Text style={styles.label}>Edit Profile</Text>
@@ -95,42 +93,32 @@ const Settings = () => {
               <Icon name="chevron-right" size={22} color="#000" />
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.row}
-              onPress={() => navigation.navigate('Payments')}>
+            <TouchableOpacity style={styles.row}>
               <Image source={SettingsIcon.paymentsIcon} style={styles.icon} />
               <Text style={styles.label}>Payments</Text>
               <Icon name="chevron-right" size={22} color="#000" />
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.row}
-              onPress={() => navigation.navigate('Language')}>
+            <TouchableOpacity style={styles.row}>
               <Image source={SettingsIcon.languageIcon} style={styles.icon} />
               <Text style={styles.label}>Language</Text>
               <Text style={styles.subtitle}>English (US)</Text>
               <Icon name="chevron-right" size={22} color="#000" />
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.row}
-              onPress={() => navigation.navigate('AccountSecurity')}>
+            <TouchableOpacity style={styles.row}>
               <Image source={SettingsIcon.security} style={styles.icon} />
               <Text style={styles.label}>Account & Security</Text>
               <Icon name="chevron-right" size={22} color="#000" />
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.row}
-              onPress={() => navigation.navigate('HelpCentre')}>
+            <TouchableOpacity style={styles.row}>
               <Image source={SettingsIcon.helpIcon} style={styles.icon} />
               <Text style={styles.label}>Help Centre</Text>
               <Icon name="chevron-right" size={22} color="#000" />
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.row}
-              onPress={() => navigation.navigate('RateUs')}>
+            <TouchableOpacity style={styles.row}>
               <Image source={SettingsIcon.rateIcon} style={styles.icon} />
               <Text style={styles.label}>Rate Us</Text>
               <Icon name="chevron-right" size={22} color="#000" />
@@ -140,9 +128,7 @@ const Settings = () => {
             <TouchableOpacity>{/* <CustomImage url={} /> */}</TouchableOpacity>
           </View>
 
-          <TouchableOpacity
-            style={styles.logoutRow}
-            onPress={() => console.log('Log out')}>
+          <TouchableOpacity style={styles.logoutRow} onPress={onLogout}>
             <Icon name="log-out" size={20} color="red" />
             <Text style={styles.logoutText}>Log Out</Text>
           </TouchableOpacity>
@@ -208,7 +194,7 @@ const styles = StyleSheet.create({
   logoutRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: globalStyleDefinitions.screenPadding.padding,
+    padding: globalStyleDefinitions.screenPadding.padding,
   },
   logoutText: {
     marginLeft: globalStyleDefinitions.mt_10.marginTop,

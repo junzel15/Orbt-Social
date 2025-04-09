@@ -1,6 +1,6 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React, {memo} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {colors} from '../../constants/colors';
 import {fonts} from '../../constants/fonts';
@@ -37,7 +37,7 @@ export default memo(CustomHeader);
 
 const styles = StyleSheet.create({
   fullContainer: {
-    marginTop: 3 * globalStyleDefinitions.screenPadding.padding,
+    paddingTop: Platform.select({ios:3 * globalStyleDefinitions.screenPadding.padding,android:2.5 * globalStyleDefinitions.screenPadding.padding,}),
     width: windowWidth,
     alignItems: 'center',
     flexDirection: 'row',
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: colors.black,
-    fontSize: getScaledFontSize(20),
+    fontSize: getScaledFontSize(20),lineHeight:getScaledFontSize(25),
     fontFamily: fonts.soraSemiBold,
   },
 });

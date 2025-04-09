@@ -8,7 +8,8 @@ import {
     ListRenderItem,
     Image,
     TouchableOpacity,
-    Dimensions
+    Dimensions,
+    Platform
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
@@ -199,6 +200,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: globalStyleDefinitions.cardInnerPadding.padding,
+        paddingTop:Platform.select({ios:3*globalStyleDefinitions.screenPadding.padding,android:2.5*globalStyleDefinitions.screenPadding.padding})
     },
     sectionHeaderTitle: {
         paddingHorizontal: globalStyleDefinitions.cardInnerPadding.padding,

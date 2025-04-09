@@ -62,7 +62,7 @@ const onBoardingProgress = ({item, activeIndex, setActiveIndex}: iProps) => {
   };
 
   const onLogin = () => {
-    navigation.navigate(navigationStrings.Login)
+    navigation.navigate(navigationStrings.Login);
   };
 
   return (
@@ -141,14 +141,14 @@ const styles = StyleSheet.create({
     height: windowHeight,
   },
   image: {
-    marginTop: 2 *globalStyleDefinitions.commonItemMargin.margin,
+    marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin,
     flex: 1,
     alignSelf: 'center',
   },
   bottomWrapper: {
     paddingHorizontal: globalStyleDefinitions.screenPadding.padding,
     justifyContent: 'flex-end',
-    paddingBottom: Platform.OS == 'ios' ? 70 : 10,
+    paddingBottom: Platform.OS == 'ios' ? 70 : 0,
   },
   headerText: {
     fontSize: getScaledFontSize(28),
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.fontRegular,
     color: colors.white,
     textAlign: 'center',
-    marginTop: 0.5 *globalStyleDefinitions.commonItemMargin.margin,
+    marginTop: 0.5 * globalStyleDefinitions.commonItemMargin.margin,
   },
   innerWrapper: {
     zIndex: 1,
@@ -171,7 +171,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: globalStyleDefinitions.commonItemMargin.margin,
-    paddingBottom: 2 * globalStyleDefinitions.commonItemMargin.margin,
+    paddingBottom: Platform.select({
+      ios: 2 * globalStyleDefinitions.commonItemMargin.margin,
+    }),
     marginHorizontal: globalStyleDefinitions.screenPadding.padding,
   },
   subText: {
@@ -217,7 +219,9 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   buttonWrapper: {
-    paddingBottom: 2 * globalStyleDefinitions.commonItemMargin.margin,
+    paddingBottom: Platform.select({
+      ios: 2 * globalStyleDefinitions.commonItemMargin.margin,
+    }),
     marginTop: globalStyleDefinitions.commonItemMargin.margin,
   },
 });

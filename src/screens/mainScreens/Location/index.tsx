@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     padding: globalStyleDefinitions.screenPadding.padding,
     paddingTop: Platform.select({
       ios: 3 * globalStyleDefinitions.screenPadding.padding,
-      android: 2 * globalStyleDefinitions.screenPadding.padding,
+      android: 2.5 * globalStyleDefinitions.screenPadding.padding,
     }),
     backgroundColor: colors.white,
     flex: 1,

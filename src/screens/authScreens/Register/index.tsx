@@ -152,14 +152,12 @@ const Register = () => {
           </View>
           <Text style={styles.loginTitleText}>
             Already have account?{'  '}
-            <TouchableOpacity onPress={onLoginOpen}  >
             <Text
               style={styles.loginText}
               suppressHighlighting
               onPress={handleLogin}>
               Log in
             </Text>
-            </TouchableOpacity>
           </Text>
         </ScrollView>
         <CountrycodeModal
@@ -230,14 +228,14 @@ const styles = StyleSheet.create({
   },
   loginTitleText: {
     fontFamily: fonts.fontRegular,
-    fontSize: getScaledFontSize(14),
+    fontSize: getScaledFontSize(14),lineHeight:getScaledFontSize(20),
     color: colors.secondaryText,
     textAlign: 'center',
     marginTop: globalStyleDefinitions.commonItemMargin.margin,
   },
   loginText: {
     fontFamily: fonts.fontBold,
-    fontSize: getScaledFontSize(14),
+    fontSize: getScaledFontSize(14),lineHeight:getScaledFontSize(20),
     color: colors.primary,
     textDecorationLine: 'underline',
   },

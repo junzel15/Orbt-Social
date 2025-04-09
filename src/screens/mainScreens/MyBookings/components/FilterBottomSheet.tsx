@@ -28,6 +28,9 @@ const FilterBottomSheet = ({
   setSelectedPrice,
   handleReset,
 }: any) => {
+  const onApplyPress=()=>{
+    refRBSheet.current.close()
+  }
   return (
     <RsBottomSheet
       ref={refRBSheet}
@@ -55,7 +58,7 @@ const FilterBottomSheet = ({
         <TextInput placeholder='Location' style={styles.inputLocation} />
 
         <Text style={styles.optHeader} >Distance</Text>
-        <MultiSlider
+       <MultiSlider
           values={sliderValue}
           sliderLength={350}
           min={0}
@@ -71,7 +74,7 @@ const FilterBottomSheet = ({
             borderRadius: 8,
             backgroundColor: '#7A5AF8',
             marginTop: 3
-          }}
+          }} 
           customMarker={(e) => <CustomMarker currentValue={e.currentValue} />}
           enabledOne={true}
         />
@@ -123,7 +126,7 @@ const FilterBottomSheet = ({
           <TouchableOpacity style={styles.resetButton} onPress={handleReset}>
             <Text style={styles.resetText}>Reset</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.applyButton}>
+          <TouchableOpacity style={styles.applyButton} onPress={onApplyPress}>
             <Text style={styles.applyText}>Apply</Text>
           </TouchableOpacity>
         </View>
@@ -206,9 +209,9 @@ const styles = StyleSheet.create({
     width: "100%",
     borderWidth: 1,
     borderColor: colors.lightgray,
-    height: windowHeight / 15,
+    height: 50,
     borderRadius: 15,
-    marginTop: globalStyleDefinitions.mt_15.marginTop,
+    marginTop:5,
     padding: globalStyleDefinitions.screenPadding.padding / 2
   },
   slider: {
@@ -253,7 +256,7 @@ const styles = StyleSheet.create({
   optionsRow: {
     flexDirection: 'row',
     gap: 10,
-    marginTop: globalStyleDefinitions.mt_15.marginTop,
+    marginTop:0.5* globalStyleDefinitions.mt_15.marginTop,
   },
   priceOption: {
     paddingVertical: 12,
@@ -280,7 +283,7 @@ const styles = StyleSheet.create({
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: globalStyleDefinitions.mt_15.marginTop,
+    marginTop:2* globalStyleDefinitions.mt_15.marginTop,
   },
   resetButton: {
     flex: 1,

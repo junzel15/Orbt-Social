@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     top: Platform.select({
       ios: 25,
-      android: 65,
+      android: 55,
     }),
     width: windowWidth * 0.25,
   },

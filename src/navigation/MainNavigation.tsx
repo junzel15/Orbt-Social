@@ -15,10 +15,10 @@ import CancelEvent from '../screens/mainScreens/Home/cancelEvent/CancelEvent';
 import GiveFeedback from '../screens/mainScreens/Home/reviewScreen/GiveFeedback';
 import SuccessfulFeedback from '../screens/mainScreens/Home/reviewScreen/SuccessfulFeedback';
 import Location from '../screens/mainScreens/Location';
-import Notification from '../screens/mainScreens/Notification';
 import PasswordUpdated from '../screens/mainScreens/PasswordUpdated';
-import Settings from '../screens/mainScreens/Profile/Settings';
 import EditProfile from '../screens/mainScreens/Profile/EditProfile';
+import Settings from '../screens/mainScreens/Profile/Settings';
+import Notification from '../screens/mainScreens/notification';
 import BottomNavigation from './BottomNavigation';
 import {navigationStrings} from './navigationStrings';
 
@@ -113,7 +113,7 @@ const MainNavigation = () => {
         component={Settings}
         options={options}
       />
-          <MainStack.Screen
+      <MainStack.Screen
         name={navigationStrings.EditProfile}
         component={EditProfile}
         options={options}

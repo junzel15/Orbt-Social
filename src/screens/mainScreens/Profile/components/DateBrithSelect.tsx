@@ -1,21 +1,11 @@
-import React, {
-  useRef,
-  forwardRef,
-  useImperativeHandle,
-} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-} from 'react-native';
-import RBSheet from 'react-native-raw-bottom-sheet';
+import React, {forwardRef, useImperativeHandle, useRef} from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import { iconPath } from '../../../../constants/iconPath';
-import { globalStyleDefinitions } from '../../../../constants/globalStyleDefinitions';
-import { colors } from '../../../../constants/colors';
-import { fonts } from '../../../../constants/fonts';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import {colors} from '../../../../constants/colors';
+import {fonts} from '../../../../constants/fonts';
+import {globalStyleDefinitions} from '../../../../constants/globalStyleDefinitions';
+import {iconPath} from '../../../../constants/iconPath';
 
 type DOBBottomSheetProps = {
   date: Date;
@@ -27,27 +17,28 @@ export type DOBBottomSheetRef = {
 };
 
 const DOBBottomSheet = forwardRef<DOBBottomSheetRef, DOBBottomSheetProps>(
-  ({ date, setDate }, ref) => {
+  ({date, setDate}, ref) => {
     const sheetRef = useRef<RBSheet>(null);
     useImperativeHandle(ref, () => ({
       open: () => sheetRef.current?.open(),
     }));
 
     const formatDate = (date: Date) => {
-      return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')
-        }/${date.getFullYear()}`;
+      return `${date.getDate().toString().padStart(2, '0')}/${(
+        date.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, '0')}/${date.getFullYear()}`;
     };
 
     return (
       <>
         <TouchableOpacity
           style={styles.inputBox}
-          onPress={() => sheetRef.current?.open()}
+          activeOpacity={0.9}
+          // onPress={() => sheetRef.current?.open()}
         >
-          <Image
-            source={iconPath.dateBrithIcon}
-            style={styles.icon}
-          />
+          <Image source={iconPath.dateBrithIcon} style={styles.icon} />
           <Text style={styles.dateText}>{formatDate(date)}</Text>
         </TouchableOpacity>
         <RBSheet
@@ -64,27 +55,21 @@ const DOBBottomSheet = forwardRef<DOBBottomSheetRef, DOBBottomSheetProps>(
             },
             draggableIcon: {
               backgroundColor: colors.lighGrey,
-            }
-          }}
-        >
-          <View style={{ flex: 1 }} >
+            },
+          }}>
+          <View style={{flex: 1}}>
             <Text style={styles.sheetTitle}>Date of Birth</Text>
-            <DatePicker
-              date={date}
-              mode="date"
-              onDateChange={setDate}
-            />
+            <DatePicker date={date} mode="date" onDateChange={setDate} />
             <TouchableOpacity
               style={styles.updateBtn}
-              onPress={() => sheetRef.current?.close()}
-            >
+              onPress={() => sheetRef.current?.close()}>
               <Text style={styles.updateText}>Update</Text>
             </TouchableOpacity>
           </View>
         </RBSheet>
       </>
     );
-  }
+  },
 );
 
 export default DOBBottomSheet;
@@ -98,25 +83,25 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 12,
-    marginTop: globalStyleDefinitions.mt_15.marginTop
+    marginTop: globalStyleDefinitions.mt_15.marginTop,
   },
   icon: {
     width: 20,
     height: 20,
     tintColor: colors.lighGrey,
-    marginRight: globalStyleDefinitions.mt_10.marginTop
+    marginRight: globalStyleDefinitions.mt_10.marginTop,
   },
   dateText: {
     fontSize: 16,
-    fontFamily:fonts.fontRegular
+    fontFamily: fonts.fontRegular,
   },
   sheetTitle: {
     fontSize: 18,
     textAlign: 'center',
-    fontFamily: fonts.fontSemiBold
+    fontFamily: fonts.fontSemiBold,
   },
   updateBtn: {
-    marginTop: 2* globalStyleDefinitions.mt_10.marginTop,
+    marginTop: 2 * globalStyleDefinitions.mt_10.marginTop,
     backgroundColor: colors.primary,
     paddingVertical: 14,
     borderRadius: 10,
@@ -125,6 +110,6 @@ const styles = StyleSheet.create({
     color: colors.white,
     textAlign: 'center',
     fontSize: 16,
-    fontFamily:fonts.fontSemiBold
+    fontFamily: fonts.fontSemiBold,
   },
 });
