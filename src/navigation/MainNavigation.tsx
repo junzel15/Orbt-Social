@@ -18,6 +18,7 @@ import Location from '../screens/mainScreens/Location';
 import Notification from '../screens/mainScreens/Notification';
 import PasswordUpdated from '../screens/mainScreens/PasswordUpdated';
 import Settings from '../screens/mainScreens/Profile/Settings';
+import EditProfile from '../screens/mainScreens/Profile/EditProfile';
 import BottomNavigation from './BottomNavigation';
 import {navigationStrings} from './navigationStrings';
 
@@ -110,6 +111,11 @@ const MainNavigation = () => {
       <MainStack.Screen
         name={navigationStrings.Settings}
         component={Settings}
+        options={options}
+      />
+          <MainStack.Screen
+        name={navigationStrings.EditProfile}
+        component={EditProfile}
         options={options}
       />
       <MainStack.Screen
