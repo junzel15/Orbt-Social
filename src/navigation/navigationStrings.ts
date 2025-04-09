@@ -35,6 +35,9 @@ type NavigationStrings = {
   Notification:string
   Location:string
   Settings:string
+  FollowersFollowing:string
+  Followers:string
+  Following:string
 };
 
 export const navigationStrings: NavigationStrings = {
@@ -73,5 +76,8 @@ export const navigationStrings: NavigationStrings = {
   CancelEvent:'CancelEvent',
   Notification:'Notification',
   Location:'Location',
-  Settings:'Settings'
+  Settings:'Settings',
+  FollowersFollowing:'FollowersFollowing',
+  Followers:'Followers',
+  Following:'Following',
 };

@@ -1,9 +1,10 @@
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import { Provider } from 'react-redux';
+import {StatusBar} from 'react-native';
+import {PaperProvider} from 'react-native-paper';
+import {Provider} from 'react-redux';
 import AppNavigation from './src/navigation/AppNavigation';
 import store from './src/redux/store/state';
-import { StatusBar } from 'react-native';
 
 const App = () => {
   return (
@@ -13,9 +14,11 @@ const App = () => {
         backgroundColor={'transparent'}
         barStyle={'light-content'}
       />
-      <NavigationContainer>
-        <AppNavigation />
-      </NavigationContainer>
+      <PaperProvider>
+        <NavigationContainer>
+          <AppNavigation />
+        </NavigationContainer>
+      </PaperProvider>
     </Provider>
   );
 };

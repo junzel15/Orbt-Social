@@ -24,6 +24,14 @@ const Profile = () => {
     navigation.navigate(navigationStrings.Settings);
   };
 
+  const onFollowers=()=>{
+    navigation.navigate(navigationStrings.FollowersFollowing,{name:navigationStrings.Followers});
+  }
+
+  const onFollowing=()=>{
+    navigation.navigate(navigationStrings.FollowersFollowing,{name:navigationStrings.Following});
+  }
+
   return (
     <WrapperContainer>
       <LinearWrapperContainer>
@@ -46,8 +54,8 @@ const Profile = () => {
             <Text style={styles.location}>Makati City, Philippines</Text>
 
             <View style={styles.statsRow}>
-              <Text style={styles.statsText}>290{'\n'}<Text style={styles.statsLabel}>Followers</Text></Text>
-              <Text style={styles.statsText}>200{'\n'}<Text style={styles.statsLabel}>Following</Text></Text>
+              <Text style={styles.statsText} onPress={onFollowers} suppressHighlighting>290{'\n'}<Text style={styles.statsLabel}>Followers</Text></Text>
+              <Text style={styles.statsText} onPress={onFollowing} suppressHighlighting>200{'\n'}<Text style={styles.statsLabel}>Following</Text></Text>
             </View>
 
             <Text style={styles.sectionTitle}>My Bio</Text>

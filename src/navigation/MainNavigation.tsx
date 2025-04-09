@@ -1,21 +1,22 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import BottomNavigation from './BottomNavigation';
-import { navigationStrings } from './navigationStrings';
-import Dining from '../screens/mainScreens/Home/Dining';
-import MatchingCrew from '../screens/mainScreens/Home/MatchingCrew';
+import FollowersFollowing from '../screens/mainScreens/FollowersFollowing';
 import Bars from '../screens/mainScreens/Home/Bars';
+import Dining from '../screens/mainScreens/Home/Dining';
 import Experiences from '../screens/mainScreens/Home/Experiences';
-import BookingDiningDetails from '../screens/mainScreens/Home/bookingDetails/BookingDiningDetails';
+import MatchingCrew from '../screens/mainScreens/Home/MatchingCrew';
 import BarDetails from '../screens/mainScreens/Home/bookingDetails/BarDetails';
+import BookingDiningDetails from '../screens/mainScreens/Home/bookingDetails/BookingDiningDetails';
 import ExperienceDetails from '../screens/mainScreens/Home/bookingDetails/ExperienceDetails';
-import GiveFeedback from '../screens/mainScreens/Home/reviewScreen/GiveFeedback';
-import SuccessfulFeedback from '../screens/mainScreens/Home/reviewScreen/SuccessfulFeedback';
 import CancelBooking from '../screens/mainScreens/Home/cancelEvent/CancelBooking';
 import CancelEvent from '../screens/mainScreens/Home/cancelEvent/CancelEvent';
-import Notification from '../screens/mainScreens/notification';
+import GiveFeedback from '../screens/mainScreens/Home/reviewScreen/GiveFeedback';
+import SuccessfulFeedback from '../screens/mainScreens/Home/reviewScreen/SuccessfulFeedback';
 import Location from '../screens/mainScreens/Location';
 import Settings from '../screens/mainScreens/Profile/Settings';
+import Notification from '../screens/mainScreens/notification';
+import BottomNavigation from './BottomNavigation';
+import {navigationStrings} from './navigationStrings';
 
 const MainStack = createNativeStackNavigator();
 
@@ -103,9 +104,14 @@ const MainNavigation = () => {
         component={Location}
         options={options}
       />
-        <MainStack.Screen
+      <MainStack.Screen
         name={navigationStrings.Settings}
         component={Settings}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.FollowersFollowing}
+        component={FollowersFollowing}
         options={options}
       />
     </MainStack.Navigator>
