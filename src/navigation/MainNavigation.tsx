@@ -16,6 +16,7 @@ import CancelEvent from '../screens/mainScreens/Home/cancelEvent/CancelEvent';
 import Notification from '../screens/mainScreens/notification';
 import Location from '../screens/mainScreens/Location';
 import Settings from '../screens/mainScreens/Profile/Settings';
+import EditProfile from '../screens/mainScreens/Profile/EditProfile';
 
 const MainStack = createNativeStackNavigator();
 
@@ -106,6 +107,11 @@ const MainNavigation = () => {
         <MainStack.Screen
         name={navigationStrings.Settings}
         component={Settings}
+        options={options}
+      />
+          <MainStack.Screen
+        name={navigationStrings.EditProfile}
+        component={EditProfile}
         options={options}
       />
     </MainStack.Navigator>

@@ -14,6 +14,8 @@ export const iconPath = {
   person: require('../assets/icons/person.png'),
   sparkle: require('../assets/icons/sparkle.png'),
   topRightArrow: require('../assets/icons/topRightArrow.png'),
+  dateBrithIcon:require('../assets/icons/dateBrithIcon.png'),
+  editProfileIcon:require('../assets/icons/editProfile.png')
 };
 
 export const BottomIcon = {
@@ -29,7 +31,7 @@ export const BottomIcon = {
   sideView: require('../assets/icons/BottomTab/sideView.png'),
 };
 
-export const Settings = {
+ export const SettingsIcon = {
   blockedIcon: require('../assets/icons/SettingTab/blockedIcon.png'),
   helpIcon: require('../assets/icons/SettingTab/helpIcon.png'),
   languageIcon: require('../assets/icons/SettingTab/languageIcon.png'),
@@ -39,5 +41,7 @@ export const Settings = {
   paymentsIcon: require('../assets/icons/SettingTab/paymentsIcon.png'),
   rateIcon: require('../assets/icons/SettingTab/rateIcon.png'),
   security: require('../assets/icons/SettingTab/security.png'),
-  profileIcon:require('../assets/icons/SettingTab/profileIcon.png')
+  profileIcon:require('../assets/icons/SettingTab/profileIcon.png'),
+  truetoggle:require('../assets/icons/SettingTab/truetoggle.png'),
+  falsetoggle:require('../assets/icons/SettingTab/falsetoggle.png')
 }

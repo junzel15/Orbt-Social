@@ -1,141 +1,134 @@
-import React, { useRef, useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-  Platform,
-  Dimensions,
-} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import WrapperContainer from '../../../components/wrapper/WrapperContainer';
-import CustomImage from '../../../components/atoms/image/CustomImage';
-import { colors } from '../../../constants/colors';
-import { imagePath } from '../../../constants/imagePath';
-import { fonts } from '../../../constants/fonts';
-import { getScaledFontSize } from '../../../constants/globalFunctions';
-import { globalStyleDefinitions } from '../../../constants/globalStyleDefinitions';
-import { windowHeight, windowWidth } from '../../../constants/globalConstants';
-import LinearGradient from 'react-native-linear-gradient';
-import UpcomingEvent from './components/UpcomingEvent';
-import CompletedEvent from './components/CompletedEvent';
-import CancelledEvent from './components/CancelledEvent';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import FilterBottomSheet from './components/FilterBottomSheet';
+// BookingFilterBottomSheet.tsx
+import React from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from 'react-native';
+import RsBottomSheet from 'react-native-raw-bottom-sheet';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import Icon from 'react-native-vector-icons/Feather';
+import { colors } from '../../../../constants/colors';
+import { windowHeight, windowWidth } from '../../../../constants/globalConstants';
+import { globalStyleDefinitions } from '../../../../constants/globalStyleDefinitions';
+import commonStyles from '../../../../constants/commonStyles';
+import { getScaledFontSize } from '../../../../constants/globalFunctions';
+import { fonts } from '../../../../constants/fonts';
 
+const CustomMarker = ({ currentValue }: any) => (
+  <View style={styles.customMarkerContainer}>
+    <View style={styles.marker} />
+    <Text style={styles.markerLabel}>{currentValue} km</Text>
+  </View>
+);
 
-const MyBookings = () => {
-  const [selectedTab, setSelectedTab] = useState('Upcoming');
-  const navigation = useNavigation<NavigationProp<any>>();
-  const refRBSheet = useRef();
-  const [sliderValue, setSliderValue] = useState([0, 20]);
-  const [selectedEventType, setSelectedEventType] = useState(['Dining']);
-  const [selectedPrice, setSelectedPrice] = useState('Free');
-
-  const handleTabPress = (tab: any) => {
-    setSelectedTab(tab);
-  };
-
-  const onBackPress = () => {
-    navigation.goBack();
-  };
-
-  const toggleEventType = (type : any) => {
-    setSelectedEventType((prev) =>
-      prev.includes(type)
-        ? prev.filter((item) => item !== type)
-        : [...prev, type]
-    );
-  };
-
-  const handleReset = () => {
-    setSelectedEventType([]);
-    setSelectedPrice(null);
-  };
-
+const FilterBottomSheet = ({
+  refRBSheet,
+  sliderValue,
+  setSliderValue,
+  selectedEventType,
+  toggleEventType,
+  selectedPrice,
+  setSelectedPrice,
+  handleReset,
+}: any) => {
   return (
-    <WrapperContainer>
-      <LinearGradient
-        colors={['#4C0BCE', '#180028', '#000000']}
-        locations={[0.0, 0.5, 0.8]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={{ flex: 0.4 }}
-      >
-        <View style={styles.header}>
-          <View style={styles.rowWrapper}>
-            <View style={{ flexDirection: 'row' }} >
-              <AntDesign name="arrowleft" size={28} color="white" onPress={onBackPress} />
-              <Text style={styles.headerTitle}>My Bookings</Text>
-            </View>
-            <TouchableOpacity activeOpacity={0.9} onPress={() => refRBSheet.current.open()} >
-              <CustomImage url={imagePath.filter} height={25} width={25} />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.searchView}>
-            <AntDesign
-              name="search1"
-              size={20}
-              color="white"
-              style={styles.searchIcon}
-            />
-            <TextInput
-              placeholder="Search Events, Dates, Places ..."
-              placeholderTextColor={colors.white}
-            />
-          </View>
-        </View>
-        <View style={styles.optView}>
-          {['Upcoming', 'Completed', 'Cancelled'].map(tab => (
-            <TouchableOpacity
-              key={tab}
-              onPress={() => handleTabPress(tab)}
-              style={[
-                styles.tabItem,
-                selectedTab === tab && styles.activeTab,
-              ]}
-            >
-              <Text
-                style={[
-                  styles.optText,
-                  selectedTab === tab && styles.activeTabText,
-                ]}
+    <RsBottomSheet
+      ref={refRBSheet}
+      closeOnDragDown={true}
+      closeOnPressMask={false}
+      height={windowHeight / 1.5}
+      customStyles={{
+        wrapper: {
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        },
+        draggableIcon: {
+          backgroundColor: "#000",
+        },
+        container: {
+          borderTopRightRadius: 20,
+          borderTopLeftRadius: 20,
+          backgroundColor: colors.white
+        }
+      }}
+    >
+      <View style={commonStyles.fullInnerContainer} >
+        <Text style={styles.headerBottomSheet} >Filter</Text>
+
+        <Text style={styles.optHeader} >Location</Text>
+        <TextInput placeholder='Location' style={styles.inputLocation} />
+
+        <Text style={styles.optHeader} >Distance</Text>
+        <MultiSlider
+          values={sliderValue}
+          sliderLength={350}
+          min={0}
+          max={100}
+          step={1}
+          onValuesChange={(values) => setSliderValue(values)}
+          selectedStyle={{ backgroundColor: colors.primary }}
+          unselectedStyle={{ backgroundColor: colors.lighGrey }}
+          trackStyle={{ height: 4 }}
+          markerStyle={{
+            height: 16,
+            width: 16,
+            borderRadius: 8,
+            backgroundColor: '#7A5AF8',
+            marginTop: 3
+          }}
+          customMarker={(e) => <CustomMarker currentValue={e.currentValue} />}
+          enabledOne={true}
+        />
+
+        <Text style={styles.optHeader}>Event Type</Text>
+        <View style={styles.optionsRow}>
+          {['Dining', 'Bars', 'Experiences'].map((type) => {
+            const isSelected = selectedEventType.includes(type);
+            return (
+              <TouchableOpacity
+                key={type}
+                style={styles.checkbox}
+                onPress={() => toggleEventType(type)}
               >
-                {tab}
+                <View style={[
+                  styles.iconBox,
+                  isSelected ? styles.iconBoxSelected : styles.iconBoxUnselected,
+                ]}>
+                  {isSelected && <Icon name="check" size={14} color="#fff" />}
+                </View>
+                <Text style={styles.checkboxLabel}>{type}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+
+        <Text style={styles.optHeader}>Price</Text>
+        <View style={styles.optionsRow}>
+          {['Free', 'Paid'].map((price) => (
+            <TouchableOpacity
+              key={price}
+              style={[
+                styles.priceOption,
+                selectedPrice === price && styles.priceOptionSelected,
+              ]}
+              onPress={() => setSelectedPrice(price)}
+            >
+              <Text style={[
+                styles.priceText,
+                selectedPrice === price && styles.priceTextSelected,
+              ]}>
+                {price}
               </Text>
             </TouchableOpacity>
           ))}
         </View>
-      </LinearGradient>
-      {selectedTab === 'Upcoming' && <UpcomingEvent />}
-      {selectedTab === 'Completed' && <CompletedEvent
-        name="Brew & Co."
-        date="Thursday, March 14, 2024"
-        time="10:30 AM"
-        location="Makati City, Philippines"
-        status="Booking Completed!"
-        id="ORBT-BR0001"
-      />}
-      {selectedTab === 'Cancelled' && <CancelledEvent
-        name="The Bolthole Bar"
-        date="Thursday, March 14, 2024"
-        time="10:30 AM"
-        location="Makati City, Philippines"
-        status="Booking Completed!"
-        id="ORBT-BR0001"
-      />}
-      <FilterBottomSheet
-      refRBSheet={refRBSheet}
-      sliderValue={sliderValue}
-      setSliderValue={setSliderValue}
-      selectedEventType={selectedEventType}
-      toggleEventType={toggleEventType}
-      selectedPrice={selectedPrice}
-      setSelectedPrice={setSelectedPrice}
-      handleReset={handleReset}
-      />
-    </WrapperContainer>
+
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.resetButton} onPress={handleReset}>
+            <Text style={styles.resetText}>Reset</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.applyButton}>
+            <Text style={styles.applyText}>Apply</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </RsBottomSheet>
   );
 };
 
@@ -340,5 +333,4 @@ const styles = StyleSheet.create({
   }
   
 });
-
-export default MyBookings;
+export default FilterBottomSheet;
