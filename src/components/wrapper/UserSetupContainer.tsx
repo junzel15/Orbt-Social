@@ -1,16 +1,24 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
-import React, {memo, ReactNode} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import React, { memo, ReactNode } from 'react';
+import {
+  ImageBackground,
+  Platform,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
 import Octicons from 'react-native-vector-icons/Octicons';
-import {useDispatch} from 'react-redux';
-import {colors} from '../../constants/colors';
+import { useDispatch } from 'react-redux';
+import { colors } from '../../constants/colors';
 import commonStyles from '../../constants/commonStyles';
-import {fonts} from '../../constants/fonts';
-import {windowWidth} from '../../constants/globalConstants';
-import {getScaledFontSize} from '../../constants/globalFunctions';
-import {globalStyleDefinitions} from '../../constants/globalStyleDefinitions';
-import {setAccessToken} from '../../redux/slices/authState';
+import { fonts } from '../../constants/fonts';
+import { windowWidth } from '../../constants/globalConstants';
+import { getScaledFontSize } from '../../constants/globalFunctions';
+import { globalStyleDefinitions } from '../../constants/globalStyleDefinitions';
+import { imagePath } from '../../constants/imagePath';
+import { setAccessToken } from '../../redux/slices/authState';
 import CommonButton from '../atoms/button/CommonButton';
+import CustomImage from '../atoms/image/CustomImage';
 
 type WrapperContainerProps = {
   children: ReactNode;
@@ -45,7 +53,24 @@ const UserSetupContainer = (props: WrapperContainerProps) => {
           <View style={[styles.progressFill, {width: `${props.progress}%`}]} />
         </View>
       </View>
-      <View style={styles.mainWrapper}>{props.children}</View>
+      <View style={commonStyles.flexFull}>
+        <CustomImage
+          url={imagePath.userSetupBackground2}
+          imageStyle={styles.innerImage}
+          resizeMode="stretch"
+        />
+        <CustomImage
+          url={imagePath.userSetupBackground}
+          imageStyle={styles.subInnerImage}
+          resizeMode="stretch"
+        />
+        <ImageBackground
+          source={imagePath.userSetupBackground3}
+          style={styles.mainImage}
+          resizeMode="stretch">
+          <View style={styles.innerContainer}>{props.children}</View>
+        </ImageBackground>
+      </View>
       <View style={styles.buttonWrapper}>
         <CommonButton title="Next" onPress={props.onNextPress} />
         <Text style={styles.subText} suppressHighlighting onPress={onSkip}>
@@ -80,22 +105,38 @@ const styles = StyleSheet.create({
     backgroundColor: colors.purple,
     borderRadius: 0.5 * globalStyleDefinitions.br_10.borderRadius,
   },
-  mainWrapper: {
+  mainImage: {
+    height: '95%',
+    width: windowWidth - 2 * globalStyleDefinitions.screenPadding.padding,
     flex: 1,
-    margin: globalStyleDefinitions.screenPadding.padding,
-    borderWidth: 1,
-    borderColor: colors.primary,
-    backgroundColor: colors.primary + '20',
-    borderRadius: 1.5 * globalStyleDefinitions.br_10.borderRadius,
+    alignSelf: 'center',
+    marginTop: globalStyleDefinitions.mt_15.marginTop,
+    zIndex: 3,
+  },
+  innerImage: {
+    height: '95%',
+    width: windowWidth - 4 * globalStyleDefinitions.screenPadding.padding,
+    alignSelf: 'center',
+    top: globalStyleDefinitions.screenPadding.padding,
+    zIndex: 2,
+    position: 'absolute',
+  },
+  subInnerImage: {
+    height: '95%',
+    width: windowWidth - 6 * globalStyleDefinitions.screenPadding.padding,
+    alignSelf: 'center',
+    top: 2 * globalStyleDefinitions.screenPadding.padding,
+    zIndex: 1,
+    position: 'absolute',
+  },
+  innerContainer: {
+    height: '95%',
     padding: 2 * globalStyleDefinitions.cardInnerPadding.padding,
   },
   subText: {
     fontSize: getScaledFontSize(16),
     color: colors.white,
     fontFamily: fonts.fontRegular,
-    marginBottom: Platform.select({
-      ios: globalStyleDefinitions.screenPadding.padding,
-    }),
     marginTop: globalStyleDefinitions.mt_15.marginTop,
     padding: globalStyleDefinitions.cardInnerPadding.padding,
     alignSelf: 'center',

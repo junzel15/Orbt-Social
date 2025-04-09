@@ -1,4 +1,4 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
   Platform,
@@ -6,19 +6,20 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import CustomImage from '../../../components/atoms/image/CustomImage';
 import LinearWrapperContainer from '../../../components/wrapper/LinearWrapperContainer';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
-import {colors} from '../../../constants/colors';
-import {fonts} from '../../../constants/fonts';
-import {windowWidth} from '../../../constants/globalConstants';
-import {getScaledFontSize} from '../../../constants/globalFunctions';
-import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
-import {iconPath} from '../../../constants/iconPath';
-import {imagePath} from '../../../constants/imagePath';
-import {navigationStrings} from '../../../navigation/navigationStrings';
+import { colors } from '../../../constants/colors';
+import { fonts } from '../../../constants/fonts';
+import { windowWidth } from '../../../constants/globalConstants';
+import { getScaledFontSize } from '../../../constants/globalFunctions';
+import { globalStyleDefinitions } from '../../../constants/globalStyleDefinitions';
+import { iconPath } from '../../../constants/iconPath';
+import { imagePath } from '../../../constants/imagePath';
+import { navigationStrings } from '../../../navigation/navigationStrings';
 import CommonButton from './components/CommonButton';
 
 const Home = () => {
@@ -27,20 +28,38 @@ const Home = () => {
   const onDiningPress = () => {
     navigation.navigate(navigationStrings.Dining);
   };
-
+  const onBarsPress = () => {
+    navigation.navigate(navigationStrings.Bars);
+  };
+  const onExperiences = () => {
+    navigation.navigate(navigationStrings.Experiences);
+  };
+  const onNotification = () => {
+    navigation.navigate(navigationStrings.Notification);
+  };
+  const onLocation = () => {
+    navigation.navigate(navigationStrings.Location);
+  };
   return (
     <WrapperContainer>
       <LinearWrapperContainer>
         <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
           <View style={styles.mainContainer}>
             <View style={styles.rowWrapper}>
-              <CustomImage url={iconPath.location} height={34} width={34} />
-              <TextInput
+              <TouchableOpacity style={styles.textTouchableOpacity} onPress={onLocation}>
+                <CustomImage url={iconPath.location} height={34} width={34} />
+                {/* <TextInput
                 style={styles.textInput}
                 placeholder="Add your location"
                 placeholderTextColor={colors.placeholderColor}
-              />
-              <CustomImage url={iconPath.notification} height={24} width={24} />
+              /> */}
+                <Text style={styles.textInput}>Add your location</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={onNotification}
+              >
+                <CustomImage url={iconPath.notification} height={24} width={24} />
+              </TouchableOpacity>
             </View>
 
             <View style={styles.innerContainer}>
@@ -62,7 +81,7 @@ const Home = () => {
 
               <Text style={styles.mainText}>
                 {`Find your crowd,\n`}
-                <Text style={{color: colors.darkPurple}}>Share the moment</Text>
+                <Text style={{ color: colors.darkPurple }}>Share the moment</Text>
               </Text>
 
               <Text style={styles.subText}>
@@ -83,20 +102,22 @@ const Home = () => {
             label={'Dining'}
             colors={[colors.darkPrimary, colors.black]}
             icon={imagePath.dining}
-            customStyle={{bottom: 0}}
+            customStyle={{ bottom: 0 }}
             onPress={onDiningPress}
           />
           <CommonButton
             label={'Bars'}
             colors={[colors.darkPurple, colors.darkPrimary]}
             icon={imagePath.bar}
-            customStyle={{bottom: 30}}
+            customStyle={{ bottom: 30 }}
+            onPress={onBarsPress}
           />
           <CommonButton
             label={'Experiences'}
             colors={[colors.primary, colors.darkPurple]}
             icon={imagePath.experience}
-            customStyle={{bottom: 60}}
+            customStyle={{ bottom: 60 }}
+            onPress={onExperiences}
           />
         </View>
       </LinearWrapperContainer>
@@ -119,11 +140,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: globalStyleDefinitions.gap.gap,
   },
+  textTouchableOpacity: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center"
+  },
   textInput: {
     fontFamily: fonts.fontRegular,
-    color: colors.black,
+    // color: colors.black,
+    color: colors.primaryText,
     fontSize: getScaledFontSize(14),
-    flex: 1,
+    // flex: 1,
+    marginLeft: globalStyleDefinitions.mt_15.margin / 2
   },
   innerContainer: {
     marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,

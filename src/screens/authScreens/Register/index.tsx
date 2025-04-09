@@ -1,6 +1,6 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import CheckBox from '../../../components/atoms/button/CheckBox';
 import CommonButton from '../../../components/atoms/button/CommonButton';
@@ -20,7 +20,6 @@ import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions'
 import {iconPath} from '../../../constants/iconPath';
 import {imagePath} from '../../../constants/imagePath';
 import {navigationStrings} from '../../../navigation/navigationStrings';
-import { setAccessToken } from '../../../redux/slices/authState';
 
 const Register = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -64,7 +63,7 @@ const Register = () => {
   };
 
   const handleLogin = async () => {
-    dispatch(setAccessToken("accessToken"))
+    navigation.navigate(navigationStrings.Login)
   };
 
   const onCountryCodePress = () => {
@@ -83,6 +82,10 @@ const Register = () => {
   const onAgreeToggle = () => {
     setIsAgree(!isAgree);
   };
+
+  const onLoginOpen = () =>{
+    navigation.navigate(navigationStrings.Login)
+  }
 
   return (
     <WrapperContainer>
@@ -149,12 +152,14 @@ const Register = () => {
           </View>
           <Text style={styles.loginTitleText}>
             Already have account?{'  '}
+            <TouchableOpacity onPress={onLoginOpen}  >
             <Text
               style={styles.loginText}
               suppressHighlighting
               onPress={handleLogin}>
               Log in
             </Text>
+            </TouchableOpacity>
           </Text>
         </ScrollView>
         <CountrycodeModal

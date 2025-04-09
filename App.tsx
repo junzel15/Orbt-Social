@@ -1,9 +1,9 @@
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import AppNavigation from './src/navigation/AppNavigation';
 import store from './src/redux/store/state';
-import {StatusBar} from 'react-native';
+import { StatusBar } from 'react-native';
 
 const App = () => {
   return (

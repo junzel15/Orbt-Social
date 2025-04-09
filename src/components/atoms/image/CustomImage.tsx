@@ -3,8 +3,8 @@ import {Image, ImageStyle} from 'react-native';
 
 interface iProps {
   url: any;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   tintColor?: string;
   resizeMode?: 'cover' | 'contain' | 'stretch';
   imageStyle?:ImageStyle

@@ -1,5 +1,5 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
 import {
   ImageBackground,
   Platform,
@@ -12,16 +12,17 @@ import {
 import CommonButton from '../../../components/atoms/button/CommonButton';
 import CustomImage from '../../../components/atoms/image/CustomImage';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
-import {colors} from '../../../constants/colors';
+import { colors } from '../../../constants/colors';
 import commonStyles from '../../../constants/commonStyles';
-import {fonts} from '../../../constants/fonts';
-import {getScaledFontSize} from '../../../constants/globalFunctions';
-import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
-import {iconPath} from '../../../constants/iconPath';
-import {imagePath} from '../../../constants/imagePath';
-import {DiningData} from './components/data';
+import { fonts } from '../../../constants/fonts';
+import { getScaledFontSize } from '../../../constants/globalFunctions';
+import { globalStyleDefinitions } from '../../../constants/globalStyleDefinitions';
+import { iconPath } from '../../../constants/iconPath';
+import { imagePath } from '../../../constants/imagePath';
 import DateSelectionList from './components/DateSelectionList';
 import ExpandableCard from './components/ExpandableCard';
+import { navigationStrings } from '../../../navigation/navigationStrings';
+import DiningOptions from './components/DiningOptions';
 
 const Dining = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -33,12 +34,24 @@ const Dining = () => {
     navigation.goBack();
   };
 
+  const searchCrew = () => {
+    navigation.navigate(navigationStrings.MatchingCrew);
+  }
+
+  const onSelect = (itemlable: any) => {
+    setSelected(itemlable);
+    setSelectedDate('');
+  }
+
   return (
     <WrapperContainer>
       <ImageBackground
         source={imagePath.linearBackground}
         style={commonStyles.fullInnerContainer}>
-        <ScrollView style={commonStyles.flexFull} showsVerticalScrollIndicator={false} nestedScrollEnabled>
+        <ScrollView
+          style={commonStyles.flexFull}
+          showsVerticalScrollIndicator={false}
+          nestedScrollEnabled>
           <View style={styles.rowWrapper}>
             <CustomImage url={imagePath.dining} height={44} width={44} />
             <Text style={styles.headerTitle}>Dining</Text>
@@ -46,33 +59,11 @@ const Dining = () => {
               <CustomImage url={iconPath.close} height={44} width={44} />
             </TouchableOpacity>
           </View>
-
-          <View style={styles.listWrapper}>
-            {DiningData.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() => setSelected(item.label)}
-                activeOpacity={0.9}
-                style={[
-                  styles.listContainer,
-                  selected == item.label && styles.selectedItem,
-                ]}>
-                <Text
-                  style={[
-                    styles.listText,
-                    selected == item.label && styles.selectedText,
-                  ]}>
-                  {item.label}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-
+          <DiningOptions selected={selected} onSelect={onSelect} />
           <DateSelectionList
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
-
           <ExpandableCard
             header="BEFORE YOU BOOK"
             content={[
@@ -114,8 +105,9 @@ const Dining = () => {
         </ScrollView>
         <CommonButton
           title="Book Now"
-          customStyles={styles.buttonContainer}
           disable={!selectedDate?.trim()}
+          onPress={searchCrew}
+          customStyles={styles.buttonContainer}
         />
       </ImageBackground>
     </WrapperContainer>
@@ -153,9 +145,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 2 * globalStyleDefinitions.br_10.borderRadius,
   },
-  selectedItem: {
-    backgroundColor: colors.white,
-  },
   listText: {
     color: colors.white,
     fontFamily: fonts.fontSemiBold,
@@ -164,28 +153,6 @@ const styles = StyleSheet.create({
   selectedText: {
     color: colors.black,
   },
-  dropdownWrapper: {
-    height: 50,
-    borderColor: colors.white,
-    borderWidth: 1,
-    borderRadius: globalStyleDefinitions.br_10.borderRadius,
-    paddingHorizontal: globalStyleDefinitions.cardInnerPadding.padding,
-  },
-  dropdownPlaceholder: {
-    color: colors.white,
-    fontFamily: fonts.fontRegular,
-    fontSize: getScaledFontSize(14),
-  },
-  dropdownText: {
-    color: colors.white,
-    fontFamily: fonts.fontSemiBold,
-    fontSize: getScaledFontSize(14),
-  },
-  dropdownContainer: {
-    backgroundColor: colors.primary,
-    borderRadius: globalStyleDefinitions.br_10.borderRadius,
-  },
-
   buttonContainer: {
     marginBottom: globalStyleDefinitions.mt_15.marginTop,
   },

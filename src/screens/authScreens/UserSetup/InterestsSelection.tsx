@@ -1,18 +1,20 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {FlatList, StyleSheet, Text, TextInput, View} from 'react-native';
-import {useDispatch} from 'react-redux';
+import React, { useCallback, useEffect, useState } from 'react';
+import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 import UserSetupContainer from '../../../components/wrapper/UserSetupContainer';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
-import {colors} from '../../../constants/colors';
-import {fonts} from '../../../constants/fonts';
-import {getScaledFontSize} from '../../../constants/globalFunctions';
-import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
-import {setAccessToken} from '../../../redux/slices/authState';
-import {InterestData} from './components/data';
+import { colors } from '../../../constants/colors';
+import { fonts } from '../../../constants/fonts';
+import { getScaledFontSize } from '../../../constants/globalFunctions';
+import { globalStyleDefinitions } from '../../../constants/globalStyleDefinitions';
+import { setAccessToken } from '../../../redux/slices/authState';
+import { InterestData } from './components/data';
 import InterestCard from './components/InterestCard';
+import { useNavigation } from '@react-navigation/native';
+import { navigationStrings } from '../../../navigation/navigationStrings';
 
 const InterestSelection = () => {
-  const dispatch = useDispatch();
+  const navigation :any= useNavigation()
 
   const [interestsList, setInterestsList] = useState<Array<string>>([]);
   const [filteredData, setFilteredData] = useState<Array<string>>(InterestData);
@@ -31,11 +33,11 @@ const InterestSelection = () => {
   }, [search]);
 
   const onNext = () => {
-    dispatch(setAccessToken('accessToken'));
+    navigation.navigate(navigationStrings.LocationAllow)
   };
 
   const renderItem = useCallback(
-    ({item, index}: any) => {
+    ({ item, index }: any) => {
       const onInterestSelect = () => {
         setInterestsList(prev =>
           prev.includes(item) ? prev.filter(i => i !== item) : [...prev, item],
