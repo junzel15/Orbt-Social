@@ -81,8 +81,7 @@ export const navigationStrings: NavigationStrings = {
   Notification:'Notification',
   Location:'Location',
   Settings:'Settings',
-  EditProfile:'EditProfile'
-  Settings:'Settings',
+  EditProfile:'EditProfile',
   Blocked:'Blocked',
   ChangePassword:'ChangePassword',
   PasswordUpdated:'PasswordUpdated',
