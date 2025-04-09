@@ -1,5 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
+import Blocked from '../screens/mainScreens/Blocked';
+import ChangePassword from '../screens/mainScreens/ChangePassword';
 import FollowersFollowing from '../screens/mainScreens/FollowersFollowing';
 import Bars from '../screens/mainScreens/Home/Bars';
 import Dining from '../screens/mainScreens/Home/Dining';
@@ -12,14 +14,12 @@ import CancelBooking from '../screens/mainScreens/Home/cancelEvent/CancelBooking
 import CancelEvent from '../screens/mainScreens/Home/cancelEvent/CancelEvent';
 import GiveFeedback from '../screens/mainScreens/Home/reviewScreen/GiveFeedback';
 import SuccessfulFeedback from '../screens/mainScreens/Home/reviewScreen/SuccessfulFeedback';
-import CancelBooking from '../screens/mainScreens/Home/cancelEvent/CancelBooking';
-import CancelEvent from '../screens/mainScreens/Home/cancelEvent/CancelEvent';
-import Notification from '../screens/mainScreens/Notification';
 import Location from '../screens/mainScreens/Location';
-import Settings from '../screens/mainScreens/Profile/Settings';
-import Blocked from '../screens/mainScreens/Blocked';
-import ChangePassword from '../screens/mainScreens/ChangePassword';
+import Notification from '../screens/mainScreens/Notification';
 import PasswordUpdated from '../screens/mainScreens/PasswordUpdated';
+import Settings from '../screens/mainScreens/Profile/Settings';
+import BottomNavigation from './BottomNavigation';
+import {navigationStrings} from './navigationStrings';
 
 const MainStack = createNativeStackNavigator();
 
@@ -125,6 +125,11 @@ const MainNavigation = () => {
       <MainStack.Screen
         name={navigationStrings.PasswordUpdated}
         component={PasswordUpdated}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.FollowersFollowing}
+        component={FollowersFollowing}
         options={options}
       />
     </MainStack.Navigator>

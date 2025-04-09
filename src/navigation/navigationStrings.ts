@@ -82,8 +82,7 @@ export const navigationStrings: NavigationStrings = {
   Settings:'Settings',
   Blocked:'Blocked',
   ChangePassword:'ChangePassword',
-  PasswordUpdated:'PasswordUpdated'
-  Settings:'Settings',
+  PasswordUpdated:'PasswordUpdated',
   FollowersFollowing:'FollowersFollowing',
   Followers:'Followers',
   Following:'Following',
