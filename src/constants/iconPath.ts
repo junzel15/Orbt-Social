@@ -28,3 +28,16 @@ export const BottomIcon = {
   profileFill: require('../assets/icons/BottomTab/profileFill.png'),
   sideView: require('../assets/icons/BottomTab/sideView.png'),
 };
+
+export const Settings = {
+  blockedIcon: require('../assets/icons/SettingTab/blockedIcon.png'),
+  helpIcon: require('../assets/icons/SettingTab/helpIcon.png'),
+  languageIcon: require('../assets/icons/SettingTab/languageIcon.png'),
+  logoutIcon: require('../assets/icons/SettingTab/logoutIcon.png'),
+  notificationIcon: require('../assets/icons/SettingTab/notificationIcon.png'),
+  passwordIcon: require('../assets/icons/SettingTab/passwordIcon.png'),
+  paymentsIcon: require('../assets/icons/SettingTab/paymentsIcon.png'),
+  rateIcon: require('../assets/icons/SettingTab/rateIcon.png'),
+  security: require('../assets/icons/SettingTab/security.png'),
+  profileIcon:require('../assets/icons/SettingTab/profileIcon.png')
+}

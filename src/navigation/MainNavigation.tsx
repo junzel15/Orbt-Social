@@ -15,6 +15,7 @@ import CancelBooking from '../screens/mainScreens/Home/cancelEvent/CancelBooking
 import CancelEvent from '../screens/mainScreens/Home/cancelEvent/CancelEvent';
 import Notification from '../screens/mainScreens/notification';
 import Location from '../screens/mainScreens/Location';
+import Settings from '../screens/mainScreens/Profile/Settings';
 
 const MainStack = createNativeStackNavigator();
 
@@ -100,6 +101,11 @@ const MainNavigation = () => {
       <MainStack.Screen
         name={navigationStrings.Location}
         component={Location}
+        options={options}
+      />
+        <MainStack.Screen
+        name={navigationStrings.Settings}
+        component={Settings}
         options={options}
       />
     </MainStack.Navigator>

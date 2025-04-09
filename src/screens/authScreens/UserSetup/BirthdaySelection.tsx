@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontFamily: fonts.soraSemiBold,
     textAlign: 'center',
-    marginBottom: globalStyleDefinitions.mt_15.marginTop,
+    marginBottom: globalStyleDefinitions.commonItemMargin.margin,
   },
   inputContainer: {
     borderColor: colors.white,

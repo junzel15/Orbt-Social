@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: globalStyleDefinitions.gap.gap,
-    marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
+    marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin,
   },
   listContainer: {
     flex: 1,
@@ -176,11 +176,11 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    marginBottom: globalStyleDefinitions.mt_15.marginTop,
+    marginBottom: globalStyleDefinitions.commonItemMargin.margin,
   },
   eventWrapper: {
     borderRadius: globalStyleDefinitions.br_10.borderRadius,
-    marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
+    marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin,
     padding: globalStyleDefinitions.cardInnerPadding.padding,
     flexDirection: 'row',
     alignItems: 'center',

@@ -156,13 +156,13 @@ const styles = StyleSheet.create({
     fontSize: getScaledFontSize(14),
     color: colors.primaryText,
     fontFamily: fonts.fontRegular,
-    marginTop: 0.5 * globalStyleDefinitions.mt_15.marginTop,
-    marginBottom: globalStyleDefinitions.mt_15.marginTop,
+    marginTop: 0.5 * globalStyleDefinitions.commonItemMargin.margin,
+    marginBottom: globalStyleDefinitions.commonItemMargin.margin,
   },
-  btnWrapper: {marginTop: 2 * globalStyleDefinitions.mt_15.marginTop},
+  btnWrapper: {marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin},
   codeField: {
     justifyContent: 'space-evenly',
-    marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
+    marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin,
   },
   codeWrapper: {
     width: 55,
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     fontSize: getScaledFontSize(14),
     color: colors.secondaryText,
     textAlign: 'center',
-    marginTop: 1.5 * globalStyleDefinitions.mt_15.marginTop,
+    marginTop: 1.5 * globalStyleDefinitions.commonItemMargin.margin,
   },
 });
 
