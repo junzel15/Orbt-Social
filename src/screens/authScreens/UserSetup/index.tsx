@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
     fontSize: getScaledFontSize(14),
     color: colors.white,
     fontFamily: fonts.fontRegular,
-    marginTop: globalStyleDefinitions.mt_15.marginTop,
+    marginTop:globalStyleDefinitions.commonItemMargin.margin,
   },
   buttonContainer: {
     marginBottom: globalStyleDefinitions.screenPadding.padding,
-    marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
+    marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin,
   },
 });
 

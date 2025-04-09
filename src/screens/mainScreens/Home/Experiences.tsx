@@ -38,10 +38,10 @@ const Experiences = () => {
         navigation.navigate(navigationStrings.MatchingCrew);
     }
 
-    const onSelect = (itemlable: any) =>{
+    const onSelect = (itemlable: any) => {
         setSelected(itemlable);
         setSelectedDate('');
-     }
+    }
 
     return (
         <WrapperContainer>
@@ -56,7 +56,7 @@ const Experiences = () => {
                             <CustomImage url={iconPath.close} height={44} width={44} />
                         </TouchableOpacity>
                     </View>
-                    <DiningOptions selected={selected}  onSelect={onSelect} />
+                    <DiningOptions selected={selected} onSelect={onSelect} />
                     <DateSelectionList
                         selectedDate={selectedDate}
                         setSelectedDate={setSelectedDate}
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: globalStyleDefinitions.gap.gap,
-        marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
+        marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin,
     },
     listContainer: {
         flex: 1,
@@ -173,11 +173,11 @@ const styles = StyleSheet.create({
     },
 
     buttonContainer: {
-        marginBottom: globalStyleDefinitions.mt_15.marginTop,
+        marginBottom: globalStyleDefinitions.commonItemMargin.margin,
     },
     eventWrapper: {
         borderRadius: globalStyleDefinitions.br_10.borderRadius,
-        marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
+        marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin,
         padding: globalStyleDefinitions.cardInnerPadding.padding,
         flexDirection: 'row',
         alignItems: 'center',

@@ -6,8 +6,6 @@ import Dining from '../screens/mainScreens/Home/Dining';
 import MatchingCrew from '../screens/mainScreens/Home/MatchingCrew';
 import Bars from '../screens/mainScreens/Home/Bars';
 import Experiences from '../screens/mainScreens/Home/Experiences';
-import LocationAllow from '../screens/mainScreens/AccessScreen/LocationAllow';
-import NotificationAllow from '../screens/mainScreens/AccessScreen/NotificationAllow';
 import BookingDiningDetails from '../screens/mainScreens/Home/bookingDetails/BookingDiningDetails';
 import BarDetails from '../screens/mainScreens/Home/bookingDetails/BarDetails';
 import ExperienceDetails from '../screens/mainScreens/Home/bookingDetails/ExperienceDetails';
@@ -17,6 +15,7 @@ import CancelBooking from '../screens/mainScreens/Home/cancelEvent/CancelBooking
 import CancelEvent from '../screens/mainScreens/Home/cancelEvent/CancelEvent';
 import Notification from '../screens/mainScreens/notification';
 import Location from '../screens/mainScreens/Location';
+import Settings from '../screens/mainScreens/Profile/Settings';
 
 const MainStack = createNativeStackNavigator();
 
@@ -57,16 +56,6 @@ const MainNavigation = () => {
       <MainStack.Screen
         name={navigationStrings.MatchingCrew}
         component={MatchingCrew}
-        options={options}
-      />
-      <MainStack.Screen
-        name={navigationStrings.LocationAllow}
-        component={LocationAllow}
-        options={options}
-      />
-      <MainStack.Screen
-        name={navigationStrings.NotificationAllow}
-        component={NotificationAllow}
         options={options}
       />
       <MainStack.Screen
@@ -112,6 +101,11 @@ const MainNavigation = () => {
       <MainStack.Screen
         name={navigationStrings.Location}
         component={Location}
+        options={options}
+      />
+        <MainStack.Screen
+        name={navigationStrings.Settings}
+        component={Settings}
         options={options}
       />
     </MainStack.Navigator>

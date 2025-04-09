@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const globalStyleDefinitions = StyleSheet.create({
   screenPadding: {
@@ -29,5 +29,8 @@ export const globalStyleDefinitions = StyleSheet.create({
   },
   gap:{
     gap:10
+  },
+  commonItemMargin: {
+    margin: 15
   }
 });

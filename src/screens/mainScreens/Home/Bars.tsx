@@ -1,5 +1,5 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
 import {
   ImageBackground,
   Platform,
@@ -12,13 +12,13 @@ import {
 import CommonButton from '../../../components/atoms/button/CommonButton';
 import CustomImage from '../../../components/atoms/image/CustomImage';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
-import {colors} from '../../../constants/colors';
+import { colors } from '../../../constants/colors';
 import commonStyles from '../../../constants/commonStyles';
-import {fonts} from '../../../constants/fonts';
-import {getScaledFontSize} from '../../../constants/globalFunctions';
-import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
-import {iconPath} from '../../../constants/iconPath';
-import {imagePath} from '../../../constants/imagePath';
+import { fonts } from '../../../constants/fonts';
+import { getScaledFontSize } from '../../../constants/globalFunctions';
+import { globalStyleDefinitions } from '../../../constants/globalStyleDefinitions';
+import { iconPath } from '../../../constants/iconPath';
+import { imagePath } from '../../../constants/imagePath';
 import DateSelectionList from './components/DateSelectionList';
 import ExpandableCard from './components/ExpandableCard';
 import { navigationStrings } from '../../../navigation/navigationStrings';
@@ -34,14 +34,14 @@ const Bars = () => {
     navigation.goBack();
   };
 
-  const searchCrew =() =>{
-      navigation.navigate(navigationStrings.MatchingCrew);
+  const searchCrew = () => {
+    navigation.navigate(navigationStrings.MatchingCrew);
   }
 
- const onSelect = (itemlable: any) =>{
+  const onSelect = (itemlable: any) => {
     setSelected(itemlable);
     setSelectedDate('');
- }
+  }
 
   return (
     <WrapperContainer>
@@ -56,7 +56,7 @@ const Bars = () => {
               <CustomImage url={iconPath.close} height={44} width={44} />
             </TouchableOpacity>
           </View>
-          <DiningOptions selected={selected}  onSelect={onSelect} />
+          <DiningOptions selected={selected} onSelect={onSelect} />
           <DateSelectionList
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: globalStyleDefinitions.gap.gap,
-    marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
+    marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin,
   },
   listContainer: {
     flex: 1,
@@ -176,11 +176,11 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    marginBottom: globalStyleDefinitions.mt_15.marginTop,
+    marginBottom: globalStyleDefinitions.commonItemMargin.margin,
   },
   eventWrapper: {
     borderRadius: globalStyleDefinitions.br_10.borderRadius,
-    marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
+    marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin,
     padding: globalStyleDefinitions.cardInnerPadding.padding,
     flexDirection: 'row',
     alignItems: 'center',

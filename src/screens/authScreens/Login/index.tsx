@@ -39,6 +39,10 @@ const Login = () => {
         navigation.navigate(navigationStrings.ForgetPassword)
     }
 
+    const handleRegister = () => {
+        navigation.navigate(navigationStrings.Register)
+    }
+
     return (
         <WrapperContainer>
             <LinearWrapperContainer>
@@ -75,6 +79,7 @@ const Login = () => {
                         <CommonButton
                             title="Login"
                             onPress={handleLogin}
+                            customStyles={{ marginTop: globalStyleDefinitions.cardInnerPadding.padding }}
                         />
                         <Text style={styles.loginTitleText}>
                             Forgot your password? {'  '}
@@ -96,12 +101,12 @@ const Login = () => {
                             <SocialButton iconPath={iconPath.facebook} />
                         </View>
                         <Text style={styles.loginTitleText}>
-                            Already have account?{'  '}
+                            Don't have an account?{'  '}
                             <Text
                                 style={styles.loginText}
                                 suppressHighlighting
-                                onPress={handleLogin}>
-                                Log in
+                                onPress={handleRegister}>
+                                Sign up
                             </Text>
                         </Text>
                     </View>
@@ -128,21 +133,21 @@ const styles = StyleSheet.create({
         color: colors.black,
         fontFamily: fonts.soraSemiBold,
         textAlign: 'center',
-        marginTop: globalStyleDefinitions.mt_15.marginTop,
+        marginTop: globalStyleDefinitions.commonItemMargin.margin,
     },
     headerSubText: {
         fontSize: getScaledFontSize(14),
         color: colors.primaryText,
         fontFamily: fonts.fontRegular,
         textAlign: 'center',
-        marginTop: 0.5 * globalStyleDefinitions.mt_15.marginTop,
-        marginBottom: globalStyleDefinitions.mt_15.marginTop,
+        marginTop: 0.5 * globalStyleDefinitions.commonItemMargin.margin,
+        marginBottom:globalStyleDefinitions.commonItemMargin.margin,
     },
     rowWrapper: {
         flexDirection: 'row',
         alignItems: 'center',
         gap: globalStyleDefinitions.gap.gap,
-        marginTop: globalStyleDefinitions.mt_15.marginTop,
+        marginTop: globalStyleDefinitions.commonItemMargin.margin,
     },
     subText: {
         fontFamily: fonts.fontRegular,
@@ -178,7 +183,7 @@ const styles = StyleSheet.create({
         fontSize: getScaledFontSize(14),
         color: colors.secondaryText,
         textAlign: 'center',
-        marginTop: globalStyleDefinitions.mt_15.marginTop,
+        marginTop: globalStyleDefinitions.commonItemMargin.margin,
     },
     loginText: {
         fontFamily: fonts.fontBold,

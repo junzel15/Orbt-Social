@@ -31,4 +31,7 @@ export const imagePath = {
   cancelImage:  require('../assets/images/cancelImage.png'),
   noNotificationImage: require('../assets/images/noNotificationImage.png'),
   noLocationImage: require('../assets/images/s_location.png'),
+  filter: require('../assets/images/filter.png'),
+  nothingImage: require('../assets/images/nothingImage.png'),
+  burgerIcon: require('../assets/images/burgerIcon.png'),
 };

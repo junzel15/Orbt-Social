@@ -151,10 +151,10 @@ const styles = StyleSheet.create({
     color: colors.primaryText,
     fontSize: getScaledFontSize(14),
     // flex: 1,
-    marginLeft: globalStyleDefinitions.mt_15.margin / 2
+    marginLeft: globalStyleDefinitions.commonItemMargin.margin / 2
   },
   innerContainer: {
-    marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
+    marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin,
   },
   titleText: {
     fontSize: getScaledFontSize(16),

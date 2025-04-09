@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     padding: globalStyleDefinitions.cardInnerPadding.padding,
-    // marginTop: globalStyleDefinitions.mt_15.marginTop,
+    marginTop: globalStyleDefinitions.commonItemMargin.margin,
   },
   btnText: {
     color: colors.white,

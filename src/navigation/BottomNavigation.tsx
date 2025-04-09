@@ -5,12 +5,12 @@ import {colors} from '../constants/colors';
 import {windowWidth} from '../constants/globalConstants';
 import {globalStyleDefinitions} from '../constants/globalStyleDefinitions';
 import {BottomIcon} from '../constants/iconPath';
-import Calendar from '../screens/mainScreens/Calendar';
 import Home from '../screens/mainScreens/Home';
 import Message from '../screens/mainScreens/Message';
 import Profile from '../screens/mainScreens/Profile';
 import {navigationStrings} from './navigationStrings';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MyBookings from '../screens/mainScreens/MyBookings';
 
 const TabIcons = ({isFocused, routeName}: any) => {
   return routeName == navigationStrings.Home ? (
@@ -29,7 +29,7 @@ const TabIcons = ({isFocused, routeName}: any) => {
         />
       )}
     </>
-  ) : routeName == navigationStrings.Calendar ? (
+  ) : routeName == navigationStrings.MyBookings ? (
     <>
       <CustomImage
         height={44}
@@ -96,8 +96,8 @@ const BottomNavigation = () => {
       tabBar={BottomTabBar}>
       <BottomTab.Screen name={navigationStrings.Home} component={Home} />
       <BottomTab.Screen
-        name={navigationStrings.Calendar}
-        component={Calendar}
+        name={navigationStrings.MyBookings}
+        component={MyBookings}
       />
       <BottomTab.Screen name={navigationStrings.Message} component={Message} />
       <BottomTab.Screen name={navigationStrings.Profile} component={Profile} />
