@@ -6,7 +6,7 @@ import commonStyles from '../../../constants/commonStyles';
 import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
 import EmptyList from './components/EmptyList';
 import FollowingCard from './components/FollowingCard';
-import SearchInput from './components/SearchInput';
+import SearchInput from '../../../components/atoms/input/SearchInput';
 
 const data = [
   {

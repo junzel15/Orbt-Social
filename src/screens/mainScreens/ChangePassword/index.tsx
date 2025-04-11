@@ -4,7 +4,6 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import CommonButton from '../../../components/atoms/button/CommonButton';
 import CustomInput from '../../../components/atoms/input/CustomInput';
-import ProfileHeader from '../../../components/header/ProfileHeader';
 import LinearWrapperContainer from '../../../components/wrapper/LinearWrapperContainer';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
 import {colors} from '../../../constants/colors';
@@ -13,6 +12,7 @@ import {fonts} from '../../../constants/fonts';
 import {getScaledFontSize} from '../../../constants/globalFunctions';
 import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
 import {iconPath} from '../../../constants/iconPath';
+import CustomHeader from '../../../components/header/CustomHeader';
 
 const ChangePassword = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -56,7 +56,7 @@ const ChangePassword = () => {
     <WrapperContainer>
       <LinearWrapperContainer>
         <View style={commonStyles.flexFull}>
-          <ProfileHeader title="Change Password" />
+          <CustomHeader title="Change Password" />
 
           <View style={commonStyles.fullInnerContainer}>
             <Text style={styles.passwordTitle}>Old Password</Text>

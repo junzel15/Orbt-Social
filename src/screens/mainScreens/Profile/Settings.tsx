@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import ProfileHeader from '../../../components/header/ProfileHeader';
 import LinearWrapperContainer from '../../../components/wrapper/LinearWrapperContainer';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
 import {colors} from '../../../constants/colors';
@@ -21,6 +20,7 @@ import {SettingsIcon} from '../../../constants/iconPath';
 import {navigationStrings} from '../../../navigation/navigationStrings';
 import { useDispatch } from 'react-redux';
 import { setAccessToken } from '../../../redux/slices/authState';
+import CustomHeader from '../../../components/header/CustomHeader';
 
 const Settings = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -53,7 +53,7 @@ const Settings = () => {
     <WrapperContainer>
       <LinearWrapperContainer>
         <View style={commonStyles.flexFull}>
-          <ProfileHeader title="Settings" />
+          <CustomHeader title="Settings" />
           <View style={commonStyles.fullInnerContainer}>
             <TouchableOpacity style={styles.row} onPress={onGoEditProfile}>
               <Image source={SettingsIcon.profileIcon} style={styles.icon} />

@@ -2,7 +2,6 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import {RouteProp, useRoute} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import CustomHeader from '../../../components/header/CustomHeader';
 import LinearWrapperContainer from '../../../components/wrapper/LinearWrapperContainer';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
 import {colors} from '../../../constants/colors';
@@ -11,6 +10,7 @@ import {getScaledFontSize} from '../../../constants/globalFunctions';
 import {navigationStrings} from '../../../navigation/navigationStrings';
 import Followers from './Followers';
 import Following from './Following';
+import CustomHeader from '../../../components/header/CustomHeader';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -31,7 +31,7 @@ const FollowersFollowing = () => {
   return (
     <WrapperContainer>
       <LinearWrapperContainer>
-        <CustomHeader title="Constante Agpaoa" />
+        <CustomHeader title="Constante Agpaoa" isShadow={false}/>
         <Tab.Navigator
           screenOptions={screenOptions}
           initialRouteName={name || navigationStrings.Followers}>

@@ -23,6 +23,7 @@ export const colors = {
   mediumRed:"#CD5C5C",
   mediumgray:"#888",
   CharcoalGrey:"#414141",
-  offWhite:'#F8F8F8',
-  orange:'#FE883E'
+  offWhite:'#E8E8E8',
+  orange:'#FE883E',
+  backgroundGray:'#E0E6F0'
 };

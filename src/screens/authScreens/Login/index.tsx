@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     bottom: getScaledFontSize(-8),
     alignSelf: 'center',
     paddingHorizontal: globalStyleDefinitions.cardInnerPadding.padding,
-    backgroundColor: colors.offWhite,
+    backgroundColor: colors.white,
   },
   loginTitleText: {
     fontFamily: fonts.fontRegular,

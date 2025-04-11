@@ -21,6 +21,10 @@ import Settings from '../screens/mainScreens/Profile/Settings';
 import Notification from '../screens/mainScreens/notification';
 import BottomNavigation from './BottomNavigation';
 import {navigationStrings} from './navigationStrings';
+import NewMessage from '../screens/mainScreens/Message/NewMessage';
+import NewGroup from '../screens/mainScreens/Message/NewGroup';
+import Chat from '../screens/mainScreens/Chat';
+import EventChat from '../screens/mainScreens/EventChat';
 
 const MainStack = createNativeStackNavigator();
 
@@ -136,6 +140,26 @@ const MainNavigation = () => {
       <MainStack.Screen
         name={navigationStrings.FollowersFollowing}
         component={FollowersFollowing}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.NewMessage}
+        component={NewMessage}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.NewGroup}
+        component={NewGroup}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.Chat}
+        component={Chat}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.EventChat}
+        component={EventChat}
         options={options}
       />
     </MainStack.Navigator>

@@ -1,15 +1,7 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import CustomImage from '../../../components/atoms/image/CustomImage';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import CustomHeader from '../../../components/header/CustomHeader';
 import LinearWrapperContainer from '../../../components/wrapper/LinearWrapperContainer';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
 import {colors} from '../../../constants/colors';
@@ -17,9 +9,7 @@ import commonStyles from '../../../constants/commonStyles';
 import {fonts} from '../../../constants/fonts';
 import {getScaledFontSize} from '../../../constants/globalFunctions';
 import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
-import {imagePath} from '../../../constants/imagePath';
 import {navigationStrings} from '../../../navigation/navigationStrings';
-import ProfileHeader from '../../../components/header/ProfileHeader';
 
 const Profile = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -36,11 +26,19 @@ const Profile = () => {
     });
   };
 
+  const onMenuPress = () => {
+    navigation.navigate(navigationStrings.Settings);
+  };
+
   return (
     <WrapperContainer>
       <LinearWrapperContainer>
         <View style={commonStyles.flexFull}>
-          <ProfileHeader title='My Profile' isMenuVisible/>
+          <CustomHeader
+            title="My Profile"
+            isMenuVisible
+            onMenuPress={onMenuPress}
+          />
           <ScrollView contentContainerStyle={styles.scrollContent}>
             <View style={styles.profileCircle}>
               <Text style={styles.profileInitial}>C</Text>

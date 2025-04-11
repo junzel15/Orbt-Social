@@ -42,6 +42,10 @@ type NavigationStrings = {
   ChangePassword:string
   PasswordUpdated:string
   EditProfile:string
+  NewMessage:string
+  NewGroup:string
+  Chat:string
+  EventChat:string
 };
 
 export const navigationStrings: NavigationStrings = {
@@ -88,4 +92,8 @@ export const navigationStrings: NavigationStrings = {
   FollowersFollowing:'FollowersFollowing',
   Followers:'Followers',
   Following:'Following',
+  NewMessage:'NewMessage',
+  NewGroup:'NewGroup',
+  Chat:'Chat',
+  EventChat:'EventChat',
 };

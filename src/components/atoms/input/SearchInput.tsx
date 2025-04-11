@@ -1,10 +1,10 @@
 import React, {memo} from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import {colors} from '../../../../constants/colors';
-import {fonts} from '../../../../constants/fonts';
-import {getScaledFontSize} from '../../../../constants/globalFunctions';
-import {globalStyleDefinitions} from '../../../../constants/globalStyleDefinitions';
+import { colors } from '../../../constants/colors';
+import { globalStyleDefinitions } from '../../../constants/globalStyleDefinitions';
+import { fonts } from '../../../constants/fonts';
+import { getScaledFontSize } from '../../../constants/globalFunctions';
 
 interface iProps {
   value: string;

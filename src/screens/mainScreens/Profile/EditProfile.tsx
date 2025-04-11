@@ -3,7 +3,6 @@ import React, {useRef, useState} from 'react';
 import {Platform, ScrollView, StyleSheet, Text, View} from 'react-native';
 import CustomInput from '../../../components/atoms/input/CustomInput';
 import PhoneInput from '../../../components/atoms/input/PhoneInput';
-import ProfileHeader from '../../../components/header/ProfileHeader';
 import CountrycodeModal from '../../../components/modal/CountrycodeModal';
 import LinearWrapperContainer from '../../../components/wrapper/LinearWrapperContainer';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
@@ -17,6 +16,7 @@ import {navigationStrings} from '../../../navigation/navigationStrings';
 import DOBBottomSheet, {DOBBottomSheetRef} from './components/DateBrithSelect';
 import GenderPicker from './components/GenderPicker';
 import ProfilePicturePicker from './components/ProfilePicturePicker';
+import CustomHeader from '../../../components/header/CustomHeader';
 
 const EditProfile = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -57,7 +57,7 @@ const EditProfile = () => {
     <WrapperContainer>
       <LinearWrapperContainer>
         <View style={commonStyles.flexFull}>
-          <ProfileHeader title="My Profile" />
+          <CustomHeader title="My Profile" />
           <ScrollView contentContainerStyle={styles.scrollContent}>
             <ProfilePicturePicker
               profilePic={profilePic}
