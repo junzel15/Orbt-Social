@@ -6,46 +6,49 @@ type NavigationStrings = {
   Confirmation: string;
   UserSetup: string;
   GenderSelection: string;
-  BirthdaySelection:string
-  AboutMe:string
-  InterestSelection:string
-  BottomNavigation:string
-  Home:string
-  MyBookings:string
-  Message:string
-  Profile:string
-  Dining:string
-  MatchingCrew:string
-  Bars:string
-  Experiences:string
-  LocationAllow:string
-  NotificationAllow:string
-  Login:string
-  ForgetPassword:string
-  VerifyScreen:string
-  NewPassword:string
-  SuccessfulPassword:string
-  DiningDetails:string
-  BarDetails:string
-  ExperienceDetails:string
-  GiveFeedback:string
-  SuccessfulFeedback:string
-  CancelBooking:string
-  CancelEvent:string
-  Notification:string
-  Location:string
-  Settings:string
-  FollowersFollowing:string
-  Followers:string
-  Following:string
-  Blocked:string
-  ChangePassword:string
-  PasswordUpdated:string
-  EditProfile:string
-  NewMessage:string
-  NewGroup:string
-  Chat:string
-  EventChat:string
+  BirthdaySelection: string;
+  AboutMe: string;
+  InterestSelection: string;
+  BottomNavigation: string;
+  MainApp: string; // ✅ Added this line
+  Home: string;
+  MyBookings: string;
+  Message: string;
+  Profile: string;
+  Dining: string;
+  MatchingCrew: string;
+  MatchingCrewBars: string;
+  MatchingCrewExp: string;
+  Bars: string;
+  Experiences: string;
+  LocationAllow: string;
+  NotificationAllow: string;
+  Login: string;
+  ForgetPassword: string;
+  VerifyScreen: string;
+  NewPassword: string;
+  SuccessfulPassword: string;
+  DiningDetails: string;
+  BarDetails: string;
+  ExperienceDetails: string;
+  GiveFeedback: string;
+  SuccessfulFeedback: string;
+  CancelBooking: string;
+  CancelEvent: string;
+  Notification: string;
+  Location: string;
+  Settings: string;
+  FollowersFollowing: string;
+  Followers: string;
+  Following: string;
+  Blocked: string;
+  ChangePassword: string;
+  PasswordUpdated: string;
+  EditProfile: string;
+  NewMessage: string;
+  NewGroup: string;
+  Chat: string;
+  EventChat: string;
 };
 
 export const navigationStrings: NavigationStrings = {
@@ -60,40 +63,43 @@ export const navigationStrings: NavigationStrings = {
   AboutMe: 'AboutMe',
   InterestSelection: 'InterestSelection',
   BottomNavigation: 'BottomNavigation',
+  MainApp: 'BottomNavigation', // ✅ Alias pointing to the actual main route
   Home: 'Home',
   MyBookings: 'MyBookings',
   Message: 'Message',
   Profile: 'Profile',
   Dining: 'Dining',
-  MatchingCrew:'MatchingCrew',
-  Bars:'Bars',
-  Experiences:'Experiences',
-  LocationAllow:'LocationAllow',
-  NotificationAllow:'NotificationAllow',
-  Login:'Login',
-  ForgetPassword:'ForgetPassword',
-  VerifyScreen:'VerifyScreen',
-  NewPassword:"NewPassword",
-  SuccessfulPassword:'SuccessfulPassword',
+  MatchingCrew: 'MatchingCrew',
+  MatchingCrewBars: 'MatchingCrewBars',
+  MatchingCrewExp: 'MatchingCrewExp',
+  Bars: 'Bars',
+  Experiences: 'Experiences',
+  LocationAllow: 'LocationAllow',
+  NotificationAllow: 'NotificationAllow',
+  Login: 'Login',
+  ForgetPassword: 'ForgetPassword',
+  VerifyScreen: 'VerifyScreen',
+  NewPassword: 'NewPassword',
+  SuccessfulPassword: 'SuccessfulPassword',
   DiningDetails: 'DiningDetails',
-  ExperienceDetails:"ExperienceDetails",
-  BarDetails:"BarDetails",
-  GiveFeedback:"GiveFeedback",
-  SuccessfulFeedback:"SuccessfulFeedback",
-  CancelBooking:'CancelBooking',
-  CancelEvent:'CancelEvent',
-  Notification:'Notification',
-  Location:'Location',
-  Settings:'Settings',
-  EditProfile:'EditProfile',
-  Blocked:'Blocked',
-  ChangePassword:'ChangePassword',
-  PasswordUpdated:'PasswordUpdated',
-  FollowersFollowing:'FollowersFollowing',
-  Followers:'Followers',
-  Following:'Following',
-  NewMessage:'NewMessage',
-  NewGroup:'NewGroup',
-  Chat:'Chat',
-  EventChat:'EventChat',
+  ExperienceDetails: 'ExperienceDetails',
+  BarDetails: 'BarDetails',
+  GiveFeedback: 'GiveFeedback',
+  SuccessfulFeedback: 'SuccessfulFeedback',
+  CancelBooking: 'CancelBooking',
+  CancelEvent: 'CancelEvent',
+  Notification: 'Notification',
+  Location: 'Location',
+  Settings: 'Settings',
+  EditProfile: 'EditProfile',
+  Blocked: 'Blocked',
+  ChangePassword: 'ChangePassword',
+  PasswordUpdated: 'PasswordUpdated',
+  FollowersFollowing: 'FollowersFollowing',
+  Followers: 'Followers',
+  Following: 'Following',
+  NewMessage: 'NewMessage',
+  NewGroup: 'NewGroup',
+  Chat: 'Chat',
+  EventChat: 'EventChat',
 };

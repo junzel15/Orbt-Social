@@ -8,21 +8,41 @@ import {fonts} from '../../../constants/fonts';
 import {getScaledFontSize} from '../../../constants/globalFunctions';
 import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
 import {navigationStrings} from '../../../navigation/navigationStrings';
+import {useSelector} from 'react-redux';
+
+import {Auth} from 'aws-amplify';
+import axios from 'axios';
+import {RootState} from '../../../redux/store/state';
 
 const AboutMe = () => {
   const navigation = useNavigation<NavigationProp<any>>();
-
   const [about, setAbout] = useState<string>('');
+  const {uuid} = useSelector((state: RootState) => state.userSetup);
 
-  const onNext = () => {
-    navigation.navigate(navigationStrings.InterestSelection);
+  const onNext = async () => {
+    try {
+      const session = await Auth.currentSession();
+      const token = session.getIdToken().getJwtToken();
+
+      await axios.put(
+        `https://du3kce1sli.execute-api.us-east-1.amazonaws.com/default/profile/${uuid}`,
+        {bio: about},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      navigation.navigate(navigationStrings.InterestSelection);
+    } catch (err) {
+      console.error('❌ Failed to save bio:', err);
+    }
   };
 
   return (
     <WrapperContainer>
-      <UserSetupContainer
-        progress={60}
-        onNextPress={onNext}>
+      <UserSetupContainer progress={60} onNextPress={onNext}>
         <Text style={styles.titleText}>About Me</Text>
         <TextInput
           value={about}

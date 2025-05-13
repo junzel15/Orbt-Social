@@ -9,10 +9,15 @@ import {BookindDate} from './data';
 
 interface iProps {
   selectedDate: string;
-  setSelectedDate: (text: string) => void;
+  setSelectedDate: (date: string) => void;
+  setSelectedTime: (time: string) => void;
 }
 
-const DateSelectionList = ({selectedDate, setSelectedDate}: iProps) => {
+const DateSelectionList = ({
+  selectedDate,
+  setSelectedDate,
+  setSelectedTime,
+}: iProps) => {
   const [isDropdownVisible, setDropdownVisible] = useState<boolean>(false);
 
   const onDropdownToggle = () => {
@@ -20,25 +25,27 @@ const DateSelectionList = ({selectedDate, setSelectedDate}: iProps) => {
   };
 
   const renderItem = useCallback(
-    ({item, index}: any) => {
+    ({item}: any) => {
       const onItemSelect = () => {
         setSelectedDate(item.value);
+        setSelectedTime(item.time);
         setDropdownVisible(false);
       };
+
       return (
         <TouchableOpacity
           style={[
             styles.dropdownItem,
-            selectedDate == item.value && styles.selectedItem,
+            selectedDate === item.value && styles.selectedItem,
           ]}
           activeOpacity={1}
           onPress={onItemSelect}>
           <Text style={styles.dropdownText}>{item.label}</Text>
-          <Text style={styles.subText}>10:00 AM</Text>
+          <Text style={styles.subText}>{item.time}</Text>
         </TouchableOpacity>
       );
     },
-    [selectedDate],
+    [selectedDate, setSelectedDate, setSelectedTime],
   );
 
   return (

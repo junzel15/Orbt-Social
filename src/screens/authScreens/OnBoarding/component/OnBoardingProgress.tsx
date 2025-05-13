@@ -62,7 +62,7 @@ const onBoardingProgress = ({item, activeIndex, setActiveIndex}: iProps) => {
   };
 
   const onLogin = () => {
-    navigation.navigate(navigationStrings.Login);
+    navigation.navigate(navigationStrings.Login)
   };
 
   return (
@@ -141,14 +141,14 @@ const styles = StyleSheet.create({
     height: windowHeight,
   },
   image: {
-    marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin,
+    marginTop: 2 * globalStyleDefinitions.mt_15.marginTop,
     flex: 1,
     alignSelf: 'center',
   },
   bottomWrapper: {
     paddingHorizontal: globalStyleDefinitions.screenPadding.padding,
     justifyContent: 'flex-end',
-    paddingBottom: Platform.OS == 'ios' ? 70 : 0,
+    paddingBottom: Platform.OS == 'ios' ? 70 : 10,
   },
   headerText: {
     fontSize: getScaledFontSize(28),
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.fontRegular,
     color: colors.white,
     textAlign: 'center',
-    marginTop: 0.5 * globalStyleDefinitions.commonItemMargin.margin,
+    marginTop: 0.5 * globalStyleDefinitions.mt_15.marginTop,
   },
   innerWrapper: {
     zIndex: 1,
@@ -170,10 +170,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: globalStyleDefinitions.commonItemMargin.margin,
-    paddingBottom: Platform.select({
-      ios: 2 * globalStyleDefinitions.commonItemMargin.margin,
-    }),
+    marginTop: globalStyleDefinitions.mt_15.marginTop,
+    paddingBottom: 2 * globalStyleDefinitions.mt_15.marginTop,
     marginHorizontal: globalStyleDefinitions.screenPadding.padding,
   },
   subText: {
@@ -209,9 +207,9 @@ const styles = StyleSheet.create({
     fontSize: getScaledFontSize(14),
     fontFamily: fonts.fontRegular,
     color: colors.white,
-    marginBottom: 2 * globalStyleDefinitions.commonItemMargin.margin,
+    marginBottom: 2 * globalStyleDefinitions.mt_15.marginTop,
     textAlign: 'center',
-    marginTop: globalStyleDefinitions.commonItemMargin.margin,
+    marginTop: globalStyleDefinitions.mt_15.marginTop,
   },
   loginText: {
     fontSize: getScaledFontSize(14),
@@ -219,9 +217,7 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   buttonWrapper: {
-    paddingBottom: Platform.select({
-      ios: 2 * globalStyleDefinitions.commonItemMargin.margin,
-    }),
-    marginTop: globalStyleDefinitions.commonItemMargin.margin,
+    paddingBottom: 2 * globalStyleDefinitions.mt_15.marginTop,
+    marginTop: globalStyleDefinitions.mt_15.marginTop,
   },
 });

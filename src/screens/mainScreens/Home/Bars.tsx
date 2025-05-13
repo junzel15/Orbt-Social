@@ -1,5 +1,5 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import React, {useState} from 'react';
 import {
   ImageBackground,
   Platform,
@@ -9,58 +9,93 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useSelector} from 'react-redux';
 import CommonButton from '../../../components/atoms/button/CommonButton';
 import CustomImage from '../../../components/atoms/image/CustomImage';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
-import { colors } from '../../../constants/colors';
+import {colors} from '../../../constants/colors';
 import commonStyles from '../../../constants/commonStyles';
-import { fonts } from '../../../constants/fonts';
-import { getScaledFontSize } from '../../../constants/globalFunctions';
-import { globalStyleDefinitions } from '../../../constants/globalStyleDefinitions';
-import { iconPath } from '../../../constants/iconPath';
-import { imagePath } from '../../../constants/imagePath';
+import {fonts} from '../../../constants/fonts';
+import {getScaledFontSize} from '../../../constants/globalFunctions';
+import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
+import {iconPath} from '../../../constants/iconPath';
+import {imagePath} from '../../../constants/imagePath';
 import DateSelectionList from './components/DateSelectionList';
 import ExpandableCard from './components/ExpandableCard';
-import { navigationStrings } from '../../../navigation/navigationStrings';
-import DiningOptions from './components/DiningOptions';
+import {navigationStrings} from '../../../navigation/navigationStrings';
+import axios from 'axios';
+import {selectAccessToken} from '../../../redux/slices/authState';
+import {selectUserUuid} from '../../../redux/slices/userSetupSlice';
 
 const Bars = () => {
   const navigation = useNavigation<NavigationProp<any>>();
 
-  const [selected, setSelected] = useState<string>('Coffee');
   const [selectedDate, setSelectedDate] = useState<string>('');
+  const [selectedTime, setSelectedTime] = useState<string>('');
+  const accessToken = useSelector(selectAccessToken);
+  const uuid = useSelector(selectUserUuid);
 
   const onBackPress = () => {
     navigation.goBack();
   };
 
-  const searchCrew = () => {
-    navigation.navigate(navigationStrings.MatchingCrew);
-  }
+  const handlebooking = async () => {
+    try {
+      const payload = {
+        booking_date: selectedDate,
+        booking_time: selectedTime,
+        location: 'Boston',
+        booking_type: 'Bars',
+        uuid,
+      };
 
-  const onSelect = (itemlable: any) => {
-    setSelected(itemlable);
-    setSelectedDate('');
-  }
+      const res = await axios.post(
+        'https://v71rq9c35d.execute-api.us-east-1.amazonaws.com/default/booking',
+        payload,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      );
+
+      if (res.status === 201) {
+        navigation.navigate(navigationStrings.MatchingCrewBars, {});
+      } else {
+        console.error('❌ Booking failed:', res.status, res.data);
+      }
+    } catch (err: any) {
+      console.error('🚨 Axios error posting booking:', err.message);
+      if (err.response) {
+        console.log('📛 Error response status:', err.response.status);
+        console.log('📛 Error response data:', err.response.data);
+      }
+    }
+  };
 
   return (
     <WrapperContainer>
       <ImageBackground
         source={imagePath.linearBackground}
         style={commonStyles.fullInnerContainer}>
-        <ScrollView style={commonStyles.flexFull} showsVerticalScrollIndicator={false} nestedScrollEnabled>
+        <ScrollView
+          style={commonStyles.flexFull}
+          showsVerticalScrollIndicator={false}
+          nestedScrollEnabled>
           <View style={styles.rowWrapper}>
-            <CustomImage url={imagePath.dining} height={44} width={44} />
+            <CustomImage url={imagePath.bar} height={44} width={44} />
             <Text style={styles.headerTitle}>Bars</Text>
             <TouchableOpacity activeOpacity={0.9} onPress={onBackPress}>
               <CustomImage url={iconPath.close} height={44} width={44} />
             </TouchableOpacity>
           </View>
-          <DiningOptions selected={selected} onSelect={onSelect} />
           <DateSelectionList
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
+            setSelectedTime={setSelectedTime}
           />
+
           <ExpandableCard
             header="BEFORE YOU BOOK"
             content={[
@@ -95,16 +130,16 @@ const Bars = () => {
             <CustomImage url={imagePath.event} height={80} width={80} />
             <Text style={styles.subText}>
               Event details—like the restaurant, table, and hints about your
-              group—will be revealed{'  '}
+              group—will be revealed{' '}
               <Text style={styles.highlightText}>1 day</Text> before.
             </Text>
           </ImageBackground>
         </ScrollView>
         <CommonButton
           title="Book Now"
+          disable={!selectedDate?.trim() || !selectedTime?.trim()}
+          onPress={handlebooking}
           customStyles={styles.buttonContainer}
-          disable={!selectedDate?.trim()}
-          onPress={searchCrew}
         />
       </ImageBackground>
     </WrapperContainer>
@@ -127,54 +162,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.soraRegular,
     flex: 1,
   },
-  listWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: globalStyleDefinitions.gap.gap,
-    marginTop: 2 * globalStyleDefinitions.commonItemMargin.margin,
-  },
-  listContainer: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: colors.white,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 10,
-    borderRadius: 2 * globalStyleDefinitions.br_10.borderRadius,
-  },
-  selectedItem: {
-    backgroundColor: colors.white,
-  },
-  listText: {
-    color: colors.white,
-    fontFamily: fonts.fontSemiBold,
-    fontSize: getScaledFontSize(14),
-  },
-  selectedText: {
-    color: colors.black,
-  },
-  dropdownWrapper: {
-    height: 50,
-    borderColor: colors.white,
-    borderWidth: 1,
-    borderRadius: globalStyleDefinitions.br_10.borderRadius,
-    paddingHorizontal: globalStyleDefinitions.cardInnerPadding.padding,
-  },
-  dropdownPlaceholder: {
-    color: colors.white,
-    fontFamily: fonts.fontRegular,
-    fontSize: getScaledFontSize(14),
-  },
-  dropdownText: {
-    color: colors.white,
-    fontFamily: fonts.fontSemiBold,
-    fontSize: getScaledFontSize(14),
-  },
-  dropdownContainer: {
-    backgroundColor: colors.primary,
-    borderRadius: globalStyleDefinitions.br_10.borderRadius,
-  },
-
   buttonContainer: {
     marginBottom: globalStyleDefinitions.commonItemMargin.margin,
   },

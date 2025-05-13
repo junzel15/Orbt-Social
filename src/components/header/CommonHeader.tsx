@@ -10,32 +10,29 @@ import {globalStyleDefinitions} from '../../constants/globalStyleDefinitions';
 interface iProps {
   headerTitle?: string;
   showBackIcon?: boolean;
-  onIconPress?: () => void;
+  onPress?: () => void;
 }
 
-const CommonHeader = ({headerTitle, showBackIcon, onIconPress}: iProps) => {
+const CommonHeader = ({headerTitle, showBackIcon, onPress}: iProps) => {
   const navigation = useNavigation();
 
-  function onPress() {
-    if (onIconPress) {
-      onIconPress();
+  const handlePress = () => {
+    if (onPress) {
+      onPress();
+    } else if (navigation.canGoBack()) {
+      navigation.goBack();
     } else {
-      if (navigation.canGoBack()) {
-        navigation.goBack();
-      } else {
-        console.log('here');
-        //todo
-      }
+      console.log('❌ Cannot go back and no fallback navigation provided');
     }
-  }
+  };
 
   return (
     <View style={styles.fullContainer}>
-      {showBackIcon ? (
-        <AntDesign name="arrowleft" style={styles.icon} onPress={onPress} />
-      ) : (
-        <AntDesign name="close" style={styles.icon} onPress={onPress} />
-      )}
+      <AntDesign
+        name={showBackIcon ? 'arrowleft' : 'close'}
+        style={styles.icon}
+        onPress={handlePress}
+      />
       <Text style={styles.title}>{headerTitle}</Text>
     </View>
   );
@@ -47,7 +44,7 @@ const styles = StyleSheet.create({
   fullContainer: {
     marginTop: Platform.select({
       ios: 3 * globalStyleDefinitions.screenPadding.padding,
-      android:2.5*globalStyleDefinitions.screenPadding.padding
+      android: 2.5 * globalStyleDefinitions.screenPadding.padding,
     }),
     width: windowWidth,
     alignItems: 'center',
@@ -61,7 +58,6 @@ const styles = StyleSheet.create({
     color: colors.white,
   },
   title: {
-    // fontFamily: fonts.fontHeading,
     color: colors.white,
     fontSize: getScaledFontSize(20),
     alignSelf: 'flex-end',

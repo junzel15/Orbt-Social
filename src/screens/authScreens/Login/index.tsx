@@ -18,6 +18,9 @@ import {iconPath} from '../../../constants/iconPath';
 import {imagePath} from '../../../constants/imagePath';
 import {navigationStrings} from '../../../navigation/navigationStrings';
 import {setAccessToken} from '../../../redux/slices/authState';
+import {Auth} from 'aws-amplify';
+import {setUuid} from '../../../redux/slices/userSetupSlice';
+import axios from 'axios';
 
 const Login = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -25,12 +28,45 @@ const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isPasswordInvalid, setIsPasswordInvalid] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleLogin = async () => {
-    if (password == '1234') {
+    if (isLoading) return;
+
+    try {
+      setIsLoading(true);
+      const userData = await Auth.signIn(email, password);
+
+      if (userData.challengeName === 'NEW_PASSWORD_REQUIRED') {
+        console.warn('⚠️ User must set a new password');
+      }
+
+      const session = await Auth.currentSession();
+      const idToken = session.getIdToken().getJwtToken();
+      const uuid = userData.attributes.sub;
+
+      dispatch(setAccessToken(idToken));
+      dispatch(setUuid(uuid));
+
+      await axios.get(
+        `https://du3kce1sli.execute-api.us-east-1.amazonaws.com/default/profile/${uuid}`,
+        {
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        },
+      );
+    } catch (err: any) {
+      if (err.code === 'UserNotConfirmedException') {
+        await Auth.resendSignUp(email);
+        navigation.navigate(navigationStrings.PhoneVerify, {email});
+      } else {
+        console.error('❌ Login failed:', err.message);
+      }
+
       setIsPasswordInvalid(true);
-    } else {
-      dispatch(setAccessToken('accessToken'));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -81,10 +117,12 @@ const Login = () => {
             <CommonButton
               title="Login"
               onPress={handleLogin}
+              disable={isLoading}
               customStyles={{
                 marginTop: globalStyleDefinitions.cardInnerPadding.padding,
               }}
             />
+
             <Text style={styles.loginTitleText}>
               Forgot your password? {'  '}
               <Text

@@ -7,6 +7,8 @@ import Bars from '../screens/mainScreens/Home/Bars';
 import Dining from '../screens/mainScreens/Home/Dining';
 import Experiences from '../screens/mainScreens/Home/Experiences';
 import MatchingCrew from '../screens/mainScreens/Home/MatchingCrew';
+import MatchingCrewBars from '../screens/mainScreens/Home/MatchingCrew';
+import MatchingCrewExp from '../screens/mainScreens/Home/MatchingCrew';
 import BarDetails from '../screens/mainScreens/Home/bookingDetails/BarDetails';
 import BookingDiningDetails from '../screens/mainScreens/Home/bookingDetails/BookingDiningDetails';
 import ExperienceDetails from '../screens/mainScreens/Home/bookingDetails/ExperienceDetails';
@@ -25,6 +27,11 @@ import NewMessage from '../screens/mainScreens/Message/NewMessage';
 import NewGroup from '../screens/mainScreens/Message/NewGroup';
 import Chat from '../screens/mainScreens/Chat';
 import EventChat from '../screens/mainScreens/EventChat';
+import InterestSelection from '../screens/authScreens/UserSetup/InterestsSelection';
+import AboutMe from '../screens/authScreens/UserSetup/AboutMe';
+import BirthdaySelection from '../screens/authScreens/UserSetup/BirthdaySelection';
+import GenderSelection from '../screens/authScreens/UserSetup/GenderSelection';
+import UserSetup from '../screens/authScreens/UserSetup';
 
 const MainStack = createNativeStackNavigator();
 
@@ -65,6 +72,16 @@ const MainNavigation = () => {
       <MainStack.Screen
         name={navigationStrings.MatchingCrew}
         component={MatchingCrew}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.MatchingCrewBars}
+        component={MatchingCrewBars}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.MatchingCrewExp}
+        component={MatchingCrewExp}
         options={options}
       />
       <MainStack.Screen
@@ -160,6 +177,31 @@ const MainNavigation = () => {
       <MainStack.Screen
         name={navigationStrings.EventChat}
         component={EventChat}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.UserSetup}
+        component={UserSetup}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.GenderSelection}
+        component={GenderSelection}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.BirthdaySelection}
+        component={BirthdaySelection}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.AboutMe}
+        component={AboutMe}
+        options={options}
+      />
+      <MainStack.Screen
+        name={navigationStrings.InterestSelection}
+        component={InterestSelection}
         options={options}
       />
     </MainStack.Navigator>

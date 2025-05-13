@@ -18,7 +18,7 @@ const Confirmation = () => {
   const navigation = useNavigation<NavigationProp<any>>();
 
   const onGetStarted = () => {
-    navigation.navigate(navigationStrings.UserSetup);
+    navigation.navigate(navigationStrings.Login);
   };
 
   return (

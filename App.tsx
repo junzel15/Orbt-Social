@@ -1,3 +1,8 @@
+import 'react-native-url-polyfill/auto';
+import 'react-native-get-random-values';
+
+import './src/aws/aws-config';
+
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import {StatusBar} from 'react-native';

@@ -1,5 +1,5 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import CustomHeader from '../../../components/header/CustomHeader';
 import LinearWrapperContainer from '../../../components/wrapper/LinearWrapperContainer';
@@ -10,9 +10,31 @@ import {fonts} from '../../../constants/fonts';
 import {getScaledFontSize} from '../../../constants/globalFunctions';
 import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
 import {navigationStrings} from '../../../navigation/navigationStrings';
+import {useSelector} from 'react-redux';
+import {selectUserUuid} from '../../../redux/slices/userSetupSlice';
+import axios from 'axios';
 
 const Profile = () => {
   const navigation = useNavigation<NavigationProp<any>>();
+  const uuid = useSelector(selectUserUuid);
+  const [profile, setProfile] = useState<any>({});
+
+  useEffect(() => {
+    if (!uuid) return;
+
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(
+          `https://du3kce1sli.execute-api.us-east-1.amazonaws.com/default/profile/${uuid}`,
+        );
+        setProfile(res.data);
+      } catch (err: any) {
+        console.error('❌ Failed to fetch profile:', err.message);
+      }
+    };
+
+    fetchProfile();
+  }, [uuid]);
 
   const onFollowers = () => {
     navigation.navigate(navigationStrings.FollowersFollowing, {
@@ -41,46 +63,41 @@ const Profile = () => {
           />
           <ScrollView contentContainerStyle={styles.scrollContent}>
             <View style={styles.profileCircle}>
-              <Text style={styles.profileInitial}>C</Text>
+              <Text style={styles.profileInitial}>
+                {profile.name ? profile.name.charAt(0) : 'U'}
+              </Text>
             </View>
 
-            <Text style={styles.name}>Constante Agpaoa</Text>
-            <Text style={styles.location}>Makati City, Philippines</Text>
+            <Text style={styles.name}>{profile.name || 'Unknown User'}</Text>
+            <Text style={styles.location}>
+              {profile.location || 'Unknown Location'}
+            </Text>
 
             <View style={styles.statsRow}>
               <Text
                 style={styles.statsText}
                 onPress={onFollowers}
                 suppressHighlighting>
-                290{'\n'}
+                290{''}
                 <Text style={styles.statsLabel}>Followers</Text>
               </Text>
               <Text
                 style={styles.statsText}
                 onPress={onFollowing}
                 suppressHighlighting>
-                200{'\n'}
+                200{''}
                 <Text style={styles.statsLabel}>Following</Text>
               </Text>
             </View>
 
             <Text style={styles.sectionTitle}>My Bio</Text>
             <Text style={styles.bioText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad sit amet.
+              {profile.bio || 'No bio provided.'}
             </Text>
 
             <Text style={styles.sectionTitle}>My Interests</Text>
             <View style={styles.interestsContainer}>
-              {[
-                'Online Games',
-                'Concert',
-                'R&B Music',
-                'Art',
-                'Movies',
-                'Coffee',
-              ].map((item, index) => (
+              {(profile.interests || []).map((item: string, index: number) => (
                 <View
                   key={index}
                   style={[

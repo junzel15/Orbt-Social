@@ -1,232 +1,278 @@
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native'
-import React from 'react'
-import CommonHeader from '../../../../components/header/CommonHeader'
-import LinearGradient from 'react-native-linear-gradient'
+import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import CommonHeader from '../../../../components/header/CommonHeader';
+import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
-import { getScaledFontSize } from '../../../../constants/globalFunctions'
-import { colors } from '../../../../constants/colors'
-import { fonts } from '../../../../constants/fonts'
-import { globalStyleDefinitions } from '../../../../constants/globalStyleDefinitions'
-import { imagePath } from '../../../../constants/imagePath'
-import TimerComponent from '../components/TimerComponent'
+import {getScaledFontSize} from '../../../../constants/globalFunctions';
+import {colors} from '../../../../constants/colors';
+import {fonts} from '../../../../constants/fonts';
+import {globalStyleDefinitions} from '../../../../constants/globalStyleDefinitions';
+import {imagePath} from '../../../../constants/imagePath';
+import TimerComponent from '../components/TimerComponent';
 import CommonButton from '../../../../components/atoms/button/CommonButton';
-import { windowHeight, windowWidth } from '../../../../constants/globalConstants';
+import {windowHeight, windowWidth} from '../../../../constants/globalConstants';
 import PricePeopleComponent from '../components/PricePeopleComponent';
+import {useSelector} from 'react-redux';
+import {selectUserUuid} from '../../../../redux/slices/userSetupSlice';
+import axios from 'axios';
 
 const ExperienceDetails = () => {
-    return (
-        <LinearGradient colors={['#4C0BCE', '#180028', '#000000']}
-            locations={[0.0, 0.5, 0.8]} // Blue ends early
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.gradient}
-        >
+  const uuid = useSelector(selectUserUuid);
+  const [groupData, setGroupData] = useState<any>(null);
 
-            <CommonHeader showBackIcon={true} headerTitle='ORBT-BR0001' />
-            <ScrollView style={styles.container}>
-                <View >
-                    <View style={styles.mainCard}>
-                        <View style={{}}>
-                            <Text style={styles.title}>Experience</Text>
+  useEffect(() => {
+    if (!uuid) return;
 
-                            <View style={styles.infoRow}>
-                                <Icon name="calendar-outline" size={24} color="#fff" />
-                                <Text style={styles.infoText}>Friday, March 15, 2024{'\n'}10:30 AM</Text>
-                            </View>
+    const fetchGroupDetails = async () => {
+      try {
+        const res = await axios.get(
+          'https://oo2a9lev9d.execute-api.us-east-1.amazonaws.com/default/group',
+          {
+            params: {uuid},
+          },
+        );
+        setGroupData(res.data);
+      } catch (err: any) {
+        console.error('❌ Failed to fetch group data:', err);
+      }
+    };
 
-                            <View style={styles.infoRow}>
-                                <Icon name="location-outline" size={24} color="#fff" />
-                                <Text style={[styles.infoText, { textDecorationLine: 'underline' }]}>Mancini's Table</Text>
-                            </View>
-                            <View style={[styles.infoRow, { marginTop: globalStyleDefinitions.mt_10.marginTop }]}>
-                                <Icon name="heart-outline" size={24} color="#fff" />
-                                <View>
-                                    <Text style={styles.infoText}>Hosted By: </Text>
-                                    <Text style={[styles.infoText, { textDecorationLine: 'underline' }]}>Mancini's Table</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <Image
-                            source={imagePath.experienceImage}
-                            style={styles.cupImage}
-                        />
+    fetchGroupDetails();
+  }, [uuid]);
 
-                    </View>
-                    <View style={[ { marginTop: globalStyleDefinitions.mt_10.marginTop }]}>
-                        <Text style={{color:colors.white}}>Overview: </Text>
-                        <Text style={{color:colors.white,marginTop: globalStyleDefinitions.mt_10.marginTop}}>Get ready to roll! In this FREE Pasta Perfection Workshop, Chef Lila Mancini will guide you through the art of crafting fresh, handmade pasta. You’ll learn pro tips, try your hand at shaping dough, and enjoy the fruits of your labor with a complimentary tasting</Text>
-                    </View>
-                    <View style={[ { marginTop: globalStyleDefinitions.mt_10.marginTop }]}>
-                        <Text style={{color:colors.white}}>Inclusions: </Text>
-                        <Text style={{color:colors.white,marginTop: globalStyleDefinitions.mt_10.marginTop}}>Get ready to roll! In this FREE Pasta Perfection Workshop, Chef Lila Mancini will guide you through the art of crafting fresh, handmade pasta. You’ll learn pro tips, try your hand at shaping dough, and enjoy the fruits of your labor with a complimentary tasting</Text>
-                    </View>
-                    <View style={[styles.infoRow, { marginTop: globalStyleDefinitions.mt_10.marginTop }]}>
-                        <Icon name="heart-outline" size={24} color="#fff" />
-                        <Text style={styles.infoText}>Common Interests: </Text>
-                    </View>
-                    <View style={styles.tags}>
-                        {[
-                            'Technology',
-                            'Politics',
-                            'Healthcare',
-                            'Healthcare',
-                            'Academia & Research',
-                        ].map((item, i) => (
-                            <View key={i} style={styles.tag}>
-                                <Text style={styles.tagText}>{item}</Text>
-                            </View>
-                        ))}
-                    </View>
-                    <View style={{ borderTopWidth: 0.5, borderColor: colors.white, marginTop: globalStyleDefinitions.mt_15.marginTop }} />
-                    <View style={styles.langRow}>
+  return (
+    <LinearGradient
+      colors={['#4C0BCE', '#180028', '#000000']}
+      locations={[0.0, 0.5, 0.8]}
+      start={{x: 0, y: 0}}
+      end={{x: 1, y: 1}}
+      style={styles.gradient}>
+      <CommonHeader showBackIcon={true} headerTitle="Experience Details" />
+      <ScrollView style={styles.container}>
+        <View style={styles.mainCard}>
+          <View>
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>
+                {groupData?.booking_type?.toUpperCase()}
+              </Text>
+            </View>
+            <Text style={styles.title}>Experience</Text>
 
-                       <View>
-                                               <View  style={styles.infoRow}>
-                                                   <Feather name={"globe"} size={13} color={colors.white} />
-                                                    <Text style={[styles.subLabel,{marginLeft:10}]}>Nationality:</Text>
-                                                    </View>
-                                                   <View>
-                                                  
-                                                   <Text style={styles.whiteText}>🇺🇸 United States of America{'\n'}🇵🇭 Philippines</Text>
-                                                
-                                                   </View>
-                                               </View>
-                        <View >
-                            <Text style={styles.subLabel}>Language:</Text>
-                            <Text style={styles.whiteText}>English, Filipino</Text>
-                        </View>
-                    </View>
-                    <View style={{ borderTopWidth: 0.5, borderColor: colors.white, marginTop: globalStyleDefinitions.mt_15.marginTop }} />
-                    <View >
-                        <Text style={styles.sectionLabel}>Zodiac Signs:</Text>
-                        <Text style={styles.zodiac}>
-                            ♈ Aries   ♉ Taurus   ♊ Gemini   ♋ Cancer
-                        </Text>
-                    </View>
-                    <View style={{ borderTopWidth: 0.5, borderColor: colors.white, marginTop: globalStyleDefinitions.mt_15.marginTop }} />
-                    <TimerComponent />
-                    <PricePeopleComponent showPrice={true} />
-                    <View style={styles.buttonRow}>
-                        <CommonButton
-                            title='cancel Event'
-                            customStyles={{ width: windowWidth / 2.5, marginRight: 10, backgroundColor: colors.white }}
-                            customTextStyles={{ color: colors.black }}
-                        />
-                        <CommonButton
-                            title='View E-Ticket'
-                            customStyles={{ width: windowWidth / 2.5, }}
-                        />
-                    </View>
+            <View style={styles.infoRow}>
+              <Icon name="calendar-outline" size={24} color="#fff" />
+              <Text style={styles.infoText}>
+                {groupData?.booking_date}
+                {'\n'}
+                {groupData?.booking_time}
+              </Text>
+            </View>
 
-                </View>
-            </ScrollView>
-        </LinearGradient>
-    )
-}
+            <View style={styles.infoRow}>
+              <Icon name="location-outline" size={24} color="#fff" />
+              <Text
+                style={[styles.infoText, {textDecorationLine: 'underline'}]}>
+                {groupData?.venue}
+              </Text>
+            </View>
 
-export default ExperienceDetails
+            <View style={[styles.infoRow, {marginTop: 10}]}>
+              <Icon name="heart-outline" size={24} color="#fff" />
+              <View>
+                <Text style={styles.infoText}>Hosted By:</Text>
+                <Text
+                  style={[styles.infoText, {textDecorationLine: 'underline'}]}>
+                  {groupData?.host || 'Unknown'}
+                </Text>
+              </View>
+            </View>
+          </View>
 
+          <Image source={imagePath.experienceImage} style={styles.cupImage} />
+        </View>
+
+        <View style={{marginTop: 10}}>
+          <Text style={{color: colors.white}}>Overview:</Text>
+          <Text style={styles.whiteText}>
+            {groupData?.overview ||
+              'Get ready to roll! In this FREE Pasta Perfection Workshop, Chef Lila Mancini will guide you through the art of crafting fresh, handmade pasta. You’ll learn pro tips, try your hand at shaping dough, and enjoy the fruits of your labor with a complimentary tasting.'}
+          </Text>
+        </View>
+
+        <View style={{marginTop: 10}}>
+          <Text style={{color: colors.white}}>Inclusions:</Text>
+          <Text style={styles.whiteText}>
+            {groupData?.inclusions ||
+              'All tools and ingredients provided. Includes tasting session at the end.'}
+          </Text>
+        </View>
+
+        <View style={[styles.infoRow, {marginTop: 10}]}>
+          <Icon name="heart-outline" size={24} color="#fff" />
+          <Text style={styles.infoText}>Common Interests: </Text>
+        </View>
+
+        <View style={styles.tags}>
+          {(groupData?.comm_interests || []).map((item: string, i: number) => (
+            <View key={i} style={styles.tag}>
+              <Text style={styles.tagText}>{item}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.separator} />
+
+        <View style={styles.langRow}>
+          <View>
+            <View style={styles.infoRow}>
+              <Feather name="globe" size={13} color={colors.white} />
+              <Text style={[styles.subLabel, {marginLeft: 10}]}>
+                Nationality:
+              </Text>
+            </View>
+            <Text style={styles.whiteText}>
+              {(groupData?.nationalities || []).join('\n')}
+            </Text>
+          </View>
+          <View>
+            <Text style={styles.subLabel}>Language:</Text>
+            <Text style={styles.whiteText}>English, Filipino</Text>
+          </View>
+        </View>
+
+        <View style={styles.separator} />
+
+        <View>
+          <Text style={styles.sectionLabel}>Zodiac Signs:</Text>
+          <Text style={styles.zodiac}>
+            ♈ Aries ♉ Taurus ♊ Gemini ♋ Cancer
+          </Text>
+        </View>
+
+        <View style={styles.separator} />
+        <TimerComponent />
+        <PricePeopleComponent showPrice={true} />
+
+        <View style={styles.buttonRow}>
+          <CommonButton
+            title="Cancel Event"
+            // eslint-disable-next-line react-native/no-inline-styles
+            customStyles={{
+              width: windowWidth / 2.5,
+              marginRight: 10,
+              backgroundColor: colors.white,
+            }}
+            customTextStyles={{color: colors.black}}
+          />
+          <CommonButton
+            title="View E-Ticket"
+            customStyles={{width: windowWidth / 2.5}}
+          />
+        </View>
+      </ScrollView>
+    </LinearGradient>
+  );
+};
+
+export default ExperienceDetails;
 
 const styles = StyleSheet.create({
-    gradient: {
-        flex: 1,
-    },
-    mainCard: {
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    container: {
-        padding: globalStyleDefinitions.screenPadding.padding,
-        flex: 1
-    },
-    sectionLabel: {
-        color: colors.white,
-        marginTop: 2 * globalStyleDefinitions.mt_10.marginTop,
-        marginBottom: globalStyleDefinitions.mb_10.marginBottom,
-        fontFamily:fonts.fontMedium,
-        fontSize: getScaledFontSize(14),
-    },
-    zodiac: {
-        fontFamily:fonts.fontRegular,
-        color:colors.white,
-        fontSize: getScaledFontSize(12),
-        marginBottom: 2*globalStyleDefinitions.mb_10.marginBottom,
-    },
-    badge: {
-        alignSelf: 'flex-start',
-        backgroundColor: colors.primary,
-        borderColor:colors.darkPurple,
-        borderWidth:2,
-        borderRadius: 2 * globalStyleDefinitions.br_10.borderRadius,
-        paddingHorizontal: 12,
-        paddingVertical: 4,
-        marginBottom: globalStyleDefinitions.mb_10.marginBottom,
-    },
-    badgeText: {
-        color: colors.white,
-        fontSize: getScaledFontSize(8),
-        fontFamily: fonts.fontSemiBold
-    },
-    title: {
-        color: colors.white,
-        fontSize: getScaledFontSize(24),
-        fontFamily: fonts.fontRegular,
-        marginBottom: globalStyleDefinitions.mb_10.marginBottom,
-    },
-    infoRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: globalStyleDefinitions.mb_10.marginBottom,
-    },
-    infoText: {
-        color: colors.white,
-        marginLeft: 10,
-        fontSize: getScaledFontSize(14),
-    },
-    cupImage: {
-        width: 120,
-        height: 155,
-    },
-    tags: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        gap: globalStyleDefinitions.gap.gap,
-        marginTop: globalStyleDefinitions.mt_10.marginTop
-    },
-    tag: {
-        paddingVertical: 5,
-        paddingHorizontal: 10,
-        borderRadius: 2*globalStyleDefinitions.br_10.borderRadius,
-        borderWidth: 1,
-        borderColor: colors.white,
-        marginRight: 4,
-    },
-    tagText: {
-        color: colors.white,
-        fontSize: getScaledFontSize(10),
-    },
-    langRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 2 * globalStyleDefinitions.mt_10.marginTop,
-    },
-    subLabel: {
-        color: colors.white,
-        fontSize: getScaledFontSize(14),
-        marginBottom: 4,
-    },
-    whiteText: {
-        color:colors.white,
-        fontSize: getScaledFontSize(12),
-        // marginTop: globalStyleDefinitions.mt_15.marginTop
-    },
-    buttonRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: windowHeight * 0.1,
-        marginTop:globalStyleDefinitions.mt_10.marginTop
-    },
-
-
+  gradient: {flex: 1},
+  mainCard: {flexDirection: 'row', justifyContent: 'space-between'},
+  container: {
+    padding: globalStyleDefinitions.screenPadding.padding,
+    flex: 1,
+  },
+  badge: {
+    alignSelf: 'flex-start',
+    backgroundColor: colors.primary,
+    borderColor: colors.darkPurple,
+    borderWidth: 2,
+    borderRadius: 20,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    marginBottom: 8,
+  },
+  badgeText: {
+    color: colors.white,
+    fontSize: getScaledFontSize(8),
+    fontFamily: fonts.fontSemiBold,
+  },
+  title: {
+    color: colors.white,
+    fontSize: getScaledFontSize(24),
+    fontFamily: fonts.fontRegular,
+    marginBottom: 10,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  infoText: {
+    color: colors.white,
+    marginLeft: 10,
+    fontSize: getScaledFontSize(14),
+  },
+  cupImage: {
+    width: 120,
+    height: 155,
+  },
+  tags: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+    marginTop: 10,
+  },
+  tag: {
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: colors.white,
+    marginRight: 4,
+  },
+  tagText: {
+    color: colors.white,
+    fontSize: getScaledFontSize(10),
+  },
+  langRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  subLabel: {
+    color: colors.white,
+    fontSize: getScaledFontSize(14),
+    marginBottom: 4,
+  },
+  whiteText: {
+    color: colors.white,
+    fontSize: getScaledFontSize(12),
+    marginTop: 6,
+  },
+  sectionLabel: {
+    color: colors.white,
+    marginTop: 20,
+    marginBottom: 10,
+    fontFamily: fonts.fontMedium,
+    fontSize: getScaledFontSize(14),
+  },
+  zodiac: {
+    fontFamily: fonts.fontRegular,
+    color: colors.white,
+    fontSize: getScaledFontSize(12),
+    marginBottom: 20,
+  },
+  separator: {
+    borderTopWidth: 0.5,
+    borderColor: colors.white,
+    marginTop: 15,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: windowHeight * 0.1,
+    marginTop: 10,
+  },
 });

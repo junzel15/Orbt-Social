@@ -12,21 +12,43 @@ import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions'
 import {iconPath} from '../../../constants/iconPath';
 import {navigationStrings} from '../../../navigation/navigationStrings';
 import CalendarCard from './components/CalendarCard';
+import {useSelector} from 'react-redux';
+import {Auth} from 'aws-amplify';
+import axios from 'axios';
+import {RootState} from '../../../redux/store/state';
 
 const BirthdaySelection = () => {
   const navigation = useNavigation<NavigationProp<any>>();
-
   const [date, setDate] = useState<Date>(new Date());
+  const {uuid} = useSelector((state: RootState) => state.userSetup);
 
-  const onNext = () => {
-    navigation.navigate(navigationStrings.AboutMe);
+  const onNext = async () => {
+    const birthdate = date.toISOString().split('T')[0];
+
+    try {
+      const session = await Auth.currentSession();
+      const token = session.getIdToken().getJwtToken();
+
+      await axios.put(
+        `https://du3kce1sli.execute-api.us-east-1.amazonaws.com/default/profile/${uuid}`,
+        {birthdate},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      navigation.navigate(navigationStrings.AboutMe);
+    } catch (err) {
+      console.error('❌ Failed to save birthdate:', err);
+    }
   };
 
   return (
     <WrapperContainer>
       <UserSetupContainer progress={35} onNextPress={onNext}>
         <Text style={styles.titleText}>When is your birthday?</Text>
-
         <CustomInput
           value={moment(date).format('DD/MM/YYYY')}
           icon={iconPath.calendar}
@@ -53,7 +75,10 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
     backgroundColor: 'transparent',
   },
-  input: {color: colors.white, fontSize: getScaledFontSize(16)},
+  input: {
+    color: colors.white,
+    fontSize: getScaledFontSize(16),
+  },
 });
 
 export default BirthdaySelection;

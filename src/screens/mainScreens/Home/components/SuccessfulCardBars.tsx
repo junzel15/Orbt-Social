@@ -9,11 +9,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {navigationStrings} from '../../../../navigation/navigationStrings';
 
-const SuccessfulCard = () => {
+const SuccessfulCardBars = () => {
   const navigation = useNavigation<NavigationProp<any>>();
 
   const onViewBook = () => {
-    navigation.navigate(navigationStrings.DiningDetails);
+    navigation.navigate(navigationStrings.BarDetails);
   };
 
   return (
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SuccessfulCard;
+export default SuccessfulCardBars;

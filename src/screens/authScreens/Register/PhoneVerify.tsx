@@ -23,27 +23,33 @@ import {fonts} from '../../../constants/fonts';
 import {getScaledFontSize} from '../../../constants/globalFunctions';
 import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions';
 import {navigationStrings} from '../../../navigation/navigationStrings';
+import {Auth} from 'aws-amplify';
 
 const PhoneVerify = () => {
   const navigation = useNavigation<NavigationProp<any>>();
-  const route = useRoute<RouteProp<any>>();
-
-  const {phone} = route.params || {};
+  const route =
+    useRoute<
+      RouteProp<{params: {email: string; password: string}}, 'params'>
+    >();
+  const {email, password} = route.params;
 
   const [value, setValue] = useState<string>('');
   const [isDisable, setDisable] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(30);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const CELL_COUNT = 6;
+
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue,
   });
 
-  const ref = useBlurOnFulfill({value, cellCount: 4});
+  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
 
   useEffect(() => {
     validationHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   useEffect(() => {
@@ -60,21 +66,36 @@ const PhoneVerify = () => {
   };
 
   const validationHandler = () => {
-    if (value?.trim() && value?.length == 4) {
-      setDisable(false);
-    } else {
-      setDisable(true);
-    }
+    setDisable(!(value.trim() && value.length === CELL_COUNT));
   };
 
   const onVerify = async () => {
-    navigation.navigate(navigationStrings.Confirmation);
+    try {
+      setIsLoading(true);
+
+      await Auth.confirmSignUp(email, value);
+      console.log('✅ Verification successful');
+
+      navigation.navigate(navigationStrings.Confirmation, {
+        email,
+        password,
+      });
+    } catch (err: any) {
+      console.error('❌ Verification failed:', err.message || err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleResendCode = async () => {
-    if (timer == 0) {
-      setTimer(30);
-    } else {
+    if (timer === 0) {
+      try {
+        await Auth.resendSignUp(email);
+        console.log('✅ Code resent');
+        setTimer(30);
+      } catch (err: any) {
+        console.error('❌ Resend failed:', err.message);
+      }
     }
   };
 
@@ -95,14 +116,14 @@ const PhoneVerify = () => {
           <Text style={styles.headerText}>Verification</Text>
           <Text style={styles.headerSubText}>
             We’ve sent you the verification code to{`\n`}
-            {phone}
+            {email}
           </Text>
           <CodeField
             ref={ref}
             {...props}
             value={value}
             onChangeText={setValue}
-            cellCount={4}
+            cellCount={CELL_COUNT}
             rootStyle={styles.codeField}
             keyboardType="number-pad"
             textContentType="oneTimeCode"
@@ -129,7 +150,9 @@ const PhoneVerify = () => {
               style={{color: colors.primary}}
               suppressHighlighting
               onPress={handleResendCode}>
-              {timer == 0 ? 'Resend' : `00:${timer < 10 ? `0${timer}` : timer}`}
+              {timer === 0
+                ? 'Resend'
+                : `00:${timer < 10 ? `0${timer}` : timer}`}
             </Text>
           </Text>
         </ScrollView>

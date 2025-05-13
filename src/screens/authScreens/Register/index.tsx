@@ -1,7 +1,6 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import CheckBox from '../../../components/atoms/button/CheckBox';
 import CommonButton from '../../../components/atoms/button/CommonButton';
 import SocialButton from '../../../components/atoms/button/SocialButton';
@@ -20,10 +19,12 @@ import {globalStyleDefinitions} from '../../../constants/globalStyleDefinitions'
 import {iconPath} from '../../../constants/iconPath';
 import {imagePath} from '../../../constants/imagePath';
 import {navigationStrings} from '../../../navigation/navigationStrings';
+import {Auth} from 'aws-amplify';
+import {useDispatch} from 'react-redux';
+import {setUuid} from '../../../redux/slices/userSetupSlice';
 
 const Register = () => {
   const navigation = useNavigation<NavigationProp<any>>();
-  const dispatch = useDispatch();
 
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -37,9 +38,11 @@ const Register = () => {
   const [disable, setDisable] = useState<boolean>(false);
   const [isAgree, setIsAgree] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     validationHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, email, phone, password, isAgree]);
 
   const validationHandler = () => {
@@ -57,13 +60,36 @@ const Register = () => {
   };
 
   const handleRegister = async () => {
-    navigation.navigate(navigationStrings.PhoneVerify, {
-      phone: countryCode?.code + phone,
-    });
+    try {
+      setIsLoading(true);
+      const result = await Auth.signUp({
+        username: email,
+        password: password,
+        attributes: {
+          email: email,
+          phone_number: `${countryCode.code}${phone}`,
+          name: name,
+        },
+      });
+
+      console.log('✅ Signup success:', result);
+
+      dispatch(setUuid(result.userSub));
+
+      navigation.navigate(navigationStrings.PhoneVerify, {
+        phone: `${countryCode.code}${phone}`,
+        email,
+        password,
+      });
+    } catch (err: any) {
+      console.error('❌ Signup error:', err.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleLogin = async () => {
-    navigation.navigate(navigationStrings.Login)
+    navigation.navigate(navigationStrings.Login);
   };
 
   const onCountryCodePress = () => {
@@ -83,9 +109,10 @@ const Register = () => {
     setIsAgree(!isAgree);
   };
 
-  const onLoginOpen = () =>{
-    navigation.navigate(navigationStrings.Login)
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const onLoginOpen = () => {
+    navigation.navigate(navigationStrings.Login);
+  };
 
   return (
     <WrapperContainer>
@@ -189,7 +216,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.fontRegular,
     textAlign: 'center',
     marginTop: 0.5 * globalStyleDefinitions.commonItemMargin.margin,
-    marginBottom:globalStyleDefinitions.commonItemMargin.margin,
+    marginBottom: globalStyleDefinitions.commonItemMargin.margin,
   },
   rowWrapper: {
     flexDirection: 'row',
@@ -228,14 +255,16 @@ const styles = StyleSheet.create({
   },
   loginTitleText: {
     fontFamily: fonts.fontRegular,
-    fontSize: getScaledFontSize(14),lineHeight:getScaledFontSize(20),
+    fontSize: getScaledFontSize(14),
+    lineHeight: getScaledFontSize(20),
     color: colors.secondaryText,
     textAlign: 'center',
     marginTop: globalStyleDefinitions.commonItemMargin.margin,
   },
   loginText: {
     fontFamily: fonts.fontBold,
-    fontSize: getScaledFontSize(14),lineHeight:getScaledFontSize(20),
+    fontSize: getScaledFontSize(14),
+    lineHeight: getScaledFontSize(20),
     color: colors.primary,
     textDecorationLine: 'underline',
   },

@@ -1,11 +1,18 @@
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
+const path = require('path');
 
-/**
- * Metro configuration
- * https://reactnative.dev/docs/metro
- *
- * @type {import('@react-native/metro-config').MetroConfig}
- */
-const config = {};
+const defaultConfig = getDefaultConfig(__dirname);
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+const config = {
+  resolver: {
+    extraNodeModules: {
+      ...defaultConfig.resolver.extraNodeModules,
+      stream: require.resolve('stream-browserify'),
+      crypto: require.resolve('react-native-crypto'),
+      buffer: require.resolve('buffer/'),
+      assert: require.resolve('assert'),
+    },
+  },
+};
+
+module.exports = mergeConfig(defaultConfig, config);
