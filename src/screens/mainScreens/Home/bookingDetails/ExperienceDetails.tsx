@@ -16,8 +16,11 @@ import PricePeopleComponent from '../components/PricePeopleComponent';
 import {useSelector} from 'react-redux';
 import {selectUserUuid} from '../../../../redux/slices/userSetupSlice';
 import axios from 'axios';
+import {navigationStrings} from '../../../../navigation/navigationStrings';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 
 const ExperienceDetails = () => {
+  const navigation = useNavigation<NavigationProp<any>>();
   const uuid = useSelector(selectUserUuid);
   const [groupData, setGroupData] = useState<any>(null);
 
@@ -41,6 +44,27 @@ const ExperienceDetails = () => {
     fetchGroupDetails();
   }, [uuid]);
 
+  const getFullCountryName = (nationality: string): string => {
+    switch (nationality) {
+      case 'American':
+        return 'United States of America';
+      case 'Filipino':
+        return 'Philippines';
+      case 'British':
+        return 'United Kingdom';
+      default:
+        return nationality;
+    }
+  };
+
+  const nationalityFlagMap: Record<string, string> = {
+    American: '🇺🇸',
+    Filipino: '🇵🇭',
+    British: '🇬🇧',
+    Dutch: '🇳🇱',
+    Japanese: '🇯🇵',
+  };
+
   return (
     <LinearGradient
       colors={['#4C0BCE', '#180028', '#000000']}
@@ -48,7 +72,23 @@ const ExperienceDetails = () => {
       start={{x: 0, y: 0}}
       end={{x: 1, y: 1}}
       style={styles.gradient}>
-      <CommonHeader showBackIcon={true} headerTitle="Experience Details" />
+      <CommonHeader
+        showBackIcon={true}
+        headerTitle="Dinner Details"
+        onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [
+              {
+                name: navigationStrings.BottomNavigation,
+                state: {
+                  routes: [{name: navigationStrings.Home}],
+                },
+              },
+            ],
+          })
+        }
+      />
       <ScrollView style={styles.container}>
         <View style={styles.mainCard}>
           <View>
@@ -107,13 +147,15 @@ const ExperienceDetails = () => {
           </Text>
         </View>
 
-        <View style={[styles.infoRow, {marginTop: 10}]}>
+        <View style={styles.infoRow}>
           <Icon name="heart-outline" size={24} color="#fff" />
           <Text style={styles.infoText}>Common Interests: </Text>
         </View>
 
         <View style={styles.tags}>
-          {(groupData?.comm_interests || []).map((item: string, i: number) => (
+          {Array.from(
+            new Set((groupData?.comm_interests as string[]) || []),
+          ).map((item, i) => (
             <View key={i} style={styles.tag}>
               <Text style={styles.tagText}>{item}</Text>
             </View>
@@ -130,9 +172,25 @@ const ExperienceDetails = () => {
                 Nationality:
               </Text>
             </View>
-            <Text style={styles.whiteText}>
-              {(groupData?.nationalities || []).join('\n')}
-            </Text>
+            {(groupData?.nationalities || []).map(
+              (nation: string, i: number) => (
+                <View
+                  key={i}
+                  // eslint-disable-next-line react-native/no-inline-styles
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    marginTop: 4,
+                  }}>
+                  <Text style={{marginRight: 6}}>
+                    {nationalityFlagMap[nation] || '🏳️'}
+                  </Text>
+                  <Text style={styles.whiteText}>
+                    {getFullCountryName(nation)}
+                  </Text>
+                </View>
+              ),
+            )}
           </View>
           <View>
             <Text style={styles.subLabel}>Language:</Text>
@@ -249,7 +307,7 @@ const styles = StyleSheet.create({
   whiteText: {
     color: colors.white,
     fontSize: getScaledFontSize(12),
-    marginTop: 6,
+    marginTop: 4,
   },
   sectionLabel: {
     color: colors.white,

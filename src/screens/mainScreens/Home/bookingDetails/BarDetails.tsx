@@ -15,8 +15,12 @@ import PricePeopleComponent from '../components/PricePeopleComponent';
 import {useSelector} from 'react-redux';
 import {selectUserUuid} from '../../../../redux/slices/userSetupSlice';
 import axios from 'axios';
+import Feather from 'react-native-vector-icons/Feather';
+import {navigationStrings} from '../../../../navigation/navigationStrings';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 
 const BarDetails = () => {
+  const navigation = useNavigation<NavigationProp<any>>();
   const uuid = useSelector(selectUserUuid);
   const [groupData, setGroupData] = useState<any>(null);
 
@@ -40,6 +44,27 @@ const BarDetails = () => {
     fetchGroupDetails();
   }, [uuid]);
 
+  const getFullCountryName = (nationality: string): string => {
+    switch (nationality) {
+      case 'American':
+        return 'United States of America';
+      case 'Filipino':
+        return 'Philippines';
+      case 'British':
+        return 'United Kingdom';
+      default:
+        return nationality;
+    }
+  };
+
+  const nationalityFlagMap: Record<string, string> = {
+    American: '🇺🇸',
+    Filipino: '🇵🇭',
+    British: '🇬🇧',
+    Dutch: '🇳🇱',
+    Japanese: '🇯🇵',
+  };
+
   return (
     <LinearGradient
       colors={['#4C0BCE', '#180028', '#000000']}
@@ -47,7 +72,24 @@ const BarDetails = () => {
       start={{x: 0, y: 0}}
       end={{x: 1, y: 1}}
       style={styles.gradient}>
-      <CommonHeader showBackIcon={true} headerTitle="Bar Details" />
+      <CommonHeader
+        showBackIcon={true}
+        headerTitle="Bar Details"
+        onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [
+              {
+                name: navigationStrings.BottomNavigation,
+                state: {
+                  routes: [{name: navigationStrings.Home}],
+                },
+              },
+            ],
+          })
+        }
+      />
+
       <ScrollView style={styles.container}>
         <View style={styles.mainCard}>
           <View>
@@ -82,7 +124,9 @@ const BarDetails = () => {
         </View>
 
         <View style={styles.tags}>
-          {(groupData?.comm_interests || []).map((item: string, i: number) => (
+          {Array.from(
+            new Set((groupData?.comm_interests as string[]) || []),
+          ).map((item, i) => (
             <View key={i} style={styles.tag}>
               <Text style={styles.tagText}>{item}</Text>
             </View>
@@ -93,13 +137,34 @@ const BarDetails = () => {
 
         <View style={styles.langRow}>
           <View>
-            <Text style={styles.subLabel}>Nationality</Text>
-            <Text style={styles.whiteText}>
-              {(groupData?.nationalities || []).join('\n')}
-            </Text>
+            <View style={styles.infoRow}>
+              <Feather name="globe" size={13} color={colors.white} />
+              <Text style={[styles.subLabel, {marginLeft: 10}]}>
+                Nationality:
+              </Text>
+            </View>
+            {(groupData?.nationalities || []).map(
+              (nation: string, i: number) => (
+                <View
+                  key={i}
+                  // eslint-disable-next-line react-native/no-inline-styles
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    marginTop: 4,
+                  }}>
+                  <Text style={{marginRight: 6}}>
+                    {nationalityFlagMap[nation] || '🏳️'}
+                  </Text>
+                  <Text style={styles.whiteText}>
+                    {getFullCountryName(nation)}
+                  </Text>
+                </View>
+              ),
+            )}
           </View>
           <View>
-            <Text style={styles.subLabel}>Language</Text>
+            <Text style={styles.subLabel}>Language:</Text>
             <Text style={styles.whiteText}>English, Filipino</Text>
           </View>
         </View>
@@ -203,6 +268,7 @@ const styles = StyleSheet.create({
   whiteText: {
     color: colors.white,
     fontSize: getScaledFontSize(12),
+    marginTop: 4,
   },
   separator: {
     borderTopWidth: 0.5,

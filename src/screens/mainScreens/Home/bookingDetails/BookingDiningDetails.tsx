@@ -60,6 +60,40 @@ const BookingDiningDetails = () => {
     fetchGroupDetails();
   }, [uuid]);
 
+  const getFullCountryName = (nationality: string): string => {
+    switch (nationality) {
+      case 'American':
+        return 'United States of America';
+      case 'Filipino':
+        return 'Philippines';
+      case 'British':
+        return 'United Kingdom';
+      default:
+        return nationality;
+    }
+  };
+
+  const getBookingImage = (type: string) => {
+    switch (type?.trim().toLowerCase()) {
+      case 'coffee':
+        return imagePath.coffeeImage;
+      case 'brunch':
+        return imagePath.brunchImage;
+      case 'dinner':
+        return imagePath.dinerImage;
+      default:
+        return imagePath.dining;
+    }
+  };
+
+  const nationalityFlagMap: Record<string, string> = {
+    American: '🇺🇸',
+    Filipino: '🇵🇭',
+    British: '🇬🇧',
+    Dutch: '🇳🇱',
+    Japanese: '🇯🇵',
+  };
+
   return (
     <LinearGradient
       colors={['#4C0BCE', '#180028', '#000000']}
@@ -69,6 +103,7 @@ const BookingDiningDetails = () => {
       style={styles.gradient}>
       <CommonHeader
         showBackIcon={true}
+        headerTitle="Dinner Details"
         onPress={() =>
           navigation.reset({
             index: 0,
@@ -106,7 +141,10 @@ const BookingDiningDetails = () => {
                 <Text style={styles.infoText}>{groupData?.venue}</Text>
               </View>
             </View>
-            <Image source={imagePath.dining} style={styles.cupImage} />
+            <Image
+              source={getBookingImage(groupData?.booking_type || '')}
+              style={styles.cupImage}
+            />
           </View>
 
           <View
@@ -119,13 +157,13 @@ const BookingDiningDetails = () => {
           </View>
 
           <View style={styles.tags}>
-            {(groupData?.comm_interests || []).map(
-              (item: string, i: number) => (
-                <View key={i} style={styles.tag}>
-                  <Text style={styles.tagText}>{item}</Text>
-                </View>
-              ),
-            )}
+            {Array.from(
+              new Set((groupData?.comm_interests as string[]) || []),
+            ).map((item, i) => (
+              <View key={i} style={styles.tag}>
+                <Text style={styles.tagText}>{item}</Text>
+              </View>
+            ))}
           </View>
 
           <View style={styles.seprator} />
@@ -133,14 +171,30 @@ const BookingDiningDetails = () => {
           <View style={styles.langRow}>
             <View>
               <View style={styles.infoRow}>
-                <Feather name={'globe'} size={13} color={colors.white} />
+                <Feather name="globe" size={13} color={colors.white} />
                 <Text style={[styles.subLabel, {marginLeft: 10}]}>
                   Nationality:
                 </Text>
               </View>
-              <Text style={styles.whiteText}>
-                {(groupData?.nationalities || []).join('\n')}
-              </Text>
+              {(groupData?.nationalities || []).map(
+                (nation: string, i: number) => (
+                  <View
+                    key={i}
+                    // eslint-disable-next-line react-native/no-inline-styles
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      marginTop: 4,
+                    }}>
+                    <Text style={{marginRight: 6}}>
+                      {nationalityFlagMap[nation] || '🏳️'}
+                    </Text>
+                    <Text style={styles.whiteText}>
+                      {getFullCountryName(nation)}
+                    </Text>
+                  </View>
+                ),
+              )}
             </View>
 
             <View>
@@ -229,20 +283,25 @@ const styles = StyleSheet.create({
   tags: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: globalStyleDefinitions.gap.gap,
-    marginTop: globalStyleDefinitions.mt_10.marginTop,
+    rowGap: 8,
+    columnGap: 8,
+    marginTop: 8,
   },
   tag: {
     paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 2 * globalStyleDefinitions.br_10.borderRadius,
+    paddingHorizontal: 12,
+    borderRadius: 20,
     borderWidth: 1,
     borderColor: colors.white,
-    marginRight: 4,
   },
   tagText: {
     color: colors.white,
-    fontSize: getScaledFontSize(10),
+    fontSize: getScaledFontSize(12),
+  },
+  whiteText: {
+    color: colors.white,
+    fontSize: getScaledFontSize(12),
+    marginTop: 4,
   },
   langRow: {
     flexDirection: 'row',
@@ -253,10 +312,6 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: getScaledFontSize(14),
     marginBottom: 4,
-  },
-  whiteText: {
-    color: colors.white,
-    fontSize: getScaledFontSize(12),
   },
   buttonRow: {
     flexDirection: 'row',

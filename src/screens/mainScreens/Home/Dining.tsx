@@ -51,6 +51,8 @@ const Dining = () => {
         uuid,
       };
 
+      console.log('📦 Booking Payload:', payload);
+
       const res = await axios.post(
         'https://v71rq9c35d.execute-api.us-east-1.amazonaws.com/default/booking',
         payload,
