@@ -8,7 +8,6 @@ import {colors} from '../../../../constants/colors';
 import {fonts} from '../../../../constants/fonts';
 import {globalStyleDefinitions} from '../../../../constants/globalStyleDefinitions';
 import {imagePath} from '../../../../constants/imagePath';
-import TimerComponent from '../components/TimerComponent';
 import CommonButton from '../../../../components/atoms/button/CommonButton';
 import {windowHeight, windowWidth} from '../../../../constants/globalConstants';
 import PricePeopleComponent from '../components/PricePeopleComponent';
@@ -23,6 +22,7 @@ const BarDetails = () => {
   const navigation = useNavigation<NavigationProp<any>>();
   const uuid = useSelector(selectUserUuid);
   const [groupData, setGroupData] = useState<any>(null);
+  const [showLeaveReview, setShowLeaveReview] = useState(false);
 
   useEffect(() => {
     if (!uuid) return;
@@ -56,6 +56,14 @@ const BarDetails = () => {
         return nationality;
     }
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLeaveReview(true);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const nationalityFlagMap: Record<string, string> = {
     American: '🇺🇸',
@@ -93,11 +101,7 @@ const BarDetails = () => {
       <ScrollView style={styles.container}>
         <View style={styles.mainCard}>
           <View>
-            <View style={styles.badge}>
-              <Text style={styles.badgeText}>
-                {groupData?.booking_type?.toUpperCase()}
-              </Text>
-            </View>
+            <View />
             <Text style={styles.title}>Bars</Text>
 
             <View style={styles.infoRow}>
@@ -113,8 +117,18 @@ const BarDetails = () => {
               <Icon name="location-outline" size={24} color="#fff" />
               <Text style={styles.infoText}>{groupData?.venue}</Text>
             </View>
+            <View style={styles.infoRow}>
+              <Icon
+                name="document-text-outline"
+                size={24}
+                color={colors.white}
+              />
+              <Text style={styles.infoText}>About the group:</Text>
+            </View>
+            <Text style={[styles.infoText, {marginLeft: 34}]}>
+              {groupData?.summary}
+            </Text>
           </View>
-
           <Image source={imagePath.barImage} style={styles.cupImage} />
         </View>
 
@@ -170,23 +184,36 @@ const BarDetails = () => {
         </View>
 
         <View style={styles.separator} />
-        <TimerComponent />
+
         <PricePeopleComponent />
+
         <View style={styles.buttonRow}>
-          <CommonButton
-            title="Cancel Event"
-            // eslint-disable-next-line react-native/no-inline-styles
-            customStyles={{
-              width: windowWidth / 2.5,
-              marginRight: 10,
-              backgroundColor: colors.white,
-            }}
-            customTextStyles={{color: colors.black}}
-          />
-          <CommonButton
-            title="View E-Ticket"
-            customStyles={{width: windowWidth / 2.5}}
-          />
+          {!showLeaveReview ? (
+            <>
+              <CommonButton
+                title="Cancel Event"
+                // eslint-disable-next-line react-native/no-inline-styles
+                customStyles={{
+                  width: windowWidth / 2.5,
+                  marginRight: 10,
+                  backgroundColor: colors.white,
+                }}
+                customTextStyles={{color: colors.black}}
+              />
+              <CommonButton
+                title="Confirm"
+                customStyles={{width: windowWidth / 2.5}}
+              />
+            </>
+          ) : (
+            <CommonButton
+              title="Leave a Review"
+              onPress={() =>
+                navigation.navigate(navigationStrings.GiveFeedback)
+              }
+              customStyles={{width: windowWidth - 40}}
+            />
+          )}
         </View>
       </ScrollView>
     </LinearGradient>
@@ -214,7 +241,7 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     color: colors.white,
-    fontSize: getScaledFontSize(8),
+    fontSize: getScaledFontSize(18),
     fontFamily: fonts.fontSemiBold,
   },
   title: {

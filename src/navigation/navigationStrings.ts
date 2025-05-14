@@ -10,7 +10,7 @@ type NavigationStrings = {
   AboutMe: string;
   InterestSelection: string;
   BottomNavigation: string;
-  MainApp: string; // ✅ Added this line
+  MainApp: string;
   Home: string;
   MyBookings: string;
   Message: string;

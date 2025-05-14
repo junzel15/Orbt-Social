@@ -61,7 +61,7 @@ const Experiences = () => {
       );
 
       if (res.status === 201) {
-        navigation.navigate(navigationStrings.MatchingCrew, {});
+        navigation.navigate(navigationStrings.MatchingCrewExp, {});
       } else {
         console.error('❌ Booking failed:', res.status, res.data);
       }

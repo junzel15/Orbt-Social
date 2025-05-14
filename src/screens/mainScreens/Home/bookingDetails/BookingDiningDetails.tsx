@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Image, ScrollView, Alert} from 'react-native';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 import React from 'react';
@@ -23,6 +23,7 @@ const BookingDiningDetails = () => {
   const navigation = useNavigation<NavigationProp<any>>();
   const uuid = useSelector(selectUserUuid);
   const [groupData, setGroupData] = useState<any>(null);
+  const [showLeaveReview, setShowLeaveReview] = useState(false);
 
   useEffect(() => {
     if (!uuid) {
@@ -86,6 +87,14 @@ const BookingDiningDetails = () => {
     }
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLeaveReview(true);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const nationalityFlagMap: Record<string, string> = {
     American: '🇺🇸',
     Filipino: '🇵🇭',
@@ -127,6 +136,8 @@ const BookingDiningDetails = () => {
                 <Text style={styles.badgeText}>{groupData?.booking_type}</Text>
               </View>
 
+              <Text style={styles.diningTitle}>Dining</Text>
+
               <View style={styles.infoRow}>
                 <Icon name="calendar-outline" size={24} color="#fff" />
                 <Text style={styles.infoText}>
@@ -140,6 +151,17 @@ const BookingDiningDetails = () => {
                 <Icon name="location-outline" size={24} color={colors.white} />
                 <Text style={styles.infoText}>{groupData?.venue}</Text>
               </View>
+              <View style={styles.infoRow}>
+                <Icon
+                  name="document-text-outline"
+                  size={24}
+                  color={colors.white}
+                />
+                <Text style={styles.infoText}>About the group:</Text>
+              </View>
+              <Text style={[styles.infoText, {marginLeft: 34}]}>
+                {groupData?.summary}
+              </Text>
             </View>
             <Image
               source={getBookingImage(groupData?.booking_type || '')}
@@ -208,12 +230,41 @@ const BookingDiningDetails = () => {
           <PricePeopleComponent />
 
           <View style={styles.buttonRow}>
-            <CommonButton
-              title="Cancel Event"
-              onPress={() => navigation.navigate(navigationStrings.CancelEvent)}
-              customStyles={styles.customStyles}
-              customTextStyles={{color: colors.black}}
-            />
+            {!showLeaveReview ? (
+              <>
+                <CommonButton
+                  title="Cancel Event"
+                  // eslint-disable-next-line react-native/no-inline-styles
+                  customStyles={{
+                    width: windowWidth / 2.5,
+                    marginRight: 10,
+                    backgroundColor: colors.white,
+                  }}
+                  customTextStyles={{color: colors.black}}
+                />
+                <CommonButton
+                  title="Confirm"
+                  customStyles={{width: windowWidth / 2.5}}
+                />
+              </>
+            ) : (
+              <CommonButton
+                title="Leave a Review"
+                onPress={() => {
+                  const booking_id = groupData?.group_id;
+
+                  if (booking_id) {
+                    navigation.navigate(navigationStrings.GiveFeedback, {
+                      booking_id,
+                    });
+                  } else {
+                    console.log('🛑 booking_id is missing:', booking_id);
+                    Alert.alert('❌ Error', 'Booking ID is missing');
+                  }
+                }}
+                customStyles={{width: windowWidth - 40}}
+              />
+            )}
           </View>
         </View>
       </ScrollView>
@@ -257,7 +308,7 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     color: colors.white,
-    fontSize: getScaledFontSize(8),
+    fontSize: getScaledFontSize(12),
     fontFamily: fonts.fontSemiBold,
   },
   title: {
@@ -315,8 +366,16 @@ const styles = StyleSheet.create({
   },
   buttonRow: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     marginBottom: windowHeight * 0.1,
-    marginTop: globalStyleDefinitions.mt_10.marginTop,
+    marginTop: 10,
+    gap: 10, // optional, for spacing
+  },
+
+  diningTitle: {
+    color: colors.white,
+    fontSize: getScaledFontSize(28),
+    fontFamily: fonts.fontSemiBold,
+    marginBottom: 8,
   },
 });
