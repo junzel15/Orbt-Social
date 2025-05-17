@@ -1,8 +1,11 @@
 import {View, Text, StyleSheet, Image, ScrollView, Alert} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import axios from 'axios';
+import {useEffect, useState} from 'react';
+import React from 'react';
 import CommonHeader from '../../../../components/header/CommonHeader';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import {getScaledFontSize} from '../../../../constants/globalFunctions';
 import {colors} from '../../../../constants/colors';
 import {fonts} from '../../../../constants/fonts';
@@ -11,22 +14,20 @@ import {imagePath} from '../../../../constants/imagePath';
 import CommonButton from '../../../../components/atoms/button/CommonButton';
 import {windowHeight, windowWidth} from '../../../../constants/globalConstants';
 import PricePeopleComponent from '../components/PricePeopleComponent';
-import {useSelector} from 'react-redux';
-import {selectUserUuid} from '../../../../redux/slices/userSetupSlice';
-import axios from 'axios';
-import Feather from 'react-native-vector-icons/Feather';
-import {navigationStrings} from '../../../../navigation/navigationStrings';
 import {
   NavigationProp,
   RouteProp,
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
+import {navigationStrings} from '../../../../navigation/navigationStrings';
+import {useSelector} from 'react-redux';
+import {selectUserUuid} from '../../../../redux/slices/userSetupSlice';
 
-const BarDetails = () => {
+const DiningDetails = () => {
   const navigation = useNavigation<NavigationProp<any>>();
-  const uuid = useSelector(selectUserUuid);
   const route = useRoute<RouteProp<any>>();
+  const uuid = useSelector(selectUserUuid);
   const [groupData, setGroupData] = useState<any>(null);
   const [showLeaveReview, setShowLeaveReview] = useState(false);
   const bookingTypeParam = route.params?.bookingType || '';
@@ -42,7 +43,14 @@ const BarDetails = () => {
             params: {uuid, booking_type: bookingTypeParam},
           },
         );
-        setGroupData(res.data);
+
+        const allGroups = Array.isArray(res.data) ? res.data : [res.data];
+        const matched = allGroups.find(
+          group =>
+            group.booking_type?.toLowerCase() ===
+            bookingTypeParam.toLowerCase(),
+        );
+        setGroupData(matched || allGroups[0]);
       } catch (err: any) {
         console.error('❌ Failed to fetch group data:', err);
       }
@@ -50,6 +58,34 @@ const BarDetails = () => {
 
     fetchGroupDetails();
   }, [uuid, bookingTypeParam]);
+
+  const getBookingImage = (type: string) => {
+    switch (type?.toLowerCase()) {
+      case 'coffee':
+        return imagePath.coffeeImage;
+      case 'brunch':
+        return imagePath.brunchImage;
+      case 'dinner':
+        return imagePath.dinerImage;
+      default:
+        return imagePath.dining;
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLeaveReview(true);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const nationalityFlagMap: Record<string, string> = {
+    American: '🇺🇸',
+    Filipino: '🇵🇭',
+    British: '🇬🇧',
+    Dutch: '🇳🇱',
+    Japanese: '🇯🇵',
+  };
 
   const getFullCountryName = (nationality: string): string => {
     switch (nationality) {
@@ -64,21 +100,7 @@ const BarDetails = () => {
     }
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLeaveReview(true);
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const nationalityFlagMap: Record<string, string> = {
-    American: '🇺🇸',
-    Filipino: '🇵🇭',
-    British: '🇬🇧',
-    Dutch: '🇳🇱',
-    Japanese: '🇯🇵',
-  };
+  const bookingType = groupData?.booking_type || bookingTypeParam;
 
   return (
     <LinearGradient
@@ -89,7 +111,7 @@ const BarDetails = () => {
       style={styles.gradient}>
       <CommonHeader
         showBackIcon={true}
-        headerTitle="Bar Details"
+        headerTitle="Dining Details"
         onPress={() =>
           navigation.reset({
             index: 0,
@@ -104,13 +126,10 @@ const BarDetails = () => {
           })
         }
       />
-
       <ScrollView style={styles.container}>
         <View style={styles.mainCard}>
           <View>
-            <View />
             <Text style={styles.title}>{groupData?.booking_type}</Text>
-
             <View style={styles.infoRow}>
               <Icon name="calendar-outline" size={24} color="#fff" />
               <Text style={styles.infoText}>
@@ -119,35 +138,30 @@ const BarDetails = () => {
                 {groupData?.booking_time}
               </Text>
             </View>
-
             <View style={styles.infoRow}>
               <Icon name="location-outline" size={24} color="#fff" />
               <Text style={styles.infoText}>{groupData?.venue}</Text>
             </View>
             <View style={styles.infoRow}>
-              <Icon
-                name="document-text-outline"
-                size={24}
-                color={colors.white}
-              />
+              <Icon name="document-text-outline" size={24} color="#fff" />
               <Text style={styles.infoText}>About the group:</Text>
             </View>
             <Text style={[styles.infoText, {marginLeft: 34}]}>
               {groupData?.summary}
             </Text>
           </View>
-          <Image source={imagePath.barImage} style={styles.cupImage} />
+          <Image
+            source={getBookingImage(bookingType)}
+            style={styles.cupImage}
+          />
         </View>
 
         <View style={styles.infoRow}>
           <Icon name="heart-outline" size={24} color="#fff" />
           <Text style={styles.infoText}>Common Interests: </Text>
         </View>
-
         <View style={styles.tags}>
-          {Array.from(
-            new Set((groupData?.comm_interests as string[]) || []),
-          ).map((item, i) => (
+          {(groupData?.comm_interests || []).map((item: string, i: number) => (
             <View key={i} style={styles.tag}>
               <Text style={styles.tagText}>{item}</Text>
             </View>
@@ -155,25 +169,17 @@ const BarDetails = () => {
         </View>
 
         <View style={styles.separator} />
-
         <View style={styles.langRow}>
           <View>
             <View style={styles.infoRow}>
-              <Feather name="globe" size={13} color={colors.white} />
+              <Feather name="globe" size={13} color="#fff" />
               <Text style={[styles.subLabel, {marginLeft: 10}]}>
                 Nationality:
               </Text>
             </View>
             {(groupData?.nationalities || []).map(
               (nation: string, i: number) => (
-                <View
-                  key={i}
-                  // eslint-disable-next-line react-native/no-inline-styles
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    marginTop: 4,
-                  }}>
+                <View key={i} style={styles.nationRow}>
                   <Text style={{marginRight: 6}}>
                     {nationalityFlagMap[nation] || '🏳️'}
                   </Text>
@@ -191,7 +197,6 @@ const BarDetails = () => {
         </View>
 
         <View style={styles.separator} />
-
         <PricePeopleComponent />
 
         <View style={styles.buttonRow}>
@@ -216,13 +221,13 @@ const BarDetails = () => {
             <CommonButton
               title="Leave a Review"
               onPress={() => {
-                const booking_id = groupData?.booking_id;
-                if (booking_id) {
+                const group_id = groupData?.group_id;
+                if (group_id) {
                   navigation.navigate(navigationStrings.GiveFeedback, {
-                    booking_id,
+                    group_id,
                   });
                 } else {
-                  Alert.alert('❌ Error', 'Booking ID is missing');
+                  Alert.alert('❌ Error', 'Group ID is missing');
                 }
               }}
               customStyles={{width: windowWidth - 40}}
@@ -234,34 +239,22 @@ const BarDetails = () => {
   );
 };
 
-export default BarDetails;
+export default DiningDetails;
 
 const styles = StyleSheet.create({
   gradient: {flex: 1},
-  mainCard: {flexDirection: 'row', justifyContent: 'space-between'},
   container: {
     padding: globalStyleDefinitions.screenPadding.padding,
     flex: 1,
   },
-  badge: {
-    alignSelf: 'flex-start',
-    backgroundColor: colors.primary,
-    borderColor: colors.darkPurple,
-    borderWidth: 2,
-    borderRadius: 20,
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    marginBottom: 8,
-  },
-  badgeText: {
-    color: colors.white,
-    fontSize: getScaledFontSize(18),
-    fontFamily: fonts.fontSemiBold,
+  mainCard: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   title: {
     color: colors.white,
     fontSize: getScaledFontSize(24),
-    fontFamily: fonts.fontRegular,
+    fontFamily: fonts.fontSemiBold,
     marginBottom: 10,
   },
   infoRow: {
@@ -281,7 +274,7 @@ const styles = StyleSheet.create({
   tags: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 10,
+    gap: 8,
     marginTop: 10,
   },
   tag: {
@@ -290,35 +283,41 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: colors.white,
-    marginRight: 4,
+    marginRight: 6,
   },
   tagText: {
     color: colors.white,
     fontSize: getScaledFontSize(10),
-  },
-  langRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
-  },
-  subLabel: {
-    color: colors.white,
-    fontSize: getScaledFontSize(14),
-    marginBottom: 4,
-  },
-  whiteText: {
-    color: colors.white,
-    fontSize: getScaledFontSize(12),
-    marginTop: 4,
   },
   separator: {
     borderTopWidth: 0.5,
     borderColor: colors.white,
     marginTop: 15,
   },
+  langRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  nationRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 4,
+  },
+  whiteText: {
+    color: colors.white,
+    fontSize: getScaledFontSize(12),
+    marginTop: 4,
+  },
+  subLabel: {
+    color: colors.white,
+    fontSize: getScaledFontSize(14),
+    marginBottom: 4,
+  },
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 20,
     marginBottom: windowHeight * 0.1,
   },
 });

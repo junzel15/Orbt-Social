@@ -21,13 +21,14 @@ import {imagePath} from '../../../constants/imagePath';
 import {navigationStrings} from '../../../navigation/navigationStrings';
 import {Auth} from 'aws-amplify';
 import {useDispatch} from 'react-redux';
-import {setUuid} from '../../../redux/slices/userSetupSlice';
+import {setUuid, setEmail, setName} from '../../../redux/slices/userSetupSlice';
+import axios from 'axios';
 
 const Register = () => {
   const navigation = useNavigation<NavigationProp<any>>();
 
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
+  const [name, setNameInput] = useState<string>('');
+  const [email, setEmailInput] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [countryCode, setCountryCode] = useState<any>({
     flag: '🇵🇭',
@@ -75,6 +76,36 @@ const Register = () => {
       console.log('✅ Signup success:', result);
 
       dispatch(setUuid(result.userSub));
+      dispatch(setEmail(email));
+      dispatch(setName(name));
+
+      const welcomePayload = {
+        type: 'signup',
+        email: email,
+        data: {
+          name: name || 'Friend',
+        },
+      };
+
+      console.log('📦 Sending welcome email payload:', welcomePayload);
+
+      try {
+        const response = await axios.post(
+          'https://cy4vgutax0.execute-api.us-east-1.amazonaws.com/default/email-send',
+          welcomePayload,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+        console.log('✅ Welcome email triggered:', response.data);
+      } catch (emailErr: any) {
+        console.error(
+          '❌ Failed to send welcome email:',
+          emailErr.response?.data || emailErr.message,
+        );
+      }
 
       navigation.navigate(navigationStrings.PhoneVerify, {
         phone: `${countryCode.code}${phone}`,
@@ -134,13 +165,13 @@ const Register = () => {
             Fill your information below or register with your social account.
           </Text>
           <CustomInput
-            onChangeText={setName}
+            onChangeText={setNameInput}
             value={name}
             placeholder="Full Name"
             icon={iconPath.person}
           />
           <CustomInput
-            onChangeText={setEmail}
+            onChangeText={setEmailInput}
             value={email}
             placeholder="Email Address"
             icon={iconPath.email}

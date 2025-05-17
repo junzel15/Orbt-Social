@@ -3,10 +3,14 @@ import {Animated} from 'react-native';
 import WrapperContainer from '../../../components/wrapper/WrapperContainer';
 import SearchScreen from './components/SearchCard';
 import SuccessfulCard from './components/SuccessfulCard';
+import {RouteProp, useRoute} from '@react-navigation/native';
 
 const MatchingCrew = () => {
   const [progress] = useState(new Animated.Value(0));
   const [isCompleted, setIsCompleted] = useState(false);
+
+  const route = useRoute<RouteProp<any>>();
+  const bookingType = route.params?.bookingType;
 
   useEffect(() => {
     Animated.timing(progress, {
@@ -18,7 +22,11 @@ const MatchingCrew = () => {
 
   return (
     <WrapperContainer>
-      {!isCompleted ? <SearchScreen progress={progress} /> : <SuccessfulCard />}
+      {!isCompleted ? (
+        <SearchScreen progress={progress} />
+      ) : (
+        <SuccessfulCard bookingType={bookingType} />
+      )}
     </WrapperContainer>
   );
 };

@@ -36,18 +36,6 @@ const Profile = () => {
     fetchProfile();
   }, [uuid]);
 
-  const onFollowers = () => {
-    navigation.navigate(navigationStrings.FollowersFollowing, {
-      name: navigationStrings.Followers,
-    });
-  };
-
-  const onFollowing = () => {
-    navigation.navigate(navigationStrings.FollowersFollowing, {
-      name: navigationStrings.Following,
-    });
-  };
-
   const onMenuPress = () => {
     navigation.navigate(navigationStrings.Settings);
   };
@@ -72,23 +60,6 @@ const Profile = () => {
             <Text style={styles.location}>
               {profile.location || 'Unknown Location'}
             </Text>
-
-            <View style={styles.statsRow}>
-              <Text
-                style={styles.statsText}
-                onPress={onFollowers}
-                suppressHighlighting>
-                290{''}
-                <Text style={styles.statsLabel}>Followers</Text>
-              </Text>
-              <Text
-                style={styles.statsText}
-                onPress={onFollowing}
-                suppressHighlighting>
-                200{''}
-                <Text style={styles.statsLabel}>Following</Text>
-              </Text>
-            </View>
 
             <Text style={styles.sectionTitle}>My Bio</Text>
             <Text style={styles.bioText}>

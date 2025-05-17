@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Image, ScrollView, Alert} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import CommonHeader from '../../../../components/header/CommonHeader';
 import LinearGradient from 'react-native-linear-gradient';
@@ -16,13 +16,20 @@ import {useSelector} from 'react-redux';
 import {selectUserUuid} from '../../../../redux/slices/userSetupSlice';
 import axios from 'axios';
 import {navigationStrings} from '../../../../navigation/navigationStrings';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 
 const ExperienceDetails = () => {
   const navigation = useNavigation<NavigationProp<any>>();
+  const route = useRoute<RouteProp<any>>();
   const uuid = useSelector(selectUserUuid);
   const [groupData, setGroupData] = useState<any>(null);
   const [showLeaveReview, setShowLeaveReview] = useState(false);
+  const bookingTypeParam = route.params?.bookingType || '';
 
   useEffect(() => {
     if (!uuid) return;
@@ -30,19 +37,26 @@ const ExperienceDetails = () => {
     const fetchGroupDetails = async () => {
       try {
         const res = await axios.get(
-          'https://oo2a9lev9d.execute-api.us-east-1.amazonaws.com/default/group',
+          'https://6ioybfgs6g.execute-api.us-east-1.amazonaws.com/default/group',
           {
-            params: {uuid},
+            params: {uuid, booking_type: bookingTypeParam},
           },
         );
-        setGroupData(res.data);
+
+        const allGroups = Array.isArray(res.data) ? res.data : [res.data];
+        const matched = allGroups.find(
+          group =>
+            group.booking_type?.toLowerCase() ===
+            bookingTypeParam.toLowerCase(),
+        );
+        setGroupData(matched || allGroups[0]);
       } catch (err: any) {
         console.error('❌ Failed to fetch group data:', err);
       }
     };
 
     fetchGroupDetails();
-  }, [uuid]);
+  }, [uuid, bookingTypeParam]);
 
   const getFullCountryName = (nationality: string): string => {
     switch (nationality) {
@@ -100,7 +114,7 @@ const ExperienceDetails = () => {
       <ScrollView style={styles.container}>
         <View style={styles.mainCard}>
           <View>
-            <Text style={styles.title}>Experience</Text>
+            <Text style={styles.title}>{groupData?.booking_type}</Text>
 
             <View style={styles.infoRow}>
               <Icon name="calendar-outline" size={24} color="#fff" />
@@ -227,9 +241,16 @@ const ExperienceDetails = () => {
           ) : (
             <CommonButton
               title="Leave a Review"
-              onPress={() =>
-                navigation.navigate(navigationStrings.GiveFeedback)
-              }
+              onPress={() => {
+                const booking_id = groupData?.booking_id;
+                if (booking_id) {
+                  navigation.navigate(navigationStrings.GiveFeedback, {
+                    booking_id,
+                  });
+                } else {
+                  Alert.alert('❌ Error', 'Booking ID is missing');
+                }
+              }}
               customStyles={{width: windowWidth - 40}}
             />
           )}

@@ -10,7 +10,7 @@ import MatchingCrew from '../screens/mainScreens/Home/MatchingCrew';
 import MatchingCrewBars from '../screens/mainScreens/Home/MatchingCrewBars';
 import MatchingCrewExp from '../screens/mainScreens/Home/MatchingCrewExp';
 import BarDetails from '../screens/mainScreens/Home/bookingDetails/BarDetails';
-import BookingDiningDetails from '../screens/mainScreens/Home/bookingDetails/BookingDiningDetails';
+import DiningDetails from '../screens/mainScreens/Home/bookingDetails/DiningDetails';
 import ExperienceDetails from '../screens/mainScreens/Home/bookingDetails/ExperienceDetails';
 import CancelBooking from '../screens/mainScreens/Home/cancelEvent/CancelBooking';
 import CancelEvent from '../screens/mainScreens/Home/cancelEvent/CancelEvent';
@@ -86,7 +86,7 @@ const MainNavigation = () => {
       />
       <MainStack.Screen
         name={navigationStrings.DiningDetails}
-        component={BookingDiningDetails}
+        component={DiningDetails}
         options={options}
       />
       <MainStack.Screen

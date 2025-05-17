@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {imagePath} from '../../../../constants/imagePath';
 import CommonHeader from '../../../../components/header/CommonHeader';
 import {globalStyleDefinitions} from '../../../../constants/globalStyleDefinitions';
 import {getScaledFontSize} from '../../../../constants/globalFunctions';
@@ -40,32 +39,58 @@ const FEEDBACK_TAGS = [
 
 type RouteParams = {
   params: {
-    booking_id: string;
+    group_id: string;
     event_id?: string;
   };
+};
+
+type MemberInfo = {
+  name: string;
+  image_url: string;
 };
 
 const FeedbackScreen = () => {
   const navigation = useNavigation<NavigationProp<any>>();
   const route = useRoute<RouteProp<RouteParams, 'params'>>();
   const uuid = useSelector(selectUserUuid);
-  const booking_id = route?.params?.booking_id;
+  const group_id = route?.params?.group_id;
   const event_id = route?.params?.event_id;
 
-  const [rating, setRating] = useState<number>(5);
-  const [comment, setComment] = useState<string>('Great experience!');
-  const [selectedTags, setSelectedTags] = useState<string[]>(['Food Quality']);
-  const [votes, setVotes] = useState<Record<string, string>>({
-    Kevin: 'yes',
-    Karissa: 'no',
-    Christian: 'not-there',
-    Brittany: 'yes',
-  });
+  const [rating, setRating] = useState<number>(0);
+  const [comment, setComment] = useState<string>('');
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [votes, setVotes] = useState<Record<string, string>>({});
+  const [members, setMembers] = useState<Record<string, MemberInfo>>({});
+
+  useEffect(() => {
+    const fetchGroupMembers = async () => {
+      try {
+        const res = await axios.get(
+          `https://64qrydie0a.execute-api.us-east-1.amazonaws.com/default/group/${group_id}`,
+        );
+
+        const memberMap = res.data?.members || {};
+        setMembers(memberMap);
+
+        const initialVotes = Object.fromEntries(
+          Object.keys(memberMap).map(memberUuid => [
+            memberUuid,
+            memberUuid === uuid ? '' : '',
+          ]),
+        );
+        setVotes(initialVotes);
+      } catch (error) {
+        console.error('❌ Error loading group members:', error);
+      }
+    };
+
+    fetchGroupMembers();
+  }, [group_id, uuid]);
 
   const handleSubmit = async () => {
     try {
       const payload = {
-        booking_id,
+        group_id,
         uuid,
         comment,
         rating,
@@ -75,12 +100,10 @@ const FeedbackScreen = () => {
       };
 
       const response = await axios.post(
-        'https://wchkles84d.execute-api.us-east-1.amazonaws.com/default/submit',
+        'https://64qrydie0a.execute-api.us-east-1.amazonaws.com/default/submit',
         JSON.stringify(payload),
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: {'Content-Type': 'application/json'},
         },
       );
 
@@ -90,23 +113,10 @@ const FeedbackScreen = () => {
       } else {
         Alert.alert('⚠️ Error', 'Failed to submit review');
       }
-    } catch (error: any) {
-      console.error('❌ Review submission error:', error);
-      if (error.response) {
-        console.log('❗Error Response Data:', error.response.data);
-        console.log('❗Error Response Status:', error.response.status);
-        console.log('❗Error Response Headers:', error.response.headers);
-      } else if (error.request) {
-        console.log('📭 No response received:', error.request);
-      } else {
-        console.log('🛠 Error config:', error.config);
-      }
+    } catch (error) {
+      console.error('❌ Submission Error:', error);
       Alert.alert('❌ Error', 'Something went wrong');
     }
-  };
-
-  const handleVoteChange = (name: string, option: string) => {
-    setVotes(prev => ({...prev, [name]: option}));
   };
 
   const toggleTag = (tag: string) => {
@@ -179,37 +189,69 @@ const FeedbackScreen = () => {
           <Text style={styles.improveLabel}>
             Who would you like to see again at the table?
           </Text>
-          {Object.entries(votes).map(([name, selected], index) => (
-            <View key={index} style={{marginTop: 10}}>
-              <View style={styles.personRow}>
-                <Image source={imagePath.dining} style={styles.avatar} />
-                <Text style={styles.personName}>{name}</Text>
-              </View>
-              <View style={styles.voteButtons}>
-                {VOTE_OPTIONS.map(option => (
-                  <TouchableOpacity
-                    key={option}
-                    style={[
-                      styles.voteOption,
-                      selected === option && styles.selectedVoteOption,
-                    ]}
-                    onPress={() => handleVoteChange(name, option)}>
-                    <Text
-                      style={[
-                        styles.voteText,
-                        selected === option && styles.selectedVoteText,
-                      ]}>
-                      {option === 'yes'
-                        ? '👍 Yes'
-                        : option === 'no'
-                        ? '👎 No'
-                        : '❓ Not There'}
+          {Object.entries(members)
+            .filter(([memberUuid]) => memberUuid !== uuid)
+            .map(([memberUuid, member]) => {
+              const selected = votes[memberUuid] || '';
+              const isSelf = memberUuid === uuid;
+
+              return (
+                <View key={memberUuid} style={{marginTop: 10}}>
+                  <View style={styles.personRow}>
+                    {member?.image_url ? (
+                      <Image
+                        source={{uri: member.image_url}}
+                        style={styles.avatar}
+                      />
+                    ) : (
+                      <View style={[styles.avatar, styles.placeholderAvatar]}>
+                        <Text style={styles.avatarLetter}>
+                          {member?.name?.charAt(0).toUpperCase() || 'U'}
+                        </Text>
+                      </View>
+                    )}
+                    <Text style={styles.personName}>
+                      {member?.name || 'Unknown'}
                     </Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
-            </View>
-          ))}
+                  </View>
+
+                  {!isSelf && (
+                    <View style={styles.voteButtons}>
+                      {VOTE_OPTIONS.map(option => {
+                        const isSelected = selected === option;
+                        return (
+                          <TouchableOpacity
+                            key={`${memberUuid}-${option}`}
+                            style={[
+                              styles.voteOption,
+                              isSelected && styles.selectedVoteOption,
+                            ]}
+                            onPress={() =>
+                              setVotes(prev => ({
+                                ...prev,
+                                [memberUuid]:
+                                  prev[memberUuid] === option ? '' : option,
+                              }))
+                            }>
+                            <Text
+                              style={[
+                                styles.voteText,
+                                isSelected && styles.selectedVoteText,
+                              ]}>
+                              {option === 'yes'
+                                ? '👍 Yes'
+                                : option === 'no'
+                                ? '👎 No'
+                                : '❓ Not There'}
+                            </Text>
+                          </TouchableOpacity>
+                        );
+                      })}
+                    </View>
+                  )}
+                </View>
+              );
+            })}
 
           <CommonButton title="Submit" onPress={handleSubmit} />
         </View>
@@ -279,12 +321,6 @@ const styles = StyleSheet.create({
     height: 36,
     borderRadius: 18,
   },
-  subLabel: {
-    color: colors.black,
-    fontSize: getScaledFontSize(12),
-    marginTop: 4,
-    fontFamily: fonts.fontRegular,
-  },
   voteButtons: {
     flexDirection: 'row',
     marginVertical: 8,
@@ -327,5 +363,18 @@ const styles = StyleSheet.create({
   },
   activeTagText: {
     color: '#fff',
+  },
+  placeholderAvatar: {
+    backgroundColor: '#999',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+  },
+  avatarLetter: {
+    color: '#fff',
+    fontSize: getScaledFontSize(14),
+    fontFamily: fonts.fontBold,
   },
 });

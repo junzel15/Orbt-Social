@@ -9,11 +9,17 @@ import LinearGradient from 'react-native-linear-gradient';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {navigationStrings} from '../../../../navigation/navigationStrings';
 
-const SuccessfulCardBars = () => {
+type Props = {
+  bookingType: string;
+};
+
+const SuccessfulCardBars = ({bookingType}: Props) => {
   const navigation = useNavigation<NavigationProp<any>>();
 
   const onViewBook = () => {
-    navigation.navigate(navigationStrings.BarDetails);
+    navigation.navigate(navigationStrings.BarDetails, {
+      bookingType,
+    });
   };
 
   return (

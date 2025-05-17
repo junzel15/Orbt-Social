@@ -27,6 +27,7 @@ import DiningOptions from './components/DiningOptions';
 import axios from 'axios';
 import {selectAccessToken} from '../../../redux/slices/authState';
 import {selectUserUuid} from '../../../redux/slices/userSetupSlice';
+import {Auth} from 'aws-amplify';
 
 const Dining = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -65,7 +66,45 @@ const Dining = () => {
       );
 
       if (res.status === 201) {
-        navigation.navigate(navigationStrings.MatchingCrew, {});
+        console.log('✅ Booking successful:', res.data);
+
+        try {
+          const user = await Auth.currentAuthenticatedUser();
+          const email = user.attributes.email;
+          const name = user.attributes.name;
+
+          const emailPayload = {
+            type: 'booking',
+            email: email,
+            data: {
+              name: name,
+              date: `${selectedDate}, ${selectedTime}`,
+            },
+          };
+
+          console.log('📦 Sending booking confirmation email:', emailPayload);
+
+          await axios.post(
+            'https://cy4vgutax0.execute-api.us-east-1.amazonaws.com/default/email-send',
+            emailPayload,
+            {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            },
+          );
+
+          console.log('✅ Booking confirmation email sent');
+        } catch (emailErr: any) {
+          console.error(
+            '❌ Failed to send booking email:',
+            emailErr.response?.data || emailErr.message,
+          );
+        }
+
+        navigation.navigate(navigationStrings.MatchingCrew, {
+          bookingType: selected,
+        });
       } else {
         console.error('❌ Booking failed:', res.status, res.data);
       }

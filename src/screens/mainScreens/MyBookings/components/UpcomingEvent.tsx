@@ -144,7 +144,9 @@ const UpcomingEvent = ({
                         ? navigationStrings.ExperienceDetails
                         : navigationStrings.DiningDetails;
 
-                    navigation.navigate(route, {booking: item});
+                    navigation.navigate(route, {
+                      bookingType: item.booking_type,
+                    });
                   }}>
                   <Text style={styles.txtViewBtn}>View Details</Text>
                 </TouchableOpacity>
